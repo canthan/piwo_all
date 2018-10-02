@@ -1,0 +1,160 @@
+{
+  "storage": [
+    {
+      "number": "1",
+      "name": "Item_1",
+      "date": "2018.01.02",
+      "quantity_l": "32",
+      "quantity_b": "35",
+      "quantity_c": "1,5",
+      "stashes": [
+        {
+          "name": "Storage 1",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        },
+        {
+          "name": "Storage 2",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        }
+      ]
+    },
+    {
+      "number": "2",
+      "name": "Item_2",
+      "date": "2018.01.10",
+      "quantity_l": "25",
+      "quantity_b": "40",
+      "quantity_c": "10",
+      "stashes": [
+        {
+          "name": "Storage 1",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        },
+        {
+          "name": "Storage 2",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        }
+      ]
+    },
+    {
+      "number": "3",
+      "name": "Item_3",
+      "date": "2018.01.24",
+      "quantity_l": "32",
+      "quantity_b": "35",
+      "quantity_c": "1,5",
+      "stashes": [
+        {
+          "name": "Storage 1",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        },
+        {
+          "name": "Storage 2",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        }
+      ]
+    },
+    {
+      "number": "4",
+      "name": "Item_4",
+      "date": "2017.12.10",
+      "quantity_l": "32",
+      "quantity_b": "35",
+      "quantity_c": "1,5",
+      "stashes": [
+        {
+          "name": "Storage 1",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        },
+        {
+          "name": "Storage 2",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        }
+      ]
+    },
+    {
+      "number": "5",
+      "name": "Item_5",
+      "date": "2017.04.10",
+      "quantity_l": "10",
+      "quantity_b": "10",
+      "quantity_c": "1,5",
+      "stashes": [
+        {
+          "name": "Storage 4",
+          "items": {
+            "b050": "30",
+            "b040": "0",
+            "b033": "0"
+          }
+        },
+        {
+          "name": "Storage 5",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        }
+      ]
+    },
+    {
+      "number": "6",
+      "name": "Item_6",
+      "date": "2017.11.10",
+      "quantity_l": "20",
+      "quantity_b": "26",
+      "quantity_c": "1",
+      "stashes": [
+        {
+          "name": "Storage 1",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        },
+        {
+          "name": "Storage 2",
+          "items": {
+            "b050": "30",
+            "b040": "2",
+            "b033": "3"
+          }
+        }
+      ]
+    }
+  ]
+}
