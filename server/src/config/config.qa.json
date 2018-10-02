@@ -1,0 +1,9 @@
+{
+    "ENV_MODE": "QA",
+    "MONGODB_URI": "mongodb://movies-mongo:27017/movies",
+    "MONGODB_RECONNECT_ATTEMPTS": 3,
+    "MONGODB_RECONNECT_INTERVAL": 10000,
+    "LISTENING_PORT": 4000,
+    "SERVICE_NAME": "movies-api",
+    "MOVIES_PER_PAGE": 250
+}

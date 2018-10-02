@@ -1,8 +1,8 @@
-const path = require('path');
+import * as path from 'path';
 
 const BASE_PATH = path.join(__dirname, 'src', 'db');
 
-module.exports = {
+const config = {
 	test: {
 		client: 'pg',
 		connection: 'postgres://postgres:xxx@localhost:5432/piwo_storage_test',
@@ -24,3 +24,5 @@ module.exports = {
 		},
 	},
 };
+
+export default config;

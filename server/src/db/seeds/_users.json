@@ -1,0 +1,26 @@
+[
+	{
+		"username": "Canthan",
+		"firstname": "Andrzej",
+		"surname": "Globisz",
+		"password": "canthan12",
+		"email": "andrzej.globisz@gmail.com",
+		"registrationDate": "2018-02-24T23:00:00.000Z"
+	},
+	{
+		"username": "Other_user1",
+		"firstname": "Other",
+		"surname": "User",
+		"password": "12345678",
+		"email": "other.user@gmail.com",
+		"registrationDate": "2018-02-24T23:00:00.000Z"
+	},
+	{
+		"username": "Other_user2",
+		"firstname": "Other",
+		"surname": "Alien",
+		"password": "12345678",
+		"email": "alient.user@gmail.com",
+		"registrationDate": "2018-02-24T23:00:00.000Z"
+	}
+]
