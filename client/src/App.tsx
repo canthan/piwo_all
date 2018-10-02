@@ -1,32 +1,48 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as ReactSVG from 'react-svg';
-// import { Component } from 'react';
-import { Storage } from './components/storage/storage';
+import { connect } from 'react-redux';
+
+import StorageComponent from './components/storage/storage';
+
+import { AsyncAction } from './types/app.types';
+
+import { getUserDataAsync } from './actions/app.actions';
+import { OverallAppState } from './reducers/initialState';
+
 import './App.scss';
 
-export default class App extends React.Component<{}, {}> {
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      loaded: true
-    }
-  }
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <ReactSVG
-            path="./assets/img/logo.svg"
-            className="logo-svg"
-          />
-          <h1 className="App-title">Storage app</h1>
-        </header>
-        <Storage />
-      </div>
-    );
-  }
+interface Props {
+	userId: number;
+	getUserDataAsync(userId: number): AsyncAction;
 }
 
-// export default App;
+export class App extends React.Component<Props> {
+	componentDidMount(): void {
+		const userId = 1;
+		this.getUserData(userId);
+	}
+
+	getUserData = (userId: number): AsyncAction =>
+		this.props.getUserDataAsync(userId);
+
+	render() {
+		return (
+			<div className="App">
+				<header className="App-header">
+					<h1 className="App-title">Storage app</h1>
+				</header>
+				<StorageComponent userId={this.props.userId} />
+			</div>
+		);
+	}
+}
+
+const mapStateToProps = (state: OverallAppState) => ({
+	userId: state.app.user.userId,
+});
+
+export default connect(
+	mapStateToProps,
+	{ getUserDataAsync }
+)(App);

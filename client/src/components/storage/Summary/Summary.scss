@@ -1,0 +1,20 @@
+@import '../../../styles/colors.scss';
+
+.summary {
+  background-color: $White;
+  &__list {
+    list-style: none;
+    display: flex;
+
+    li {
+      display: block;
+      font-size: 1em;
+      font-weight: bold;
+      text-transform: capitalize;
+    }  
+  }
+}
+
+.summary:nth-of-type(even) {
+  background-color: $FrenchGrey;
+}

@@ -1,15 +1,8 @@
-$SorrellBrown: #c4a97e;
-$Black: #000;
-$Anakiwa: #9ed8ff;
-$Bombay: #AFB3B6;
+@import '../../styles/colors.scss';
 
 .storage {
-  background-color: $Anakiwa;
-}
-
-.item {
-  border: 2px solid $Bombay;
-  border-radius: 5px;
-  padding: 10px;
-  min-height: 200px;
+  background-color: lightblue;
+  .container {
+    max-width: 95%;
+  }
 }

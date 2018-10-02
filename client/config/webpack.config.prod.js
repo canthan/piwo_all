@@ -4,15 +4,22 @@ const merge = require('webpack-merge');
 const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+  template: './src/index.html',
+  filename: '[hash].index.html',
+  inject: 'body'
+});
 
 const BUILD_DIR = path.resolve(__dirname, '../dist');
 
-module.exports = merge(baseConfig, {
+const config = env => merge(baseConfig(env), {
   output: {
     path: BUILD_DIR,
     filename: '[name].bundle.[chunkhash].js',
   },
   plugins: [
+    HtmlWebpackPluginConfig,
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production'
     }),
@@ -25,3 +32,5 @@ module.exports = merge(baseConfig, {
     }),
   ]
 });
+
+module.exports = config;
