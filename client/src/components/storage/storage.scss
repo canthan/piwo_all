@@ -1,0 +1,15 @@
+$SorrellBrown: #c4a97e;
+$Black: #000;
+$Anakiwa: #9ed8ff;
+$Bombay: #AFB3B6;
+
+.storage {
+  background-color: $Anakiwa;
+}
+
+.item {
+  border: 2px solid $Bombay;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 200px;
+}
