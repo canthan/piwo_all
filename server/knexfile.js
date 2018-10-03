@@ -1,11 +1,14 @@
 const path = require('path');
+const CONFIG = require('./src/config/config');
 
 const BASE_PATH = path.join(__dirname, 'src', 'db');
 
 module.exports = {
 	test: {
 		client: 'pg',
-		connection: 'postgres://postgres:xxx@localhost:5432/piwo_storage_test',
+		connection: `postgres://${CONFIG.PG_USERNAME}:${
+			CONFIG.PG_PASSWORD
+		}{@localhost:5432/piwo_storage_test`,
 		migrations: {
 			directory: path.join(BASE_PATH, 'migrations'),
 		},
@@ -15,7 +18,9 @@ module.exports = {
 	},
 	development: {
 		client: 'pg',
-		connection: 'postgres://postgres:xxx@localhost:5432/piwo_storage',
+		connection: `postgres://${CONFIG.PG_USERNAME}:${
+			CONFIG.PG_PASSWORD
+		}@localhost:5432/piwo_storage`,
 		migrations: {
 			directory: path.join(BASE_PATH, 'migrations'),
 		},

@@ -1,5 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { Batch, Stash } from './storage.types';
+import { Action } from 'redux';
 
 // tslint:disable no-any
 export type AnyFunction = (...args: any[]) => any;
@@ -37,4 +38,4 @@ export interface Response<T> {
 	data: T;
 }
 
-export type AsyncAction = ThunkAction<Promise<void>, AppState, null>;
+export type AsyncAction = ThunkAction<Promise<void>, AppState, null, Action>;

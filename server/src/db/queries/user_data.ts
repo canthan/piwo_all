@@ -1,13 +1,13 @@
 import knex from '../connection';
 
 export class CombinedDataQueries {
-	public getUserData(userId: number) {
+	public async getUserData(userId: number) {
 		return knex('users')
 			.select('*')
 			.where({ userId });
 	}
 
-	public getUserBatches(userId: number) {
+	public async getUserBatches(userId: number) {
 		return knex('batches')
 			.select(
 				'batchId',
@@ -21,13 +21,13 @@ export class CombinedDataQueries {
 			.where({ batchUserId: userId });
 	}
 
-	public getUserStashes(userId: number) {
+	public async getUserStashes(userId: number) {
 		return knex('stashes')
 			.select('batchId', 'stashName', 'stashId', 'b050', 'b040', 'b033')
 			.where({ stashUserId: userId });
 	}
 
-	public getUserBatchesStashes(userId: number, batchId: number) {
+	public async getUserBatchesStashes(userId: number, batchId: number) {
 		return knex('stashes')
 			.select('stashName', 'b050', 'b040', 'b033')
 			.where({ batchId, stashUserId: userId });

@@ -5,7 +5,6 @@ export class UsersRouter {
 	public static init(router: Router, path: string = '/batches') {
 		const usersRouteHandlers = new UsersRouteHandlers();
 
-		router.get(path, usersRouteHandlers.getUsers);
 		router.get(`${path}/:userId`, usersRouteHandlers.getUserById);
 	}
 }

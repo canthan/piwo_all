@@ -2,23 +2,23 @@ import knex from '../connection';
 import { Stash } from '../../types/types';
 
 export class StashQueries {
-	public static getAllStashes() {
+	public static async getAllStashes() {
 		return knex('stashes').select('*');
 	}
 
-	public getStashById(stashId: number) {
+	public async getStashById(stashId: number) {
 		return knex('stashes')
 			.select('*')
 			.where({ stashId });
 	}
 
-	public getStashByUserId(userId: number) {
+	public async getStashByUserId(userId: number) {
 		return knex('stashes')
 			.select('*')
 			.where({ userId });
 	}
 
-	public getStashesOfBatch(userId: number, batchId: number) {
+	public async getStashesOfBatch(userId: number, batchId: number) {
 		return knex('stashes')
 			.select('*')
 			.where({
@@ -27,7 +27,7 @@ export class StashQueries {
 			});
 	}
 
-	public updateStashes(stashes: Stash[]) {
+	public async updateStashes(stashes: Stash[]) {
 		let updatedStash;
 		stashes.forEach(stash => {
 			updatedStash = this.updateStash(stash);
@@ -36,20 +36,20 @@ export class StashQueries {
 		return updatedStash;
 	}
 
-	public updateStash(stash: Stash) {
+	public async updateStash(stash: Stash) {
 		return knex('stashes')
 			.update(stash)
 			.where({ stashId: stash.stashId })
 			.returning('*');
 	}
 
-	public insertStash(stash: Stash) {
+	public async insertStash(stash: Stash) {
 		return knex('stashes')
 			.insert(stash)
 			.returning('*');
 	}
 
-	public deleteStashesFromBatch(userId: number, batchId: number) {
+	public async deleteStashesFromBatch(userId: number, batchId: number) {
 		return knex('stashes')
 			.del()
 			.where({

@@ -2,30 +2,30 @@ import knex from '../connection';
 import { Batch } from '../../types/types';
 
 export class BatchQueries {
-	public static getAllBatches() {
+	public static async getAllBatches() {
 		return knex('batches').select('*');
 	}
 
-	public getBatchesOfUser(userId: number) {
+	public async getBatchesOfUser(userId: number) {
 		return knex('batches')
 			.select('*')
 			.where({ batchUserId: userId });
 	}
 
-	public addBatch(batch: Batch) {
+	public async addBatch(batch: Batch) {
 		return knex('batches')
 			.insert(batch)
 			.returning('*');
 	}
 
-	public deleteBatch(batchId: number) {
+	public async deleteBatch(batchId: number) {
 		return knex('batches')
 			.del()
 			.where({ batchId })
 			.returning('*');
 	}
 
-	public updateBatch(userId: number, batchId: number, batch: Batch) {
+	public async updateBatch(userId: number, batchId: number, batch: Batch) {
 		return knex('batches')
 			.update(batch)
 			.where({

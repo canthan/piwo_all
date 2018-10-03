@@ -1,7 +1,7 @@
 import knex from '../connection';
 
 export class UserQueries {
-	public static getAllUsers() {
+	public static async getAllUsers() {
 		return knex('users').select(
 			'username',
 			'firstname',
@@ -12,7 +12,7 @@ export class UserQueries {
 		);
 	}
 
-	public getSingleUser(id: number) {
+	public async getSingleUser(id: number) {
 		return knex('users')
 			.select('*')
 			.where({ userId: id });

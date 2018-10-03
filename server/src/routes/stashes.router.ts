@@ -5,7 +5,6 @@ export class StashesRouter {
 	public static init(router: Router, path: string = '/batches') {
 		const stashesRouteHandlers = new StashesRouteHandlers();
 
-		router.get(path, stashesRouteHandlers.getStashes);
 		router.get(`${path}/:stashId`, stashesRouteHandlers.getStashById);
 		router.get(
 			`${path}/:userId/:batchId`,

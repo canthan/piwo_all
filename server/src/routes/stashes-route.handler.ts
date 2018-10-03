@@ -28,25 +28,6 @@ export class StashesRouteHandlers {
 		ctx.throw(ctx.status, ctx.message, 'Error');
 	};
 
-	public getStashes = async (
-		ctx: Context,
-		next: AnyFunction
-	): Promise<void> => {
-		logger.info('test');
-		try {
-			logger.info(`Getting all stashes from database`);
-			const stashes = await this.stashQueries.getAllStashes();
-			logger.info(`Got ${stashes.length} stashes`);
-
-			ctx.body = {
-				status: HTTP_STATUS.OK,
-				data: stashes,
-			};
-		} catch (error) {
-			ctx.throw(ctx.status, error);
-		}
-	};
-
 	public getStashById = async (
 		ctx: Context,
 		next: AnyFunction

@@ -21,21 +21,6 @@ export class UsersRouteHandlers {
 		ctx.throw(ctx.status, ctx.message, 'Error');
 	};
 
-	public getUsers = async (ctx: Context, next: AnyFunction): Promise<void> => {
-		try {
-			logger.info(`Getting all users from database`);
-			const users = await this.userQueries.getAllUsers();
-			logger.info(`Got ${users.length} users`);
-
-			ctx.body = {
-				status: HTTP_STATUS.OK,
-				data: users,
-			};
-		} catch (error) {
-			ctx.throw(ctx.status, error);
-		}
-	};
-
 	public getUserById = async (
 		ctx: Context,
 		next: AnyFunction
