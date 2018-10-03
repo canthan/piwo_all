@@ -1,0 +1,7 @@
+{
+	"NODE_ENV": "development",
+	"DB_URI": "postgres://postgres:xxx@localhost:5432/piwo_storage",
+	"LISTENING_PORT": 1337,
+	"SERVICE_NAME": "piwo-api",
+	"ENV_MODE": "DEV"
+}
