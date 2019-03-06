@@ -4,13 +4,12 @@
 	"private": true,
 	"scripts": {
 		"build": "npm run lint && tsc",
-		"dev": "concurrently --names \"lint,tsc\" --prefix \"{name}-{pid}\" \"yarn run lint:watch\" \"tsc --watch\"",
-		"dev2": "nodemon",
+		"dev": "concurrently --names \"lint,tsc\" --prefix \"{name}-{pid}\" \"npm run lint:watch\" \"tsc --watch\"",
 		"lint": "tslint --project ./tsconfig.json",
-		"lint:watch": "chokidar \"src/**/*.ts\" --command \"yarn run lint --force\" --initial --verbose --ignore \"node_modules\"",
-		"start": "ts-node ./src/index.ts",
-		"start-dev": "tsc --watch && nodemon ./build/index.js --watch ./build --legacy-watch",
-		"start-dev2": "tsc --watch | nodemon --inspect ./build/index.js --watch ./build --legacy-watch",
+		"lint:watch": "chokidar \"src/**/*.ts\" --command \"npm run lint --force\" --initial --verbose --ignore \"node_modules\"",
+		"start": "node ./build/index.js",
+		"start-dev": "tsc --watch | nodemon --inspect ./build/index.js --watch ./build --legacy-watch",
+		"tsc": "tsc",
 		"test": "node ./node_modules/mocha/bin/_mocha",
 		"migrate": "knex migrate:rollback && knex migrate:latest --env development",
 		"seed:save": "node ./build/db/saveSeeds.js",
@@ -20,18 +19,21 @@
 	},
 	"keywords": [],
 	"devDependencies": {
-		"@types/jsonfile": "^4.0.1",
-		"@types/knex": "^0.14.25",
+        "@types/jest": "^24.0.6",
 		"@types/koa": "^2.0.46",
 		"@types/koa-cors": "0.0.0",
-		"@types/koa-router": "^7.0.32",
+        "@types/koa-router": "^7.0.32",
+        "@types/mongoose": "^5.0.2",
 		"@types/nconf": "0.0.37",
-		"@types/node": "^10.11.3",
-		"chai": "^4.2.0",
-		"chai-http": "^3.0.0",
-		"concurrently": "^4.0.1",
-		"mocha": "^3.5.3",
-		"nodemon": "^1.18.4",
+        "@types/node": "^10.11.3",
+        "@types/sinon": "^7.0.6",
+		"chokidar-cli": "^1.2.0",
+        "concurrently": "^4.0.1",
+        "jest": "^24.1.0",
+        "jest-serializer-html": "^6.0.0",
+        "nodemon": "^1.18.4",
+        "sinon": "^7.2.4",
+        "ts-jest": "^24.0.0",
 		"ts-node": "^7.0.1",
 		"tslint": "^5.11.0",
 		"tslint-config-airbnb": "^5.11.0",
@@ -39,14 +41,49 @@
 		"typescript": "^3.1.1"
 	},
 	"dependencies": {
-		"jsonfile": "^4.0.0",
-		"knex": "^0.14.6",
 		"koa": "^2.5.3",
-		"koa-body": "^2.6.0",
+        "koa-body": "^2.6.0",
+        "koa-mongoose": "^2.0.0",
 		"koa-cors": "0.0.16",
 		"koa-router": "^7.4.0",
 		"log4js": "^3.0.5",
+		"mongoose": "^5.4.15",
 		"nconf": "^0.10.0",
-		"pg": "^7.4.3"
-	}
+        "pg": "^7.4.3",
+        "path": "^0.12.7"
+    },
+    "jest": {
+        "testURL": "http://localhost",
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.{ts}",
+            "!src/**/*.d.{ts}",
+            "!src/**/*.spec.{ts}"
+        ],
+        "transform": {
+            "\\.(ts)$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts?)$",
+        "coverageThreshold": {
+            "global": {
+                "branches": 20,
+                "functions": 20,
+                "lines": 20,
+                "statements": 20
+            }
+        },
+        "moduleFileExtensions": [
+            "ts",
+            "js",
+            "json",
+            "node"
+        ],
+        "snapshotSerializers": [
+            "jest-serializer-html"
+        ],
+        "moduleDirectories": [
+            "src",
+            "node_modules"
+        ]
+    }
 }

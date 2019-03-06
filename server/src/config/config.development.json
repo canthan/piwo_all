@@ -1,7 +1,11 @@
 {
-	"NODE_ENV": "development",
-	"DB_URI": "postgres://postgres:xxx@localhost:5432/piwo_storage",
-	"LISTENING_PORT": 1337,
-	"SERVICE_NAME": "piwo-api",
+    "NODE_ENV": "development",
+    "MONGODB_USERS_URI": "mongodb://users-mongo:27017/users",
+    "MONGODB_BATCHES_URI": "mongodb://batches-mongo:27018/batches",
+    "MONGODB_STASHES_URI": "mongodb://stashes-mongo:27019/stashes",
+    "MONGODB_RECONNECT_ATTEMPTS": 3,
+    "MONGODB_RECONNECT_INTERVAL": 10000,
+    "LISTENING_PORT": 3000,
+	"SERVICE_NAME": "backend-svc",
 	"ENV_MODE": "DEV"
 }

@@ -5,12 +5,12 @@
 		"sourceMap": true,
 		"noImplicitAny": false,
 		"removeComments": true,
-		"strict": true,
+		"strict": false,
 		"module": "commonjs",
 		"target": "es5",
 		"jsx": "react",
 		"lib": ["es2017.object", "dom", "es6"]
 	},
 	"include": ["./src/**/*.d.ts", "./src/**/*.ts"],
-	"exclude": ["node_modules", "build"]
+	"exclude": ["node_modules", "build", "./src/store/index.ts"]
 }

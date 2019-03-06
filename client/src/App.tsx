@@ -1,6 +1,4 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as ReactSVG from 'react-svg';
 import { connect } from 'react-redux';
 
 import StorageComponent from './components/storage/storage';
@@ -18,15 +16,15 @@ interface Props {
 }
 
 export class App extends React.Component<Props> {
-	componentDidMount(): void {
+	public componentDidMount(): void {
 		const userId = 1;
 		this.getUserData(userId);
 	}
 
-	getUserData = (userId: number): AsyncAction =>
+	public getUserData = (userId: number): AsyncAction =>
 		this.props.getUserDataAsync(userId);
 
-	render() {
+	public render() {
 		return (
 			<div className="App">
 				<header className="App-header">

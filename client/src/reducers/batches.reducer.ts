@@ -17,7 +17,8 @@ import { CommonStorageService } from '../components/storage/common.service';
 import { createConditionalSliceReducer } from './utils';
 
 export const initialBatchesState = {
-	batches: {
+    batches: 
+    {
 		batches: [],
 	},
 };

@@ -96,7 +96,6 @@
 		"newline-before-return": true,
 		"no-non-null-assertion": true,
 		"await-promise": true,
-		"no-unused-variable": true,
 		"restrict-plus-operands": true,
 		"cyclomatic-complexity": true,
 		"arrow-return-shorthand": [true, "multiline"],

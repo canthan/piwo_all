@@ -1,0 +1,32 @@
+{
+    "name": "piwo-app",
+    "version": "0.1.0",
+    "description": "Piwo storage project",
+    "license": "ISC",
+    "private": true,
+    "scripts": {
+        "up": "sh ./scripts/up-services.sh",
+        "down": "sh ./scripts/up-services.sh --down-only",
+        "precommit": "lint-staged",
+        "prettify": "prettier **/*.{js,json,ts,tsx} --write",
+        "populate": "node ./scripts/mongo_population.js"
+    },
+    "lint-staged": {
+        "**/*.{js,json,ts,tsx}": [
+            "prettier --write",
+            "git add"
+        ]
+    },
+    "prettier": {
+        "printWidth": 120,
+        "singleQuote": true,
+        "tabWidth": 4,
+        "semi": true,
+        "trailingComma": "es5"
+    },
+    "devDependencies": {
+        "@types/commander": "^2.12.2",
+        "commander": "^2.19.0",
+        "mongodb": "^3.1.13"
+    }
+}

@@ -1,0 +1,3 @@
+eval "docker exec -it new_users-mongo_1 mongoimport --port 27017 --db users --collection users --type json --file ../../scripts/mocks/_users.json --jsonArray"
+eval "docker exec -it new_batches-mongo_1 mongoimport --port 27018 --db batches --collection batches --type json --file ../../scripts/mocks/_batches.json --jsonArray"
+eval "docker exec -it new_stashes-mongo_1 mongoimport --port 27019 --db stashes --collection stashes --type json --file ../../scripts/mocks/_stashes.json --jsonArray"

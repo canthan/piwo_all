@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  gateway:
+    volumes:
+      - type: bind
+        source: ./logs/nginx
+        target: /var/log/nginx
+    ports:
+      - '8080:8080'
+    depends_on:
+      - backend-svc
+
+  backend-svc:
+    depends_on:
+      - users-mongo
+      - batches-mongo
+      - stashes-mongo
+    volumes:
+      - type: bind
+        source: ./logs/server
+        target: /app/logs
+
+  users-mongo:
+    image: mongo:3.6.3-jessie
+    command: mongod --port 27017 --smallfiles
+
+  batches-mongo:
+    image: mongo:3.6.3-jessie
+    command: mongod --port 27018 --smallfiles
+
+  stashes-mongo:
+    image: mongo:3.6.3-jessie
+    command: mongod --port 27019 --smallfiles

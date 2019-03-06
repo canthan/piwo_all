@@ -1,18 +1,18 @@
 import { Context } from 'koa';
-import { getLogger } from 'log4js';
+// import { getLogger } from 'log4js';
 
-import { UserQueries } from '../db/queries/users';
+// import { UserQueries } from '../db/queries/users';
 
 import { AnyFunction } from '../types/types';
-import { HTTP_STATUS } from '../middlewares/error-handler.middleware';
+// import { HTTP_STATUS } from '../middlewares/error-handler.middleware';
 
-const logger = getLogger();
+// const logger = getLogger();
 
 export class UsersRouteHandlers {
-	private userQueries: UserQueries;
-	constructor(userQueries: UserQueries = new UserQueries()) {
-		this.userQueries = userQueries;
-	}
+	// private userQueries: UserQueries;
+	// constructor(userQueries: UserQueries = new UserQueries()) {
+	// 	this.userQueries = userQueries;
+	// }
 
 	public errorHandler = async (
 		ctx: Context,
@@ -21,23 +21,23 @@ export class UsersRouteHandlers {
 		ctx.throw(ctx.status, ctx.message, 'Error');
 	};
 
-	public getUserById = async (
-		ctx: Context,
-		next: AnyFunction
-	): Promise<void> => {
-		try {
-			const id = Number(ctx.params.userId);
-			logger.info(`Getting user ${id}`);
-			let user = await this.userQueries.getSingleUser(id);
-			user = JSON.parse(JSON.stringify(user))[0];
-			logger.info(`Got ${user.length} user`);
+// 	public getUserById = async (
+// 		ctx: Context,
+// 		next: AnyFunction
+// 	): Promise<void> => {
+// 		try {
+// 			const id = Number(ctx.params.userId);
+// 			logger.info(`Getting user ${id}`);
+// 			let user = await this.userQueries.getSingleUser(id);
+// 			user = JSON.parse(JSON.stringify(user))[0];
+// 			logger.info(`Got ${user.length} user`);
 
-			ctx.body = {
-				status: HTTP_STATUS.OK,
-				data: user,
-			};
-		} catch (error) {
-			ctx.throw(ctx.status, error);
-		}
-	};
+// 			ctx.body = {
+// 				status: HTTP_STATUS.OK,
+// 				data: user,
+// 			};
+// 		} catch (error) {
+// 			ctx.throw(ctx.status, error);
+// 		}
+// 	};
 }

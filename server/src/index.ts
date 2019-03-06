@@ -2,7 +2,7 @@ import { getLogger } from 'log4js';
 import * as nconf from 'nconf';
 
 import { bootstrap } from './app';
-import { AppConfig } from './types/config';
+import config, { AppConfig } from './config.loader';
 
 const defaultLogger = getLogger();
 
@@ -12,7 +12,7 @@ bootstrap()
 			nconf.get(AppConfig.LISTENING_PORT),
 			async (): Promise<void> =>
 				defaultLogger.info(
-					`Server is listening on port ${nconf.get(AppConfig.LISTENING_PORT)}`
+					`Server is listening on port ${config.get(AppConfig.LISTENING_PORT)}`
 				)
 		);
 	})

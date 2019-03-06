@@ -5,13 +5,15 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const paths = require('./paths');
+
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: './src/index.html',
-  filename: '[hash].index.html',
+  template: paths.appHtmlFile,
+  filename: 'index.html',
   inject: 'body'
 });
 
-const BUILD_DIR = path.resolve(__dirname, '../dist');
+const BUILD_DIR = path.resolve(__dirname, '../build');
 
 const config = env => merge(baseConfig(env), {
   output: {

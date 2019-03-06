@@ -13,7 +13,7 @@ import { AsyncAction } from '../../types/app.types';
 
 import { Batch, Stash, BatchInDto } from '../../types/storage.types';
 
-import './Storage.scss';
+import './storage.scss';
 import { getSummaryFromStashes } from '../../actions/summary.actions';
 
 interface MappedProps {

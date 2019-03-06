@@ -38,4 +38,5 @@ export interface Response<T> {
 	data: T;
 }
 
-export type AsyncAction = ThunkAction<Promise<void>, AppState, null, Action>;
+// export type AsyncAction = ThunkAction<Promise<void>, AppState, null, Action>;
+export type AsyncAction = ThunkAction<Promise<void>, AppState, null>;
