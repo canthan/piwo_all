@@ -8,9 +8,9 @@ services:
     ports:
       - '8080:8080'
     depends_on:
-      - backend-svc
+      - users-svc
 
-  backend-svc:
+  users-svc:
     depends_on:
       - users-mongo
       - batches-mongo

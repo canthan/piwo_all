@@ -7,26 +7,6 @@ import { HTTP_STATUS } from '../middlewares/error-handler.middleware';
 
 const logger = getLogger();
 
-// public getUserById = async (
-// 		ctx: Context,
-// 		next: AnyFunction
-// 	): Promise<void> => {
-// 		try {
-// 			const id = Number(ctx.params.userId);
-// 			logger.info(`Getting user ${id}`);
-// 			let user = await this.userQueries.getSingleUser(id);
-// 			user = JSON.parse(JSON.stringify(user))[0];
-// 			logger.info(`Got ${user.length} user`);
-
-// 			ctx.body = {
-// 				status: HTTP_STATUS.OK,
-// 				data: user,
-// 			};
-// 		} catch (error) {
-// 			ctx.throw(ctx.status, error);
-// 		}
-// 	};
-
 export class UsersController {
 
     public getUserById = async (
@@ -34,9 +14,6 @@ export class UsersController {
         next: AnyFunction
     ): Promise<void> => {
         try {
-            // logger.info('UsersController ctx ', ctx.req);
-            logger.info('UsersController ctx ', ctx.params);
-            logger.info('UsersController ctx ', ctx.params.userId);
             const id = ctx.params.userId;
             const user = await UsersService.getUserById(id);
             logger.info(`Got ${user.username} user`);

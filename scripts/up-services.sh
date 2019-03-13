@@ -10,7 +10,7 @@ UNKNOWN_POSITIONAL_PARAMS=()
 
 SERVICES=(
     "client"
-    "server"
+    "backend/users-service"
 )
 
 function getDockerComposeOverrideFiles() {
