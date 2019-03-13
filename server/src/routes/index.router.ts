@@ -6,6 +6,5 @@ export class IndexRouter {
 		const indexRouteHandlers = new IndexRouteHandlers();
 
 		router.get(path, indexRouteHandlers.getIndex);
-		router.all('*', indexRouteHandlers.errorHandler);
 	}
 }

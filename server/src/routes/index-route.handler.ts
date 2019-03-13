@@ -16,7 +16,8 @@ export class IndexRouteHandlers {
 
 	public getIndex = async (ctx: Context, next: AnyFunction): Promise<void> => {
 		try {
-			logger.info(`Test route`);
+            logger.info(`Test route`);            
+            logger.info(ctx);
 
 			ctx.body = {
 				status: HTTP_STATUS.OK,

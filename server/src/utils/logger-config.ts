@@ -12,9 +12,7 @@ export default function configureLoggers() {
         resolve(
             process.cwd(),
             'logs',
-            `${logType}.${config.get(AppConfig.SERVICE_NAME)}
-            .${config.get(AppConfig.ENV_MODE)
-            .toLowerCase()}.log`
+            `${logType}.${config.get(AppConfig.SERVICE_NAME)}.${config.get(AppConfig.ENV_MODE).toLowerCase()}.log`
         );
     configure({
         appenders: {

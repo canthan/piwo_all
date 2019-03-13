@@ -24,19 +24,8 @@ export default async function mongoConnector(): Promise<mongoose.Connection> {
 
             defaultLogger.info(`[ MongoDB ] Connection attempt: ${i + 1}/${reconnectAttempts} ...`);
 
-            await mongoose.connect(
-                config.get(AppConfig.MONGODB_USERS_URI),
-                { useNewUrlParser: true }
-            );
-            await mongoose.connect(
-                config.get(AppConfig.MONGODB_BATCHES_URI),
-                { useNewUrlParser: true }
-            );
-            await mongoose.connect(
-                config.get(AppConfig.MONGODB_STASHES_URI),
-                { useNewUrlParser: true }
-            );
-
+            await mongoose.connect(config.get(AppConfig.MONGODB_USERS_URI), { useNewUrlParser: true });
+              
             break;
         } catch (e) {
             defaultLogger.error(e.message);
@@ -47,7 +36,7 @@ export default async function mongoConnector(): Promise<mongoose.Connection> {
         throw new mongoose.mongo.MongoError('MongoDB connection could NOT be established!');
     }
 
-    defaultLogger.info('[ MongoDB ] Connection has been established!');
+    defaultLogger.info(`[ MongoDB] Connection has been established!`);
 
     return mongoose.connection;
 }
