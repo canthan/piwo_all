@@ -30,7 +30,7 @@ export async function bootstrap(): Promise<Koa> {
     app.use(cors());
 
     const router = new Router();
-    new BatchesRouter().init(router, '/batches');
+    BatchesRouter.init(router, '/batches');
     IndexRouter.init(router);
 
     app.use(router.routes());

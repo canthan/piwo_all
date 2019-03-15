@@ -1,227 +1,202 @@
 [
-	{
-		"batchNumber": "50",
-		"batchUserId": 2,
-		"batchName": "Item_50",
-		"bottledOn": "2018-01-11T23:00:00.000Z",
-		"quantityLitres": 16,
-		"quantityBottles": 32,
-		"quantityCrates": 1.6
-	},
-	{
-		"batchNumber": "17",
-		"batchUserId": 1,
-		"batchName": "RIS",
-		"bottledOn": "2015-12-11T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "20",
-		"batchUserId": 1,
-		"batchName": "Tripel",
-		"bottledOn": "2016-01-26T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "27",
-		"batchUserId": 1,
-		"batchName": "Barley Wine",
-		"bottledOn": "2016-11-28T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "34",
-		"batchUserId": 1,
-		"batchName": "RIS",
-		"bottledOn": "2017-01-15T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "38",
-		"batchUserId": 1,
-		"batchName": "Tripel",
-		"bottledOn": "2017-02-26T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "39",
-		"batchUserId": 1,
-		"batchName": "Quadrupel",
-		"bottledOn": "2017-03-26T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "47",
-		"batchUserId": 1,
-		"batchName": "Dry Stout",
-		"bottledOn": "2017-11-06T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "47K",
-		"batchUserId": 1,
-		"batchName": "Dry Stout z kawą",
-		"bottledOn": "2017-11-06T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "48",
-		"batchUserId": 1,
-		"batchName": "Pale Ale",
-		"bottledOn": "2017-11-26T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "48K",
-		"batchUserId": 1,
-		"batchName": "Pale Ale z miętą",
-		"bottledOn": "2017-11-26T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "49",
-		"batchUserId": 1,
-		"batchName": "Mild",
-		"bottledOn": "2017-12-10T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "49K",
-		"batchUserId": 1,
-		"batchName": "Mild z herbatą",
-		"bottledOn": "2017-12-10T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "11",
-		"batchUserId": 1,
-		"batchName": "RIS",
-		"bottledOn": "2015-05-12T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "50",
-		"batchUserId": 1,
-		"batchName": "Brown IPA",
-		"bottledOn": "2018-03-11T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "50P",
-		"batchUserId": 1,
-		"batchName": "Brown IPA z pomarańczą",
-		"bottledOn": "2018-03-11T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "51",
-		"batchUserId": 1,
-		"batchName": "Peated FES",
-		"bottledOn": "2018-03-24T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "1",
-		"batchUserId": null,
-		"batchName": "aaa",
-		"bottledOn": "2018-04-02T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "1",
-		"batchUserId": null,
-		"batchName": "aaa",
-		"bottledOn": "2018-04-02T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "13232",
-		"batchUserId": null,
-		"batchName": "aaa",
-		"bottledOn": "2018-04-02T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "12342",
-		"batchUserId": null,
-		"batchName": "aaa",
-		"bottledOn": "2018-04-02T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "1123",
-		"batchUserId": null,
-		"batchName": "aaa",
-		"bottledOn": "2018-04-02T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "51K",
-		"batchUserId": 1,
-		"batchName": "Peated FES z kawą",
-		"bottledOn": "2018-03-23T23:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "52",
-		"batchUserId": 1,
-		"batchName": "American Pale Ale",
-		"bottledOn": "2018-04-22T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	},
-	{
-		"batchNumber": "13232",
-		"batchUserId": 1,
-		"batchName": "aaa",
-		"bottledOn": "2018-04-02T22:00:00.000Z",
-		"quantityLitres": 0,
-		"quantityBottles": 0,
-		"quantityCrates": 0
-	}
+  {
+    "batchId": "1",
+    "batchNumber": "50",
+    "batchUserId": "2",
+    "batchName": "Item_50",
+    "bottledOn": "2018-01-11T23:00:00.000Z",
+    "quantityLitres": 16,
+    "quantityBottles": 32,
+    "quantityCrates": 1.6
+  },
+  {
+    "batchId": "2",
+    "batchNumber": "17",
+    "batchUserId": "1",
+    "batchName": "RIS",
+    "bottledOn": "2015-12-11T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "3",
+    "batchNumber": "20",
+    "batchUserId": "1",
+    "batchName": "Tripel",
+    "bottledOn": "2016-01-26T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "4",
+    "batchNumber": "27",
+    "batchUserId": "1",
+    "batchName": "Barley Wine",
+    "bottledOn": "2016-11-28T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "5",
+    "batchNumber": "34",
+    "batchUserId": "1",
+    "batchName": "RIS",
+    "bottledOn": "2017-01-15T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "6",
+    "batchNumber": "38",
+    "batchUserId": "1",
+    "batchName": "Tripel",
+    "bottledOn": "2017-02-26T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "7",
+    "batchNumber": "39",
+    "batchUserId": "1",
+    "batchName": "Quadrupel",
+    "bottledOn": "2017-03-26T22:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "8",
+    "batchNumber": "47",
+    "batchUserId": "1",
+    "batchName": "Dry Stout",
+    "bottledOn": "2017-11-06T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "9",
+    "batchNumber": "47K",
+    "batchUserId": "1",
+    "batchName": "Dry Stout z kawą",
+    "bottledOn": "2017-11-06T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "10",
+    "batchNumber": "48",
+    "batchUserId": "1",
+    "batchName": "Pale Ale",
+    "bottledOn": "2017-11-26T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "11",
+    "batchNumber": "48K",
+    "batchUserId": "1",
+    "batchName": "Pale Ale z miętą",
+    "bottledOn": "2017-11-26T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "12",
+    "batchNumber": "49",
+    "batchUserId": "1",
+    "batchName": "Mild",
+    "bottledOn": "2017-12-10T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "13",
+    "batchNumber": "49K",
+    "batchUserId": "1",
+    "batchName": "Mild z herbatą",
+    "bottledOn": "2017-12-10T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "14",
+    "batchNumber": "11",
+    "batchUserId": "1",
+    "batchName": "RIS",
+    "bottledOn": "2015-05-12T22:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "15",
+    "batchNumber": "50",
+    "batchUserId": "1",
+    "batchName": "Brown IPA",
+    "bottledOn": "2018-03-11T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "16",
+    "batchNumber": "50P",
+    "batchUserId": "1",
+    "batchName": "Brown IPA z pomarańczą",
+    "bottledOn": "2018-03-11T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "17",
+    "batchNumber": "51",
+    "batchUserId": "1",
+    "batchName": "Peated FES",
+    "bottledOn": "2018-03-24T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "23",
+    "batchNumber": "51K",
+    "batchUserId": "1",
+    "batchName": "Peated FES z kawą",
+    "bottledOn": "2018-03-23T23:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "24",
+    "batchNumber": "52",
+    "batchUserId": "1",
+    "batchName": "American Pale Ale",
+    "bottledOn": "2018-04-22T22:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  },
+  {
+    "batchId": "25",
+    "batchNumber": "13232",
+    "batchUserId": "1",
+    "batchName": "aaa",
+    "bottledOn": "2018-04-02T22:00:00.000Z",
+    "quantityLitres": 0,
+    "quantityBottles": 0,
+    "quantityCrates": 0
+  }
 ]

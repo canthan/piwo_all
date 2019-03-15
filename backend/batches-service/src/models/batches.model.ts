@@ -1,4 +1,4 @@
-import { Document, model, Schema } from 'mongoose';
+import { Document, model, Schema, Model } from 'mongoose';
 import * as uuid from 'uuid';
 
 import { Batch } from '../types/types';
@@ -16,4 +16,4 @@ export const BatchSchema = new Schema({
     bottledOn: { type: Date, required: true },
 });
 
-export default model<BatchModel>('batches', BatchSchema);
+export const BatchModel: Model<BatchModel> = model<BatchModel>('batches', BatchSchema);
