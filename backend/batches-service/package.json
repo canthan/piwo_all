@@ -1,0 +1,91 @@
+{
+    "name": "piwo-backend",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "build": "npm run lint && tsc",
+        "dev": "concurrently --names \"lint,tsc\" --prefix \"{name}-{pid}\" \"npm run lint:watch\" \"tsc --watch\"",
+        "lint": "tslint --project ./tsconfig.json",
+        "lint:watch": "chokidar \"src/**/*.ts\" --command \"npm run lint --force\" --initial --verbose --ignore \"node_modules\"",
+        "start": "node ./build/index.js",
+        "start-dev": "tsc --watch | nodemon --inspect ./build/index.js --watch ./build --legacy-watch",
+        "tsc": "tsc",
+        "test": "node ./node_modules/mocha/bin/_mocha",
+        "copy-common": "yarn run copy-common:utils && yarn run copy-common:middlewares && yarn run copy-common:exceptions",
+        "copy-common:utils": "cpx \"../common/utils/*\" src/common/utils",        
+        "copy-common:middlewares": "cpx \"../common/middlewares/*\" src/common/middlewares",
+        "copy-common:exceptions": "cpx \"../common/exceptions/*\" src/common/exceptions"
+    },
+    "keywords": [],
+    "devDependencies": {
+        "@types/jest": "^24.0.6",
+        "@types/koa": "^2.0.46",
+        "@types/koa-cors": "0.0.0",
+        "@types/koa-router": "^7.0.32",
+        "@types/mongoose": "^5.0.2",
+        "@types/nconf": "0.0.37",
+        "@types/node": "^10.11.3",
+        "@types/sinon": "^7.0.6",
+        "@types/uuid": "^3.4.4",
+        "chokidar-cli": "^1.2.0",
+        "concurrently": "^4.0.1",
+        "jest": "^24.1.0",
+        "jest-serializer-html": "^6.0.0",
+        "nodemon": "^1.18.4",
+        "sinon": "^7.2.4",
+        "ts-jest": "^24.0.0",
+        "ts-node": "^7.0.1",
+        "tslint": "^5.11.0",
+        "tslint-config-airbnb": "^5.11.0",
+        "tslint-config-prettier": "^1.15.0",
+        "typescript": "^3.1.1"
+    },
+    "dependencies": {
+        "cpx": "^1.5.0",
+        "koa": "^2.5.3",
+        "koa-body": "^2.6.0",
+        "koa-cors": "0.0.16",
+        "koa-mongoose": "^2.0.0",
+        "koa-router": "^7.4.0",
+        "log4js": "^3.0.5",
+        "mongoose": "^5.4.15",
+        "mongoose-timestamp": "^0.6.0",
+        "nconf": "^0.10.0",
+        "path": "^0.12.7",
+        "uuid": "^3.3.2"
+    },
+    "jest": {
+        "testURL": "http://localhost",
+        "collectCoverage": true,
+        "collectCoverageFrom": [
+            "src/**/*.{ts}",
+            "!src/**/*.d.{ts}",
+            "!src/**/*.spec.{ts}"
+        ],
+        "transform": {
+            "\\.(ts)$": "ts-jest"
+        },
+        "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts?)$",
+        "coverageThreshold": {
+            "global": {
+                "branches": 20,
+                "functions": 20,
+                "lines": 20,
+                "statements": 20
+            }
+        },
+        "moduleFileExtensions": [
+            "ts",
+            "js",
+            "json",
+            "node"
+        ],
+        "snapshotSerializers": [
+            "jest-serializer-html"
+        ],
+        "moduleDirectories": [
+            "src",
+            "node_modules"
+        ]
+    }
+}

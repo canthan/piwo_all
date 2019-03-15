@@ -8,16 +8,24 @@ services:
     ports:
       - '8080:8080'
     depends_on:
-      - users-svc
+      - users-service
+      - batches-service
 
-  users-svc:
+  users-service:
     depends_on:
       - users-mongo
-      - batches-mongo
       - stashes-mongo
     volumes:
       - type: bind
-        source: ./logs/server
+        source: ./logs/users-service
+        target: /app/logs
+
+  batches-service:
+    depends_on:
+      - batches-mongo
+    volumes:
+      - type: bind
+        source: ./logs/batches-service
         target: /app/logs
 
   users-mongo:

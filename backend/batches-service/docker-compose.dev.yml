@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  batches-service:
+    build:
+      context: ./backend/batches-service
+      target: builder
+    volumes:
+      - type: bind
+        source: ./backend/batches-service/build
+        target: /app/build
+    ports:
+      - '3018:3018'
+    command: yarn run start-dev
+
+  batches-mongo:
+    volumes:
+      - batches-mongodata:/data/db
+    ports:
+      - "27018:27018"
+
+volumes:
+  batches-mongodata:
