@@ -24,7 +24,7 @@ COPY --from=builder /app/build ./build
 
 RUN chown -R node:node .
 
-EXPOSE 3000
+EXPOSE 3017
 
 USER node
 

@@ -5,7 +5,7 @@
     "MONGODB_STASHES_URI": "mongodb://stashes-mongo:27019/stashes",
     "MONGODB_RECONNECT_ATTEMPTS": 3,
     "MONGODB_RECONNECT_INTERVAL": 10000,
-    "LISTENING_PORT": 3000,
-	"SERVICE_NAME": "backend-svc",
+    "LISTENING_PORT": 3017,
+	"SERVICE_NAME": "users-service",
 	"ENV_MODE": "DEV"
 }

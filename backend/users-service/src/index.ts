@@ -2,7 +2,7 @@ import { getLogger } from 'log4js';
 import * as nconf from 'nconf';
 
 import { bootstrap } from './app';
-import config, { AppConfig } from './config.loader';
+import config, { AppConfig } from './common/utils/config.loader';
 
 const defaultLogger = getLogger();
 

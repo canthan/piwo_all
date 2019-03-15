@@ -3,7 +3,7 @@ import { getLogger } from 'log4js';
 
 import { UsersService } from './../services/user.service';
 import { AnyFunction } from '../types/types';
-import { HTTP_STATUS } from '../middlewares/error-handler.middleware';
+import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
 
 const logger = getLogger();
 

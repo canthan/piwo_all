@@ -1,6 +1,6 @@
 version: '3.4'
 services:
-  users-svc:
+  users-service:
     build:
       context: ./backend/users-service
       target: builder
@@ -9,7 +9,7 @@ services:
         source: ./backend/users-service/build
         target: /app/build
     ports:
-      - '3000:3000'
+      - '3017:3017'
     command: yarn run start-dev
 
   users-mongo:
@@ -17,12 +17,6 @@ services:
       - users-mongodata:/data/db
     ports:
       - "27017:27017"
-
-  batches-mongo:
-    volumes:
-      - batches-mongodata:/data/db
-    ports:
-      - "27018:27018"
 
   stashes-mongo:
     volumes:
@@ -32,5 +26,4 @@ services:
 
 volumes:
   users-mongodata:
-  batches-mongodata:
   stashes-mongodata:

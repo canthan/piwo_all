@@ -11,6 +11,7 @@ UNKNOWN_POSITIONAL_PARAMS=()
 SERVICES=(
     "client"
     "backend/users-service"
+    "backend/batches-service"
 )
 
 function getDockerComposeOverrideFiles() {

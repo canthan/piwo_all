@@ -1,7 +1,7 @@
 import { getLogger } from 'log4js';
 
 import users from './../models/user.model';
-import Exceptions from '../exceptions/exceptions';
+import Exceptions from '../common/exceptions/exceptions';
 
 const logger = getLogger();
 

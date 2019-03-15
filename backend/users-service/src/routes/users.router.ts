@@ -1,4 +1,5 @@
 import * as Router from 'koa-router';
+
 import { UsersController } from '../controllers/users.controller';
 
 export class UsersRouter {

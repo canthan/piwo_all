@@ -15,7 +15,11 @@
         "seed:save": "node ./build/db/saveSeeds.js",
         "seed:save-js": "node ./src/db/saveSeeds.js",
         "seed": "knex seed:run --env development",
-        "db:up": "npm run migrate && npm run seed && npm start"
+        "db:up": "npm run migrate && npm run seed && npm start",
+        "copy-common": "yarn run copy-common:utils && yarn run copy-common:middlewares && yarn run copy-common:exceptions",
+        "copy-common:utils": "cpx \"../common/utils/*\" src/common/utils",        
+        "copy-common:middlewares": "cpx \"../common/middlewares/*\" src/common/middlewares",
+        "copy-common:exceptions": "cpx \"../common/exceptions/*\" src/common/exceptions"
     },
     "keywords": [],
     "devDependencies": {
@@ -42,6 +46,7 @@
         "typescript": "^3.1.1"
     },
     "dependencies": {
+        "cpx": "^1.5.0",
         "koa": "^2.5.3",
         "koa-body": "^2.6.0",
         "koa-cors": "0.0.16",

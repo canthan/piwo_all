@@ -9,7 +9,8 @@
         "down": "sh ./scripts/up-services.sh --down-only",
         "precommit": "lint-staged",
         "prettify": "prettier **/*.{js,json,ts,tsx} --write",
-        "populate": "node ./scripts/mongo_population.js"
+        "populate": "node ./scripts/mongo_population.js",
+        "copy-common": "cpx "
     },
     "lint-staged": {
         "**/*.{js,json,ts,tsx}": [

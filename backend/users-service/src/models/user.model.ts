@@ -1,4 +1,4 @@
-import { Document, model, Schema, SchemaTypeOpts } from 'mongoose';
+import { Document, model, Schema } from 'mongoose';
 import * as timestamps from 'mongoose-timestamp';
 import * as uuid from 'uuid';
 
@@ -14,9 +14,7 @@ export const UserSchema = new Schema({
     email: { type: String, required: true },
     password: { type: String, required: true },
     registrationDate: Date,
-}
-    // { collection: 'users' }
-);
+});
 
 UserSchema.plugin(timestamps);
 
