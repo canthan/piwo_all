@@ -1,0 +1,9 @@
+{
+  "NODE_ENV": "development",
+  "MONGODB_STASHES_URI": "mongodb://stashes-mongo:27019/stashes",
+  "MONGODB_RECONNECT_ATTEMPTS": 3,
+  "MONGODB_RECONNECT_INTERVAL": 10000,
+  "LISTENING_PORT": 3019,
+  "SERVICE_NAME": "stashes-service",
+  "ENV_MODE": "DEV"
+}

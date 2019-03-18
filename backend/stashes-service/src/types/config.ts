@@ -1,0 +1,6 @@
+export enum AppConfig {
+	LISTENING_PORT = 'LISTENING_PORT',
+	DB_URI = 'DB_URI',
+	ENV_MODE = 'ENV_MODE',
+	SERVICE_NAME = 'SERVICE_NAME',
+}

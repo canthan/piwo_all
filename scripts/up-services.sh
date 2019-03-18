@@ -12,6 +12,7 @@ SERVICES=(
     "client"
     "backend/users-service"
     "backend/batches-service"
+    "backend/stashes-service"
 )
 
 function getDockerComposeOverrideFiles() {

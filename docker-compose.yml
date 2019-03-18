@@ -10,11 +10,11 @@ services:
     depends_on:
       - users-service
       - batches-service
+      - stashes-service
 
   users-service:
     depends_on:
       - users-mongo
-      - stashes-mongo
     volumes:
       - type: bind
         source: ./logs/users-service
@@ -26,6 +26,14 @@ services:
     volumes:
       - type: bind
         source: ./logs/batches-service
+        target: /app/logs
+
+  stashes-service:
+    depends_on:
+      - stashes-mongo
+    volumes:
+      - type: bind
+        source: ./logs/stashes-service
         target: /app/logs
 
   users-mongo:

@@ -1,0 +1,22 @@
+version: '3.4'
+services:
+  stashes-service:
+    build:
+      context: ./backend/stashes-service
+      target: builder
+    volumes:
+      - type: bind
+        source: ./backend/stashes-service/build
+        target: /app/build
+    ports:
+      - '3019:3019'
+    command: yarn run start-dev
+
+  stashes-mongo:
+    volumes:
+      - stashes-mongodata:/data/db
+    ports:
+      - "27019:27019"
+
+volumes:
+  stashes-mongodata:

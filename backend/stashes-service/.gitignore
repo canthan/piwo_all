@@ -1,0 +1,6 @@
+build
+common
+node_modules
+*.http
+*.env
+*.log
