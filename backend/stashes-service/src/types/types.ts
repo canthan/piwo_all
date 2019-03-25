@@ -10,7 +10,7 @@ export class Stash {
 	public userId: string;
 	public stashName: string;
 	public items: Bottles;
-	[key: string]: number | string | Bottles;
+	// [key: string]: number | string | Bottles;
 	constructor(stashName: string, batchId: string, userId: string) {
 		this.stashId = "";
 		this.items = new Bottles();
@@ -26,5 +26,5 @@ export class Bottles {
 		this.b040 = b040;
 		this.b050 = b050;
 	}
-	[bottleSize: string]: number | string | Bottles;
+	[bottleSize: string]: number;
 }
