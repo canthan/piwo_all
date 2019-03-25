@@ -11,36 +11,42 @@ import { OverallAppState } from './reducers/initialState';
 import './App.scss';
 
 interface Props {
-	userId: number;
-	getUserDataAsync(userId: number): AsyncAction;
+  userId: number;
+  getUserDataAsync(userId: number): AsyncAction;
 }
 
 export class App extends React.Component<Props> {
-	public componentDidMount(): void {
-		const userId = 1;
-		this.getUserData(userId);
-	}
+  public componentDidMount(): void {
+    const userId = 1;
+    this.getUserDataAsync(userId);
+  }
 
-	public getUserData = (userId: number): AsyncAction =>
-		this.props.getUserDataAsync(userId);
+  public getUserDataAsync = (userId: number): AsyncAction =>
+    this.props.getUserDataAsync(userId);
 
-	public render() {
-		return (
-			<div className="App">
-				<header className="App-header">
-					<h1 className="App-title">Storage app</h1>
-				</header>
-				<StorageComponent userId={this.props.userId} />
-			</div>
-		);
-	}
+  public render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1 className="App-title">Storage app</h1>
+        </header>
+        <StorageComponent userId={this.props.userId} />
+      </div>
+    );
+  }
 }
 
+// export default App;
+
 const mapStateToProps = (state: OverallAppState) => ({
-	userId: state.app.user.userId,
+  userId: state.app.user.userId,
 });
 
+const actions = {
+	getUserDataAsync,
+};
+
 export default connect(
-	mapStateToProps,
-	{ getUserDataAsync }
+  mapStateToProps,
+  actions
 )(App);

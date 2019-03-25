@@ -1,18 +1,18 @@
-FROM node:9.11.1-alpine as builder
+FROM node:11.10.0-alpine as builder
 
 WORKDIR /app/
 
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 
 RUN apk --no-cache add git \
-    && npm install --no-package-lock
+    && yarn install --pure-lockfile --production=false
 
 COPY src/ ./src/
 COPY public/ ./public/
 COPY config/ ./config/
 COPY tslint.json tsconfig.json ./
 
-RUN npm run build
+RUN yarn run build
 
 FROM nginx:latest
 

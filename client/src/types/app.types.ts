@@ -1,6 +1,6 @@
 import { ThunkAction } from 'redux-thunk';
 import { Batch, Stash } from './storage.types';
-import { Action } from 'redux';
+// import { Action } from 'redux';
 
 // tslint:disable no-any
 export type AnyFunction = (...args: any[]) => any;

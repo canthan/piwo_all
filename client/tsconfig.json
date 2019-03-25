@@ -9,8 +9,26 @@
 		"module": "commonjs",
 		"target": "es5",
 		"jsx": "react",
-		"lib": ["es2017.object", "dom", "es6"]
-	},
-	"include": ["./src/**/*.d.ts", "./src/**/*.ts"],
-	"exclude": ["node_modules", "build", "./src/store/index.ts"]
+		"lib": [
+      "dom",
+      "es5",
+      "es2015.core",
+      "es2015.collection",
+      "es2015.iterable",
+      "es2015.proxy",
+      "es2015.reflect",
+      "es2015.symbol",
+      "es2015.symbol.wellknown",
+      "es2015.promise",
+      "scripthost",
+      "es2016.array.include",
+      "esnext.asynciterable",
+      "es2017.object"
+    ],
+    "skipLibCheck": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+	"include": ["./src/**/*.d.ts", "./src/**/*.ts", "./src/**/*.tsx", "./src/**/*.scss"],
+	"exclude": ["node_modules", "config", "public", "build", "./src/store/index.ts"]
 }

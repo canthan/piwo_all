@@ -1,7 +1,7 @@
 import { getSummaryFromStashes } from './summary.actions';
 import Axios, { AxiosResponse } from 'axios';
-import { Dispatch } from 'react-redux';
-import { AnyAction } from 'redux';
+
+import { AnyAction, Dispatch } from 'redux';
 
 import { User, UserData, Response } from './../types/app.types';
 

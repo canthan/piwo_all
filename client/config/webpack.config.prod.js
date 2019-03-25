@@ -1,38 +1,53 @@
-const baseConfig = require('./webpack.config.base.js');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const merge = require('webpack-merge');
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const merge = require('webpack-merge');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const baseConfig = require('./webpack.config.base.js');
 const paths = require('./paths');
+const getPluginForStylesFileType = require('./getPluginForStylesFileType');
 
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
-  template: paths.appHtmlFile,
-  filename: 'index.html',
-  inject: 'body'
-});
-
-const BUILD_DIR = path.resolve(__dirname, '../build');
-
-const config = env => merge(baseConfig(env), {
-  output: {
-    path: BUILD_DIR,
-    filename: '[name].bundle.[chunkhash].js',
+// const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+//   template: paths.appHtmlFile,
+//   filename: 'index.html',
+//   inject: 'body'
+// });
+module.exports = merge(baseConfig, {
+  devtool: 'cheap-module-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, '../build'),
+    hot: true,
+    historyApiFallback: true,
+    proxy: {
+      '/api': 'http://localhost:8080',
+    },
+  },
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        include: paths.appSrc,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'happypack/loader?id=styles-less',
+        }),
+      },
+      {
+        test: /\.(css|scss)$/,
+        exclude: /node_modules/,
+        include: paths.appSrc,
+        loader: require.resolve('happypack/loader'),
+        options: {
+          id: 'styles-scss',
+        },
+      },
+    ],
   },
   plugins: [
-    HtmlWebpackPluginConfig,
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production'
-    }),
-    new ExtractTextPlugin('[name].bundle.[chunkhash:8].css'),
-    new UglifyJsPlugin({
-      sourceMap: false,
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
-  ]
+    new ExtractTextPlugin('css/uui.css'),
+
+    getPluginForStylesFileType('less'),
+    getPluginForStylesFileType('scss'),
+  ],
 });
 
-module.exports = config;

@@ -1,17 +1,17 @@
 import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { connect, dispatch } from 'react-redux';
+// import * as ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import { AnyAction } from 'redux';
 
 import ItemComponent from './StorageItem/StorageItem';
 import EmptyItemComponent from './EmptyItem/EmptyItem';
 import StorageSummaryComponent from './Summary/Summary';
-import { CommonStorageService } from './common.service';
+// import { CommonStorageService } from './common.service';
 
 import { OverallAppState } from '../../reducers/initialState';
-import { AsyncAction } from '../../types/app.types';
+// import { AsyncAction } from '../../types/app.types';
 
-import { Batch, Stash, BatchInDto } from '../../types/storage.types';
+import { Stash, BatchInDto } from '../../types/storage.types';
 
 import './storage.scss';
 import { getSummaryFromStashes } from '../../actions/summary.actions';

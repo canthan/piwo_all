@@ -1,5 +1,4 @@
-import { AnyAction } from 'redux';
-import { Dispatch } from 'react-redux';
+import { AnyAction, Dispatch } from 'redux';
 import Axios, { AxiosResponse, AxiosError } from 'axios';
 
 import { CommonStorageService } from './../components/storage/common.service';
