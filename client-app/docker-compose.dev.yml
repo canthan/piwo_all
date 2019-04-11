@@ -1,0 +1,11 @@
+version: '3.4'
+services:
+  gateway:
+    image: nginx:latest
+    volumes:
+      - type: bind
+        source: ./client/nginx/conf.d
+        target: /etc/nginx/conf.d
+      - type: bind
+        source: ./client/nginx/nginx.conf
+        target: /etc/nginx/nginx.conf

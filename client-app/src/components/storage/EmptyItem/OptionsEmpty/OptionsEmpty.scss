@@ -1,0 +1,18 @@
+.empty-option-buttons {
+  padding-top: 25px;
+
+  .btn-extra-lg {
+    padding: 1rem 2rem;
+  }
+
+  .btn__new_batch {
+    border-radius: 0;
+    border: 1px solid grey;
+    background-color: rgba(231, 236, 230, 1);
+
+    &:hover {
+      background-color: rgba(162, 170, 179, 1) !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}

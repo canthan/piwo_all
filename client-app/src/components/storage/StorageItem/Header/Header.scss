@@ -1,0 +1,17 @@
+.heading {
+  display: flex;
+  span:first-child {
+    text-align: left;
+  }
+
+  &__dates {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.45em;
+    
+    span {
+      text-align: right!important;
+      text-transform: uppercase;
+    }
+  }
+}
