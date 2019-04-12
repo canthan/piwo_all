@@ -16,6 +16,7 @@ import {
     errorHandlerMiddleware,
 } from './common/middlewares/error-handler.middleware';
 import mongoConnector from './common/utils/mongo.connector';
+import { CombinedDataRouter } from './routes/combined-data.router';
 
 
 export async function bootstrap(): Promise<Koa> {
@@ -35,8 +36,8 @@ export async function bootstrap(): Promise<Koa> {
     const router = new Router();
     // BatchesRouter.init(router, '/batches');
     // StashesRouter.init(router, '/stashes');
-    new UsersRouter().init(router, '/users');
-    // CombinedDataRouter.init(router, '/combinedData');
+    UsersRouter.init(router, '/users');
+    CombinedDataRouter.init(router, '/combined');
     IndexRouter.init(router);
 
     app.use(router.routes());

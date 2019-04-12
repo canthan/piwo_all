@@ -9,7 +9,7 @@
 UNKNOWN_POSITIONAL_PARAMS=()
 
 SERVICES=(
-    "client"
+    "client-app"
     "backend/users-service"
     "backend/batches-service"
     "backend/stashes-service"

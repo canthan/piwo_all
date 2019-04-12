@@ -16,6 +16,7 @@ import {
   DELETE_STASH_FAILURE,
   GET_STASHES_FROM_USER_DATA,
 } from './../constants/stashes.action.types';
+import { CONFIG } from './../config/config';
 
 export const addStashRequest = (): ReduxAction<undefined> => ({
   type: ADD_STASH_REQUEST,
@@ -70,7 +71,7 @@ export const deleteStashAsync = (userId: number, stashId: number): AsyncAction =
   dispatch(deleteStashRequest());
   try {
     const response = await Axios.delete(
-      `http://localhost:1337/stashes/${userId}/${stashId}`
+      `${CONFIG.STASHES_API}/${userId}/${stashId}`
     );
     const deletedStash = response.data.data.batches.find(
       (stash: Stash) => (stash.stashId = stashId)
@@ -88,7 +89,7 @@ export const addStashAsync = (userId: number, batchId: number, newStash: Stash):
   dispatch(addStashRequest());
   try {
     const response: AxiosResponse<Response<Stash>> = await Axios.post(
-      `http://localhost:1337/stashes/${userId}/${batchId}`,
+      `${CONFIG.STASHES_API}/${userId}/${batchId}`,
       CommonStorageService.flattenItemsForRequest([newStash])
     );
     const newStashResponse: Stash = { ...response.data.data };
@@ -105,7 +106,7 @@ export const updateStashesAsync = (userId: number, batchId: number, stashes: Sta
   dispatch(updateStashesRequest());
   try {
     const response: AxiosResponse<Response<Stash[]>> = await Axios.put(
-      `http://localhost:1337/stashes/${userId}/${batchId}`,
+      `${CONFIG.STASHES_API}/${userId}/${batchId}`,
       CommonStorageService.flattenItemsForRequest(stashes)
     );
     const updatedStashes: Stash[] = [...response.data.data];

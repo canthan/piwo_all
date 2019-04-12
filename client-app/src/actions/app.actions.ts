@@ -4,12 +4,13 @@ import { AnyAction } from 'redux';
 import { getSummaryFromStashes } from './summary.actions';
 import { User, UserData, Response, AsyncAction, ReduxAction } from './../types/app.types';
 import {
-	GET_USER_DATA_REQUEST,
+  GET_USER_DATA_REQUEST,
 	GET_USER_DATA_SUCCESS,
 	GET_USER_DATA_FAILURE,
 } from './../constants/app.action.types';
 import { getStashesFromUserData } from './stashes.actions';
 import { getBatchesFromUserData } from './batches.actions';
+import { CONFIG } from './../config/config';
 
 export const getUserDataRequest = (): AnyAction => ({
 	type: GET_USER_DATA_REQUEST,
@@ -35,7 +36,7 @@ export const getUserDataAsync = (userId: number): AsyncAction => async (
 	dispatch(getUserDataRequest());
 	try {
 		const response: AxiosResponse<Response<UserData>> = await Axios.get(
-			`http://localhost:1337/combinedData/${userId}`
+			`${CONFIG.COMBINED_DATA_API}/${userId}`
 		);
 		const userData = response.data.data;
 		dispatch(getUserDataSuccess(userData));

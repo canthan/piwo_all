@@ -1,10 +1,12 @@
 import * as Router from 'koa-router';
-// import { CombinedDataRouteHandlers } from './combined-data-route.handler';
+
+import { CombinedController } from '../controllers/combined.controller';
 
 export class CombinedDataRouter {
-	public static init(router: Router, path: string = '/combinedData') {
-		// const combinedDataRouteHandlers = new CombinedDataRouteHandlers();
+	public static init(router: Router, path: string = '/combined') {
+    const combinedController: CombinedController = new CombinedController();
 
-		// router.get(`${path}/:userId`, combinedDataRouteHandlers.getUserDataById);
+    router.get(path, combinedController.getTest);
+		router.get(`${path}/:userId`, combinedController.getUserById);
 	}
 }

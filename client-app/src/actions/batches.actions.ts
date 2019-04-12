@@ -19,6 +19,7 @@ import {
   DELETE_BATCH_FAILURE,
   GET_BATCHES_FROM_USER_DATA,
 } from './../constants/batches.actions.types';
+import { CONFIG } from '../config/config';
 
 export const getBatchesDataRequest = (): ReduxAction<undefined> => ({
   type: GET_USER_STORAGE_REQUEST,
@@ -105,7 +106,7 @@ export const getBatchesDataAsync = (userId: number): AsyncAction => async (
   ): Promise<ReduxAction<Batch[] | AxiosError>> => {
   dispatch(getBatchesDataRequest());
   try {
-    const response = await Axios.get(`http://localhost:1337/batches/${userId}`);
+    const response = await Axios.get(`${CONFIG.BATCHES_API}/${userId}`);
 
     return dispatch(getBatchesDataSuccess(response.data));
   } catch (error) {
@@ -119,7 +120,7 @@ export const deleteBatchAsync = (userId: number, batchId: number): AsyncAction =
   dispatch(deleteBatchRequest());
   try {
     const response = await Axios.delete(
-      `http://localhost:1337/batches/${userId}/${batchId}`
+      `${CONFIG.BATCHES_API}/${userId}/${batchId}`
     );
     const deletedBatch = response.data.data.batches.find(
       (batch: BatchInDto) => (batch.batchId = batchId)
@@ -137,7 +138,7 @@ export const addBatchAsync = (userId: number, newBatch: EmptyBatch): AsyncAction
   dispatch(addBatchRequest());
   try {
     const response: AxiosResponse<Response<Batch>> = await Axios.post(
-      `http://localhost:1337/batches/${userId}`,
+      `${CONFIG.BATCHES_API}/${userId}`,
       newBatch
     );
     const newBatchResponse = response.data.data;
@@ -154,7 +155,7 @@ export const editBatchDataAsync = (userId: number, batchId: number, batchData: E
   dispatch(editBatchDataRequest());
   try {
     const response: AxiosResponse<Response<Batch>> = await Axios.put(
-      `http://localhost:1337/batches/${userId}/${batchId}`,
+      `${CONFIG.BATCHES_API}/${userId}/${batchId}`,
       { batch: batchData }
     );
     const updatedBatch: Batch = response.data.data;

@@ -15,3 +15,4 @@ export class StashesRouter {
     router.post(`${path}/:stashId`, stashesController.addStash);
   }
 }
+ 

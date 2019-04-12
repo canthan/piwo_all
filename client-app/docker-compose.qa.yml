@@ -4,9 +4,9 @@ services:
     image: nginx:latest
     volumes:
       - type: bind
-        source: ./client/nginx/conf.d
+        source: ./client-app/nginx/conf.d
         target: /etc/nginx/conf.d
       - type: bind
-        source: ./client/nginx/nginx.conf
+        source: ./client-app/nginx/nginx.conf
         target: /etc/nginx/nginx.conf
         
