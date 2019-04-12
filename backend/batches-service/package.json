@@ -11,6 +11,7 @@
         "start-dev": "tsc --watch | nodemon --inspect ./build/index.js --watch ./build --legacy-watch",
         "tsc": "tsc",
         "test": "node ./node_modules/mocha/bin/_mocha",
+        "populate": "node ./src/db/mongo_population.js",
         "copy-common": "yarn run copy-common:utils && yarn run copy-common:middlewares && yarn run copy-common:exceptions",
         "copy-common:utils": "cpx \"../common/utils/*\" src/common/utils",        
         "copy-common:middlewares": "cpx \"../common/middlewares/*\" src/common/middlewares",

@@ -1,5 +1,6 @@
 [
 	{
+    "userId": "1",
 		"username": "Canthan",
 		"firstname": "Andrzej",
 		"surname": "Globisz",
@@ -8,6 +9,7 @@
 		"registrationDate": "2018-02-24T23:00:00.000Z"
 	},
 	{
+    "userId": "2",
 		"username": "Other_user1",
 		"firstname": "Other",
 		"surname": "User",
@@ -16,6 +18,7 @@
 		"registrationDate": "2018-02-24T23:00:00.000Z"
 	},
 	{
+    "userId": "3",
 		"username": "Other_user2",
 		"firstname": "Other",
 		"surname": "Alien",

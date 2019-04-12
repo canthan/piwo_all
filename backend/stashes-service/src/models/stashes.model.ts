@@ -10,7 +10,6 @@ export const StashSchema = new Schema({
   batchId: { type: String, required: true },
   userId: { type: String, required: true },
   stashName: { type: String, required: false },
-  // items: { type: Bottles, required: true },
   items: {
     b050: {
       type: Number,
