@@ -6,7 +6,7 @@ export type AsyncFunction = (...args: any[]) => Promise<any>;
 
 export class Batch {
 	public batchId?: number;
-	public batchUserId: number;
+	public userId: number;
 	public batchNumber?: string;
 	public batchName: string;
 	public bottledOn: string;
@@ -22,7 +22,7 @@ export class Batch {
 		bottles = 0,
 		crates = 0
 	) {
-		this.batchUserId = batchUserId;
+		this.userId = batchUserId;
 		this.batchName = batchName;
 		this.bottledOn = bottledOn;
 		this.quantityLitres = litres;

@@ -100,7 +100,7 @@ export class BatchesController {
       // const { batchId, userId } = ctx.params;
 
       // logger.info(`Updating batch ${batchId} for user ${userId}`);
-      logger.info(`Updating batch ${editedBatch.batchId} for user ${editedBatch.batchUserId}`);
+      logger.info(`Updating batch ${editedBatch.batchId} for user ${editedBatch.userId}`);
       const batch: Batch = await BatchesService.editBatch(
         // userId,
         // batchId,

@@ -15,7 +15,7 @@
         "populate": "node ./src/db/mongo_population.js",
         "db:up": "npm run migrate && npm run seed && npm start",
         "copy-common": "yarn run copy-common:utils && yarn run copy-common:middlewares && yarn run copy-common:exceptions",
-        "copy-common:utils": "cpx \"../common/utils/*\" src/common/utils",        
+        "copy-common:utils": "cpx \"../common/utils/*\" src/common/utils",
         "copy-common:middlewares": "cpx \"../common/middlewares/*\" src/common/middlewares",
         "copy-common:exceptions": "cpx \"../common/exceptions/*\" src/common/exceptions"
     },
@@ -44,6 +44,7 @@
         "typescript": "^3.1.1"
     },
     "dependencies": {
+        "axios": "^0.18.0",
         "cpx": "^1.5.0",
         "koa": "^2.5.3",
         "koa-body": "^2.6.0",

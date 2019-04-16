@@ -9,7 +9,7 @@ const logger = getLogger();
 export class BatchesService {
 
   public static async getBatchByUserId(userId: string) {
-    const userBatches = await BatchModel.find({ batchUserId: userId }).exec();
+    const userBatches = await BatchModel.find({ userId }).exec();
 
     if (!userBatches.length) {
       throw new Exceptions.NotFoundException(`There are no batches for user with id: ${userId}`);
