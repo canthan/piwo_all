@@ -7,8 +7,7 @@ import { initialStashesState } from '../reducers/stashes.reducer';
 import { initialBatchesState } from '../reducers/batches.reducer';
 import { initialAppState } from '../reducers/app.reducer';
 import { initialSummaryState } from '../reducers/summary.reducer';
-import { AnyFunction } from '../types/app.types';
-
+import { AnyFunction } from '../types/common.types';
 
 const initialState = {
   ...initialAppState,

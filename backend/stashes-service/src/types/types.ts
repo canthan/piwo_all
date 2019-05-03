@@ -1,30 +1,33 @@
-// tslint:disable max-classes-per-file
-// tslint:disable no-any
+export type AnyFunction = (...args: unknown[]) => unknown;
+export type AsyncFunction = (...args: unknown[]) => Promise<unknown>;
 
-export type AnyFunction = (...args: any[]) => any;
-export type AsyncFunction = (...args: any[]) => Promise<any>;
-
-export class Stash {
-	public stashId: string;
-	public batchId: string;
-	public userId: string;
-	public stashName: string;
-	public items: Bottles;
-	// [key: string]: number | string | Bottles;
-	constructor(stashName: string, batchId: string, userId: string) {
-		this.stashId = "";
-		this.items = new Bottles();
-		this.batchId = batchId;
-		this.userId = userId;
-		this.stashName = stashName;
-	}
+export interface StashOutDTO {
+  name: string;
+  items: Bottles;
+  batchId: string;
+  userId: string;
 }
 
-export class Bottles {
-	constructor(b033 = 0, b040 = 0, b050 = 0) {
-		this.b033 = b033;
-		this.b040 = b040;
-		this.b050 = b050;
-	}
-	[bottleSize: string]: number;
+export interface Stash extends StashOutDTO {
+  stashId: string;
+}
+
+export interface Bottles {
+  b050: number;
+  b040: number;
+  b033: number;
+  [size: string]: number;
+}
+
+export const initialBottles: Bottles = {
+  b033: 0,
+  b040: 0,
+  b050: 0,
+}
+
+export const initialStash: StashOutDTO = {
+  name: '',
+  items: initialBottles,
+  batchId: '',
+  userId: '',
 }

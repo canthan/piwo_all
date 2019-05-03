@@ -9,7 +9,7 @@
 	"batches": [
 		{
 			"batchId": 2,
-			"batchName": "Item_2",
+			"name": "Item_2",
 			"bottledOn": "2017-12-21T23:00:00.000Z",
 			"quantityLitres": 100,
 			"quantityBottles": 200,
@@ -17,7 +17,7 @@
 			"stashes": [
 				{
 					"batchId": 2,
-					"stashName": "Piwnica",
+					"name": "Piwnica",
 					"items": {
 						"b050": 10,
 						"b040": 2,
@@ -26,7 +26,7 @@
 				},
 				{
 					"batchId": 2,
-					"stashName": "Dom",
+					"name": "Dom",
 					"items": {
 						"b050": 3,
 						"b040": 2,
@@ -37,7 +37,7 @@
 		},
 		{
 			"batchId": 4,
-			"batchName": "Item_4",
+			"name": "Item_4",
 			"bottledOn": "2018-01-01T23:00:00.000Z",
 			"quantityLitres": 15,
 			"quantityBottles": 30,
@@ -45,7 +45,7 @@
 			"stashes": [
 				{
 					"batchId": 4,
-					"stashName": "Piwnica",
+					"name": "Piwnica",
 					"items": {
 						"b050": 20,
 						"b040": 2,
@@ -54,7 +54,7 @@
 				},
 				{
 					"batchId": 4,
-					"stashName": "Dom",
+					"name": "Dom",
 					"items": {
 						"b050": 5,
 						"b040": 2,
@@ -65,7 +65,7 @@
 		},
 		{
 			"batchId": 5,
-			"batchName": "Item_5",
+			"name": "Item_5",
 			"bottledOn": "2018-01-15T23:00:00.000Z",
 			"quantityLitres": 16,
 			"quantityBottles": 32,
@@ -73,7 +73,7 @@
 			"stashes": [
 				{
 					"batchId": 5,
-					"stashName": "Piwnica",
+					"name": "Piwnica",
 					"items": {
 						"b050": 25,
 						"b040": 2,
@@ -84,7 +84,7 @@
 		},
 		{
 			"batchId": 6,
-			"batchName": "Item_6",
+			"name": "Item_6",
 			"bottledOn": "2018-02-01T23:00:00.000Z",
 			"quantityLitres": 10,
 			"quantityBottles": 20,
@@ -93,7 +93,7 @@
 		},
 		{
 			"batchId": 60,
-			"batchName": "Item_60",
+			"name": "Item_60",
 			"bottledOn": "2018-02-01T23:00:00.000Z",
 			"quantityLitres": 10,
 			"quantityBottles": 20,

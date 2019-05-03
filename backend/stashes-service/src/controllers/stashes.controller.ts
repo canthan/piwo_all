@@ -1,9 +1,12 @@
 import { Context } from 'koa';
 import { getLogger } from 'log4js';
 
-import { AnyFunction, Stash } from '../types/types';
+import { AnyFunction, Stash, initialStash, StashOutDTO } from '../types/types';
 import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
 import { StashesService } from '../services/stashes.service';
+import { asyncForEach } from '../common/utils/async.foreach';
+import { StashModel } from '../models/stashes.model';
+import { mapStashOutDTO } from '../services/mapper.service';
 
 const logger = getLogger();
 
@@ -90,10 +93,15 @@ export class StashesController {
   };
 
   public addStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
-    // to be tested
     try {
-      const { stashName, batchId, userId } = ctx.params;
-      const newStash = new Stash(stashName, batchId, userId);
+      const { batchId, userId } = ctx.params;
+      const { name } = ctx.request.body;
+      const newStash: StashOutDTO = {
+        ...initialStash,
+        name,
+        batchId,
+        userId,
+      }
 
       logger.info(`Adding stash to batch ${batchId} for user ${userId}`);
 
@@ -111,20 +119,25 @@ export class StashesController {
   };
 
   public editStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
-    // to be tested
     try {
-      const editedStash: Stash = ctx.request.body.stash;
-      // const { batchId, userId } = ctx.params;
+      const { batchId } = ctx.params;
+      const { stashes } = ctx.request.body;
 
-      // logger.info(`Updating batch ${batchId} for user ${userId}`);
-      logger.info(`Updating stash ${editedStash.stashId} for batch ${editedStash.batchId}`);
-      const stash: Stash = await StashesService.editStash(editedStash);
+      const updatedStashes: Stash[] = []
 
-      if (!!stash) {
-        logger.info(`Stash ${stash.stashId} updated`);
-      }
-      ctx.body = !!stash
-        ? { status: HTTP_STATUS.OK, data: stash }
+      await asyncForEach(stashes, async (stash: Stash) => {
+        logger.info(`Updating stash ${stash.stashId} for batch ${batchId}`);
+
+        const updatedStash: StashModel = await StashesService.editStash(stash);
+  
+        if (!!updatedStash) {
+          updatedStashes.push(mapStashOutDTO(updatedStash));
+          logger.info(`Stash ${updatedStash.stashId} updated`);
+        }
+        
+      });
+      ctx.body = !!updatedStashes
+        ? { status: HTTP_STATUS.OK, data: updatedStashes }
         : { status: HTTP_STATUS.BAD_REQUEST, message: 'That stash does not exist' };
 
     } catch (error) {
@@ -135,156 +148,18 @@ export class StashesController {
   public removeStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
     // to be implemented
     try {
-      // const batchId = Number(ctx.params.batchId);
-      // const userId = Number(ctx.params.userId);
-      // logger.info(`Removing batch ${batchId} for user ${userId}`);
+      const { stashId, userId } = ctx.params;
 
-      // const deletedRecords: DeletedRecords = {
-      //   stashes: [],
-      //   batches: [],
-      // };
-      // await this.deleteStashes(
-      //   ctx.params.userId,
-      //   ctx.params.batchId,
-      //   deletedRecords
-      // );
-      // await this.deleteStash(batchId, deletedRecords);
-      // if (deletedRecords.batches.length) {
-      //   logger.info(`Stash ${batchId} removed`);
-      //   ctx.body = {
-      //     status: HTTP_STATUS.CREATED,
-      //     data: deletedRecords,
-      //   };
-      // } else {
-      //   ctx.body = {
-      //     status: HTTP_STATUS.BAD_REQUEST,
-      //     message: 'Something went wrong',
-      //   };
-      // }
+      logger.info(`Removing batch ${stashId} for user ${userId}`);
+
+      const removedStashId: number = await StashesService.deleteStash(stashId);
+
+      ctx.body = !!removedStashId
+      ? { status: HTTP_STATUS.OK, data: {stashId: removedStashId} }
+      : { status: HTTP_STATUS.BAD_REQUEST, message: 'That stash does not exist' };
+
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
   };
 }
-
-
-
-// 	public getStashByUserId = async (
-// 		ctx: Context,
-// 		next: AnyFunction
-// 	): Promise<void> => {
-// 		try {
-// 			const id = Number(ctx.params.userID);
-// 			logger.info(`Getting stashes ${id}`);
-// 			const stashes = await this.stashQueries.getStashByUserId(id);
-// 			logger.info(`Got ${stashes.length} stashes`);
-
-// 			ctx.body = {
-// 				status: HTTP_STATUS.OK,
-// 				data: stashes,
-// 			};
-// 		} catch (error) {
-// 			ctx.throw(ctx.status, error);
-// 		}
-// 	};
-
-// 	public getStashesByStashId = async (
-// 		ctx: Context,
-// 		next: AnyFunction
-// 	): Promise<void> => {
-// 		try {
-// 			const userId = Number(ctx.params.userId);
-// 			const batchId = Number(ctx.params.batchId);
-// 			logger.info(`Getting stashes from user ${userId} from batch ${batchId}`);
-// 			let stashes: Stash[] = await this.stashQueries.getStashesOfStash(
-// 				userId,
-// 				batchId
-// 			);
-// 			logger.info(`Got ${stashes.length} stashes`);
-// 			const stashesOutput: Stash[] = [];
-// 			stashes = JSON.parse(JSON.stringify(stashes));
-// 			stashes.forEach(stash => {
-// 				stashesOutput.push(this.outputService.formatSingleStash(stash));
-// 			});
-
-// 			ctx.body = {
-// 				status: HTTP_STATUS.OK,
-// 				data: stashes,
-// 			};
-// 		} catch (error) {
-// 			ctx.throw(ctx.status, error);
-// 		}
-// 	};
-
-// 	public editStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
-// 		try {
-// 			const editedStashes: Stash[] = ctx.request.body.stashes;
-// 			const stashId = Number(ctx.params.stashId);
-// 			const batchId = Number(ctx.params.batchId);
-
-// 			logger.info(`Updating stash ${stashId} from batch ${batchId}`);
-// 			const stashes = await this.updateStashes(editedStashes);
-
-// 			const stashesOutput: Stash[] = [];
-// 			stashes.forEach(stash => {
-// 				stashesOutput.push(this.outputService.formatSingleStash(stash));
-// 				logger.info(`Stash ${stash.stashId} updated`);
-// 			});
-
-// 			if (this.areThereAnyStashes(stashes)) {
-// 				logger.info(`${stashesOutput.length} stashes updated`);
-// 				ctx.body = {
-// 					status: HTTP_STATUS.OK,
-// 					data: stashesOutput,
-// 				};
-// 			} else {
-// 				ctx.body = {
-// 					status: HTTP_STATUS.BAD_REQUEST,
-// 					message: 'That batch does not exist',
-// 				};
-// 			}
-// 		} catch (error) {
-// 			ctx.throw(ctx.status, error);
-// 		}
-// 	};
-
-// 	public addStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
-// 		try {
-// 			const newStash: Stash = ctx.request.body.stashes[0];
-// 			const userId = Number(ctx.params.userId);
-// 			const batchId = Number(ctx.params.batchId);
-// 			logger.info(`Adding stash to batch  ${batchId} for user ${userId}`);
-
-// 			let stash: Stash = (await this.stashQueries.insertStash(newStash))[0];
-// 			stash = JSON.parse(JSON.stringify(stash));
-// 			delete stash.stashUserId;
-// 			stash = this.outputService.formatSingleStash(stash);
-// 			logger.info(`Stash ${stash.stashId} saved`);
-
-// 			if (!!stash) {
-// 				ctx.body = {
-// 					status: HTTP_STATUS.CREATED,
-// 					data: stash,
-// 				};
-// 			} else {
-// 				ctx.body = {
-// 					status: HTTP_STATUS.BAD_REQUEST,
-// 					message: 'Something went wrong',
-// 				};
-// 			}
-// 		} catch (error) {
-// 			ctx.throw(ctx.status, error);
-// 		}
-// 	};
-
-// 	private areThereAnyStashes = (stashes: Stash[]) => !!stashes.length;
-
-// 	private updateStashes = async (stashes: Stash[]) => {
-// 		const updatedStashes: Stash[] = [];
-// 		await asyncForEach(stashes, async (stash: Stash) => {
-// 			const updatedStash = await this.stashQueries.updateStash(stash);
-// 			updatedStashes.push(JSON.parse(JSON.stringify(updatedStash[0])));
-// 		});
-
-// 		return updatedStashes;
-// 	};

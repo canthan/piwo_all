@@ -1,9 +1,5 @@
 import Axios, { AxiosResponse, AxiosError } from 'axios';
 
-import { CommonStorageService } from './../components/storage/common.service';
-import { AsyncAction, Response, ReduxAction, AnyDispatch } from './../types/app.types';
-import { Batch, EmptyBatch, BatchInDto } from '../types/storage.types';
-
 import {
   GET_USER_STORAGE_REQUEST,
   GET_USER_STORAGE_SUCCESS,
@@ -20,6 +16,9 @@ import {
   GET_BATCHES_FROM_USER_DATA,
 } from './../constants/batches.actions.types';
 import { CONFIG } from '../config/config';
+import { Batch, EmptyBatch, DeletedRecords } from '../types/storage.types';
+import { ReduxAction, AsyncAction, Response } from '../types/common.types';
+import { CommonStorageService } from './../components/storage/common.service';
 
 export const getBatchesDataRequest = (): ReduxAction<undefined> => ({
   type: GET_USER_STORAGE_REQUEST,
@@ -81,7 +80,7 @@ export const deleteBatchRequest = (): ReduxAction<undefined> => ({
   type: DELETE_BATCH_REQUEST,
 });
 
-export const deleteBatchSuccess = (batchId: number): ReduxAction<number> => ({
+export const deleteBatchSuccess = (batchId: string): ReduxAction<string> => ({
   payload: batchId,
   type: DELETE_BATCH_SUCCESS,
 });
@@ -101,9 +100,9 @@ export const getBatchesFromUserData = (batches: Batch[]): ReduxAction<Batch[]> =
   };
 };
 
-export const getBatchesDataAsync = (userId: number): AsyncAction => async (
-  dispatch: AnyDispatch
-  ): Promise<ReduxAction<Batch[] | AxiosError>> => {
+export const getBatchesDataAsync = (userId: string): AsyncAction => async (
+  dispatch
+) => {
   dispatch(getBatchesDataRequest());
   try {
     const response = await Axios.get(`${CONFIG.BATCHES_API}/${userId}`);
@@ -114,27 +113,29 @@ export const getBatchesDataAsync = (userId: number): AsyncAction => async (
   }
 };
 
-export const deleteBatchAsync = (userId: number, batchId: number): AsyncAction => async (
-  dispatch: AnyDispatch
-  ): Promise<ReduxAction<number | AxiosError>> => {
+export const deleteBatchAsync = (userId: string, batchId: string): AsyncAction => async (
+  dispatch
+) => {
   dispatch(deleteBatchRequest());
   try {
-    const response = await Axios.delete(
+    const response: AxiosResponse<{ data: DeletedRecords }> = await Axios.delete(
       `${CONFIG.BATCHES_API}/${userId}/${batchId}`
     );
-    const deletedBatch = response.data.data.batches.find(
-      (batch: BatchInDto) => (batch.batchId = batchId)
+    const deletedBatch = response.data.data.batchIds.find(
+      (removedbatchId: string) => removedbatchId === batchId
     );
 
-    return dispatch(deleteBatchSuccess(deletedBatch.batchId));
+    if (deletedBatch) {
+      return dispatch(deleteBatchSuccess(deletedBatch));
+    }
   } catch (error) {
     return dispatch(deleteBatchFailure(error));
   }
 };
 
-export const addBatchAsync = (userId: number, newBatch: EmptyBatch): AsyncAction => async (
-  dispatch: AnyDispatch
-  ): Promise<ReduxAction<Batch | AxiosError>> => {
+export const addBatchAsync = (userId: string, newBatch: EmptyBatch): AsyncAction => async (
+  dispatch
+) => {
   dispatch(addBatchRequest());
   try {
     const response: AxiosResponse<Response<Batch>> = await Axios.post(
@@ -149,9 +150,9 @@ export const addBatchAsync = (userId: number, newBatch: EmptyBatch): AsyncAction
   }
 };
 
-export const editBatchDataAsync = (userId: number, batchId: number, batchData: EmptyBatch): AsyncAction => async (
-  dispatch: AnyDispatch
-  ): Promise<ReduxAction<Batch | AxiosError>> => {
+export const editBatchDataAsync = (userId: string, batchId: string, batchData: EmptyBatch): AsyncAction => async (
+  dispatch
+) => {
   dispatch(editBatchDataRequest());
   try {
     const response: AxiosResponse<Response<Batch>> = await Axios.put(

@@ -4,8 +4,8 @@ import {
 	GrouppedStash,
 } from '../../../types/storage.types';
 import { CommonStorageService } from '../common.service';
+import { initialStashSummary, HALF_LITER } from '../../../types/storage.constants';
 
-const HALF_LITER = 0.5;
 
 export class SummaryService {
 	public static createSummary(stashes: Stash[]): StashSummary[] {
@@ -33,7 +33,15 @@ export class SummaryService {
 	private static createSummaryForStash(
 		grouppedStash: GrouppedStash
 	): StashSummary {
-		return new StashSummary(grouppedStash.stashName, grouppedStash.items.b050);
+    return {
+      ...initialStashSummary,
+      name: grouppedStash.name,
+      bottles: {
+        ...initialStashSummary.bottles,
+        halfLiter: grouppedStash.items.b050,
+      },
+    }
+		// return new StashSummary(grouppedStash.name, grouppedStash.items.b050);
 	}
 
 	private static getLiters(grouppedStash: GrouppedStash): number {
@@ -59,7 +67,7 @@ export class SummaryService {
 	private static groupStashes(stashes: Stash[]): GrouppedStash[] {
 		const grouppedStashes: GrouppedStash[] = [];
 		stashes.forEach(stash => {
-			grouppedStashes.find(groupped => stash.stashName === groupped.stashName)
+			grouppedStashes.find(groupped => stash.name === groupped.name)
 				? this.addBottles(grouppedStashes, stash)
 				: this.createNewGroup(grouppedStashes, stash);
 		});
@@ -69,7 +77,7 @@ export class SummaryService {
 
 	private static addBottles(grouppedStashes: GrouppedStash[], stash: Stash) {
 		const grouppedStash = grouppedStashes.find(
-			groupped => groupped.stashName === stash.stashName
+			groupped => groupped.name === stash.name
 		);
 		if (!grouppedStash) {
 			return;
@@ -87,8 +95,8 @@ export class SummaryService {
 		grouppedStashes: GrouppedStash[],
 		stash: Stash
 	) {
-		const { stashName, items } = stash;
-		grouppedStashes.push({ stashName, items: { ...items }, cratesTotal: 0 });
+		const { name, items } = stash;
+		grouppedStashes.push({ name, items: { ...items }, cratesTotal: 0 });
 	}
 }
 

@@ -1,14 +1,15 @@
 import { getLogger } from 'log4js';
 
 import { StashModel } from './../models/stashes.model';
-import { Stash } from '../types/types';
+import { Stash, StashOutDTO } from '../types/types';
 import Exceptions from '../common/exceptions/exceptions';
+import { mapStashOutDTO } from './mapper.service';
 
 const logger = getLogger();
 
 export class StashesService {
 
-  public static async getStashesByUserId(userId: string) {
+  public static async getStashesByUserId(userId: string): Promise<StashModel[]> {
     const userStashes = await StashModel.find({ userId }).exec();
 
     if (!userStashes.length) {
@@ -18,17 +19,13 @@ export class StashesService {
     return userStashes;
   }
 
-  public static async getStashesByBatchId(batchId: string) {
+  public static async getStashesByBatchId(batchId: string): Promise<StashModel[]> {
     const stashes = await StashModel.find({ batchId }).exec();
 
-    if (!stashes.length) {
-      throw new Exceptions.NotFoundException(`There are no stashes for batch with id: ${stashes}`);
-    }
-
-    return stashes;
+    return stashes.length ? stashes : [];
   }
 
-  public static async getStashById(stashId: string) {
+  public static async getStashById(stashId: string): Promise<StashModel> {
     const stash = await StashModel.findOne({ stashId }).exec();
 
     if (!stash) {
@@ -38,20 +35,19 @@ export class StashesService {
     return stash;
   }
 
-  public static async addStash(newStash: Stash) {
-    // to be tested
+  public static async addStash(newStash: StashOutDTO): Promise<Stash> {
     const newStashModel: StashModel = await StashModel.create(newStash);
 
     return newStashModel.save()
       .then((response: StashModel) => {
         const savedStash: StashModel = response.toObject();
-        // const mappedSavedGroupOrder: GroupOrderOutDtoInterface = mapToGroupOrderOutDto([savedGroupOrder])[0];
+        const mappedStash = mapStashOutDTO(savedStash);
 
-        return savedStash;
+        return mappedStash;
       });
   }
 
-  public static async getAllStashes() {
+  public static async getAllStashes(): Promise<StashModel[]> {
     const returnedStashes = await StashModel.find().exec();
 
     if (!returnedStashes.length) {
@@ -61,17 +57,17 @@ export class StashesService {
     return returnedStashes;
   }
 
-  public static async editStash(updatedStash: Stash) {
-    // to be tested
+  public static async editStash(updatedStash: Stash): Promise<StashModel> {
     const { stashId } = updatedStash;
     const updatedStashModel = await StashModel.findOne({ stashId }).exec();
 
     if (!updatedStashModel) {
       throw new Exceptions.NotFoundException(`Can't find stash with id: ${stashId}`);
     }
+
     const updatedStashResponse = await StashModel.update(
       { stashId },
-      { updatedStash }
+      { items: updatedStash.items }
     ).exec();
 
     if (!updatedStashResponse.ok) {
@@ -79,7 +75,15 @@ export class StashesService {
     }
 
     return await StashModel.findOne({ stashId }).exec() as StashModel;
+  }
 
-    // return mapToGroupOrderOutDto([updatedGroupOrder])[0];
+  public static async deleteStash(stashId: number): Promise<number> {
+    const deletedStash = await StashModel.deleteOne({ stashId }).exec();
+
+    if (!deletedStash.ok) {
+      throw new Exceptions.NotFoundException(`Can't find stash with id: ${stashId}`);
+    }
+
+    return stashId;
   }
 }

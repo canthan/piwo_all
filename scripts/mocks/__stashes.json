@@ -1,0 +1,352 @@
+[
+	{
+    "stashId": "1",
+		"userId": "2",
+		"batchId": 4,
+		"name": "Dom",
+		"b050": 5,
+		"b040": 2,
+		"b033": 1
+	},
+	{
+    "stashId": "2",
+		"userId": "2",
+		"batchId": "5",
+		"name": "Piwnica",
+		"b050": 25,
+		"b040": 2,
+		"b033": 1
+	},
+	{
+    "stashId": "3",
+		"userId": "1",
+		"batchId": "14",
+		"name": "Piwnica",
+		"b050": 0,
+		"b040": 0,
+		"b033": 4
+	},
+	{
+    "stashId": "4",
+		"userId": "1",
+		"batchId": "3",
+		"name": "Piwnica",
+		"b050": 4,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "5",
+		"userId": "1",
+		"batchId": "53",
+		"name": "dd",
+		"b050": 0,
+		"b040": 5,
+		"b033": 0
+	},
+	{
+    "stashId": "6",
+		"userId": "1",
+		"batchId": "18",
+		"name": "aaa",
+		"b050": 5,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "7",
+		"userId": "1",
+		"batchId": "18",
+		"name": "Dom",
+		"b050": 2,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "8",
+		"userId": "1",
+		"batchId": "18",
+		"name": "Piwnica",
+		"b050": 10,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "9",
+		"userId": "1",
+		"batchId": "6",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "10",
+		"userId": "1",
+		"batchId": "6",
+		"name": "Piwnica",
+		"b050": 12,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "11",
+		"userId": "1",
+		"batchId": "7",
+		"name": "Piwnica",
+		"b050": 23,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "12",
+		"userId": "1",
+		"batchId": "7",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "13",
+		"userId": "1",
+		"batchId": "4",
+		"name": "Dom",
+		"b050": 3,
+		"b040": 0,
+		"b033": 10
+	},
+	{
+    "stashId": "14",
+		"userId": "1",
+		"batchId": "4",
+		"name": "Piwnica",
+		"b050": 10,
+		"b040": 0,
+		"b033": 13
+	},
+	{
+    "stashId": "15",
+		"userId": "1",
+		"batchId": "5",
+		"name": "Piwnica",
+		"b050": 7,
+		"b040": 0,
+		"b033": 11
+	},
+	{
+    "stashId": "16",
+		"userId": "1",
+		"batchId": "5",
+		"name": "Dom",
+		"b050": 1,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "17",
+		"userId": "1",
+		"batchId": "10",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "18",
+		"userId": "1",
+		"batchId": "10",
+		"name": "Piwnica",
+		"b050": 4,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "19",
+		"userId": "1",
+		"batchId": "13",
+		"name": "Piwnica",
+		"b050": 6,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "20",
+		"userId": "1",
+		"batchId": "12",
+		"name": "Piwnica",
+		"b050": 2,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "21",
+		"userId": "1",
+		"batchId": "11",
+		"name": "Piwnica",
+		"b050": 2,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "22",
+		"userId": "1",
+		"batchId": "11",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "23",
+		"userId": "1",
+		"batchId": "17",
+		"name": "Piwnica",
+		"b050": 33,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "24",
+		"userId": "1",
+		"batchId": "17",
+		"name": "Dom",
+		"b050": 3,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "25",
+		"userId": "1",
+		"batchId": "16",
+		"name": "Piwnica",
+		"b050": 12,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "26",
+		"userId": "1",
+		"batchId": "16",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "27",
+		"userId": "1",
+		"batchId": "15",
+		"name": "Piwnica",
+		"b050": 30,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "28",
+		"userId": "1",
+		"batchId": "15",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "29",
+		"userId": "1",
+		"batchId": "9",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "30",
+		"userId": "1",
+		"batchId": "9",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "31",
+		"userId": "1",
+		"batchId": "9",
+		"name": "Piwnica",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "32",
+		"userId": "1",
+		"batchId": "9",
+		"name": "Piwnica",
+		"b050": 5,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "33",
+		"userId": "1",
+		"batchId": "8",
+		"name": "Piwnica",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+		"userId": "34",
+		"batchId": "8",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "35",
+		"userId": "1",
+		"batchId": "8",
+		"name": "Piwnica",
+		"b050": 6,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "36",
+		"userId": "1",
+		"batchId": "8",
+		"name": "Dom",
+		"b050": 0,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "37",
+		"userId": "1",
+		"batchId": "19",
+		"name": "Piwnica",
+		"b050": 33,
+		"b040": 0,
+		"b033": 0
+	},
+	{
+    "stashId": "38",
+		"userId": "1",
+		"batchId": "19",
+		"name": "Dom",
+		"b050": 7,
+		"b040": 0,
+		"b033": 5
+	},
+	{
+    "stashId": "39",
+		"userId": "1",
+		"batchId": "2",
+		"name": "Piwnica",
+		"b050": 3,
+		"b040": 0,
+		"b033": 4
+	}
+]

@@ -104,7 +104,8 @@
 		"no-extra-semi": true,
 		"ter-func-call-spacing": [true, "never"],
 		"handle-callback-err": true,
-		"strict-boolean-expressions": false
+    "strict-boolean-expressions": false,
+    "no-console": false
 	},
 	"rulesDirectory": []
 }

@@ -1,9 +1,11 @@
 import { Context } from 'koa';
 import { getLogger } from 'log4js';
 
-import { AnyFunction, Batch } from '../types/types';
+import { AnyFunction, Batch, DeletedRecords, Stash } from '../types/types';
 import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
 import { BatchesService } from '../services/batches.service';
+import { StashesService } from '../services/stashes.service';
+import { asyncForEach } from '../common/utils/async.foreach';
 
 const logger = getLogger();
 
@@ -58,54 +60,35 @@ export class BatchesController {
   };
 
   public addBatch = async (ctx: Context, next: AnyFunction): Promise<void> => {
-    // to be tested
     try {
-      const userId = ctx.params.userId;
-      const newBatch = {
-        ...new Batch(),
-        ...ctx.request.body,
-        batchUserId: userId,
-      };
+      const { userId } = ctx.params;
+      const newBatch = { ...ctx.request.body, userId };
 
       logger.info(`Adding batch ${newBatch.batchId} for user ${userId}`);
       const batch: Batch = await BatchesService.addBatch(newBatch);
-      // batch = JSON.parse(JSON.stringify(batch));
-      // delete batch.batchUserId;
+
       logger.info(`Batch ${batch.batchId} saved`);
 
       ctx.body = !!batch
         ? { status: HTTP_STATUS.CREATED, data: batch }
         : { status: HTTP_STATUS.BAD_REQUEST, message: 'Something went wrong' };
 
-      // if (!!batch) {
-      //   ctx.body = {
-      //     status: HTTP_STATUS.CREATED,
-      //     data: batch,
-      //   };
-      // } else {
-      //   ctx.body = {
-      //     status: HTTP_STATUS.BAD_REQUEST,
-      //     message: 'Something went wrong',
-      //   };
-      // }
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
   };
 
   public editBatch = async (ctx: Context, next: AnyFunction): Promise<void> => {
-    // to be tested
     try {
-      const editedBatch: Batch = ctx.request.body.batch;
-      // const { batchId, userId } = ctx.params;
+      const { batchId, userId } = ctx.params;
+      const editedBatch = ctx.request.body.batch;
 
-      // logger.info(`Updating batch ${batchId} for user ${userId}`);
-      logger.info(`Updating batch ${editedBatch.batchId} for user ${editedBatch.userId}`);
-      const batch: Batch = await BatchesService.editBatch(
-        // userId,
-        // batchId,
-        editedBatch
-      );
+      logger.info(`Updating batch ${batchId} for user ${userId}`);
+      const batch: Batch = await BatchesService.editBatch({
+        ...editedBatch,
+        userId,
+        batchId,
+      });
 
       if (!!batch) {
         logger.info(`Batch ${batch.batchId} updated`);
@@ -120,56 +103,35 @@ export class BatchesController {
   };
 
   public removeBatch = async (ctx: Context, next: AnyFunction): Promise<void> => {
-    // to be implemented
     try {
-      // const batchId = Number(ctx.params.batchId);
-      // const userId = Number(ctx.params.userId);
-      // logger.info(`Removing batch ${batchId} for user ${userId}`);
+      const { batchId, userId } = ctx.params;
+      logger.info(`Removing batch ${batchId} for user ${userId}`);
 
-      // const deletedRecords: DeletedRecords = {
-      //   stashes: [],
-      //   batches: [],
-      // };
-      // await this.deleteStashes(
-      //   ctx.params.userId,
-      //   ctx.params.batchId,
-      //   deletedRecords
-      // );
-      // await this.deleteBatch(batchId, deletedRecords);
-      // if (deletedRecords.batches.length) {
-      //   logger.info(`Batch ${batchId} removed`);
-      //   ctx.body = {
-      //     status: HTTP_STATUS.CREATED,
-      //     data: deletedRecords,
-      //   };
-      // } else {
-      //   ctx.body = {
-      //     status: HTTP_STATUS.BAD_REQUEST,
-      //     message: 'Something went wrong',
-      //   };
-      // }
+      const deletedRecords: DeletedRecords = {
+        stashIds: [],
+        batchIds: [],
+      };
+      const stashesInBatch = await StashesService.getStashesByBatchId(batchId);
+
+      if (stashesInBatch.length) {
+        await asyncForEach(stashesInBatch, async (stash: Stash) => {
+          const removedStash = await StashesService.removeStash(stash.stashId);
+          if (!!removedStash) {
+            deletedRecords.stashIds.push(stash.stashId)
+          }
+        });
+      }
+
+      const removedBatch = await BatchesService.removeBatch(batchId);
+      if (!!removedBatch) {
+        deletedRecords.batchIds.push(removedBatch)
+      }
+
+      ctx.body = !!removedBatch
+        ? { status: HTTP_STATUS.OK, data: deletedRecords }
+        : { status: HTTP_STATUS.BAD_REQUEST, message: 'That batch does not exist' };
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
-
-    // public deleteStashes = async (
-    // 	userId: number,
-    // 	batchId: number,
-    // 	deletedRecords: DeletedRecords
-    // ) => {
-    // 	const deleted = await this.stashQueries.deleteStashesFromBatch(
-    // 		userId,
-    // 		batchId
-    // 	);
-    // 	deletedRecords.stashes = deleted;
-    // };
-
-    // public deleteBatch = async (
-    // 	batchId: number,
-    // 	deletedRecords: DeletedRecords
-    // ) => {
-    // 	const deleted = await this.batchQueries.deleteBatch(batchId);
-    // 	deletedRecords.batches = deleted;
-    // };
   };
 }

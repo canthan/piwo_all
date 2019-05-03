@@ -3,6 +3,7 @@ import { getLogger } from 'log4js';
 import { BatchModel } from './../models/batches.model';
 import Exceptions from '../common/exceptions/exceptions';
 import { Batch } from '../types/types';
+import { mapBatchOutDTO } from './mapper.service';
 
 const logger = getLogger();
 
@@ -19,15 +20,13 @@ export class BatchesService {
   }
 
   public static async addBatch(newBatch: Batch) {
-    // to be tested
     const newBatchModel: BatchModel = await BatchModel.create(newBatch);
 
     return newBatchModel.save()
       .then((response: BatchModel) => {
         const savedBatch: BatchModel = response.toObject();
-        // const mappedSavedGroupOrder: GroupOrderOutDtoInterface = mapToGroupOrderOutDto([savedGroupOrder])[0];
 
-        return savedBatch;
+        return mapBatchOutDTO(savedBatch);
       });
   }
 
@@ -42,27 +41,37 @@ export class BatchesService {
   }
 
   public static async editBatch(updatedBatch: Batch) {
-    const { batchId } = updatedBatch;
+    const { batchId, name, batchNo, bottledOn } = updatedBatch;
     const updatedBatchModel = await BatchModel.findOne({ batchId }).exec();
     if (!updatedBatchModel) {
       throw new Exceptions.NotFoundException(`Can't find batch with id: ${batchId}`);
     }
-    const updatedBatchResponse = await BatchModel.update(
+    const updated = await BatchModel.update(
       { batchId },
-      { updatedBatch }
+      {
+        ...updatedBatch,
+        name,
+        batchNo,
+        bottledOn,
+      }
     ).exec();
 
-    if (!updatedBatchResponse.ok) {
+    if (!updated.ok) {
       throw new Error('Something went wrong during updating batch');
     }
 
-    return await BatchModel.findOne({ batchId }).exec() as BatchModel;
+    const updatedBatchResponse = await BatchModel.findOne({ batchId }).exec() as BatchModel;
 
-    // return mapToGroupOrderOutDto([updatedGroupOrder])[0];
+    return mapBatchOutDTO(updatedBatchResponse);
   }
 
+  public static async removeBatch(batchId: string): Promise<string> {
+    const removedBatch = await BatchModel.deleteOne({ batchId }).exec();
 
+    if (!removedBatch.ok) {
+      throw new Exceptions.NotFoundException(`Can't find batch with id: ${batchId}`);
+    }
 
-
-
+    return batchId;
+  }
 }

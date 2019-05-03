@@ -1,4 +1,3 @@
-import { UsersController } from './users.controller';
 import { Context } from 'koa';
 import { getLogger } from 'log4js';
 
@@ -12,7 +11,6 @@ import { StashesService } from '../services/stashes.service';
 const logger = getLogger();
 
 export class CombinedController {
-  private outputService: OutputService = new OutputService();
   private batchesService: BatchesService = new BatchesService();
   private stashesService: StashesService = new StashesService();
 
@@ -45,18 +43,7 @@ export class CombinedController {
       const user = await UsersService.getUserById(id);
       const batches = await this.batchesService.getBatchesByUserId(id);
       const stashes = await this.stashesService.getStashesByUserId(id);
-      // console.log(user)
-      // console.log(batches)
-      // console.log(stashes)
-      // let stashes = await this.combinedDataQueries.getUserStashes(id);
 
-
-      // batches = JSON.parse(JSON.stringify(batches));
-
-      const formattedStashes: Stash[] = [];
-      stashes.forEach(stash => {
-        formattedStashes.push(this.outputService.formatSingleStash(stash));
-      });
       const { email, firstname, password, registrationDate, surname, userId, username } = user
       const outputData: UserData = {
         email, 
@@ -67,11 +54,8 @@ export class CombinedController {
         userId, 
         username,
         batches,
-        stashes: formattedStashes,
+        stashes,
       };
-
-      // outputData.batches = batches;
-      // outputData.stashes = formattedStashes;
 
       logger.info(`Got ${outputData.firstname} ${outputData.surname} data`);
 

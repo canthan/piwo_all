@@ -18,7 +18,7 @@ export class StorageSummaryComponent extends React.Component<Props> {
 				{this.props.summary.map(stashSummary => (
 					<StorageSummaryLineComponent
 						summary={stashSummary}
-						key={stashSummary.stashName}
+						key={stashSummary.name}
 					/>
 				))}
 			</React.Fragment>

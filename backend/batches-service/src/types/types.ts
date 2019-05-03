@@ -1,32 +1,41 @@
-// tslint:disable max-classes-per-file
-// tslint:disable no-any
+export type AnyFunction = (...args: unknown[]) => unknown;
+export type AsyncFunction = (...args: unknown[]) => Promise<unknown>;
 
-export type AnyFunction = (...args: any[]) => any;
-export type AsyncFunction = (...args: any[]) => Promise<any>;
+export interface BatchOutDTO {
+	userId: string;
+	batchNo: string;
+	name: string;
+	bottledOn: Date;
+	quantityLitres: number;
+	quantityBottles: number;
+	quantityCrates: number;
+}
 
-export class Batch {
-	public batchId?: number;
-	public userId: number;
-	public batchNumber?: string;
-	public batchName: string;
-	public bottledOn: string;
-	public quantityLitres: number;
-	public quantityBottles: number;
-	public quantityCrates: number;
+export type EmptyBatch = Pick<BatchOutDTO, 'batchNo' | 'name' | 'bottledOn'>
 
-	constructor(
-		batchUserId = 0,
-		bottledOn = '',
-		batchName = '',
-		litres = 0,
-		bottles = 0,
-		crates = 0
-	) {
-		this.userId = batchUserId;
-		this.batchName = batchName;
-		this.bottledOn = bottledOn;
-		this.quantityLitres = litres;
-		this.quantityBottles = bottles;
-		this.quantityCrates = crates;
-	}
+export interface Batch extends BatchOutDTO {
+  batchId: number;
+}
+
+export interface DeletedRecords {
+  batchIds: string[];
+  stashIds: string[];
+}
+
+export interface StashOutDTO {
+  name: string;
+  items: Bottles;
+  batchId: string;
+  userId: string;
+}
+
+export interface Stash extends StashOutDTO {
+  stashId: string;
+}
+
+export interface Bottles {
+  b050: number;
+  b040: number;
+  b033: number;
+  [size: string]: number;
 }

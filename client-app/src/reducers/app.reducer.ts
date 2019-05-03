@@ -4,41 +4,40 @@ import {
 	GET_USER_DATA_FAILURE,
 } from '../constants/app.action.types';
 import { createConditionalSliceReducer } from './utils';
-import { AppState } from '../types/app.types';
+import { AppState, User } from '../types/app.types';
 
 export const initialAppState: { app: AppState } = {
 	app: {
 		loaded: true,
 		loggedIn: false,
 		user: {
-			userId: 0,
+			userId: '1',
 			username: '',
 			firstname: '',
 			surname: '',
-			email: '',
+      email: '',
+      registrationDate: '',
 		},
 	},
 };
 
-// tslint:disable no-any
-
 const appReducerMapping = () => ({
 	[GET_USER_DATA_REQUEST]: (state: AppState) => ({ ...state }),
-	[GET_USER_DATA_SUCCESS]: (state: AppState, { user, loaded, loggedIn } = state) => ({
+	[GET_USER_DATA_SUCCESS]: (state: AppState, payload: { user: User; loaded: boolean; loggedIn: boolean }) => ({
 		...state,
 		...{
-			loaded,
-			loggedIn,
+			loaded: payload.loaded,
+			loggedIn: payload.loggedIn,
 			user: {
-				userId: user.userId,
-				username: user.username,
-				firstname: user.firstname,
-				surname: user.surname,
-				email: user.email,
+				userId: payload.user.userId,
+				username: payload.user.username,
+				firstname: payload.user.firstname,
+				surname: payload.user.surname,
+				email: payload.user.email,
 			},
 		},
 	}),
-	[GET_USER_DATA_FAILURE]: (state: AppState, payload: any) => ({
+	[GET_USER_DATA_FAILURE]: (state: AppState, payload: unknown) => ({
 		...state,
 		...{ error: payload },
 	}),

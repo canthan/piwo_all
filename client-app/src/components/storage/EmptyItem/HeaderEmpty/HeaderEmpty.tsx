@@ -33,8 +33,8 @@ export class EmptyHeaderComponent extends React.Component<Props> {
         <div className="col-3">
           <input
             type="text"
-            name="batchNumber"
-            value={this.props.batchNumber}
+            name="batchNo"
+            value={this.props.batchNo}
             placeholder="#Number*"
             // placeholder={this.state.batchId.toString()}
             className="empty-heading__input"
@@ -44,9 +44,9 @@ export class EmptyHeaderComponent extends React.Component<Props> {
         <div className="col-6">
           <input
             type="text"
-            name="batchName"
-            value={this.props.batchName}
-            // placeholder={this.state.batchName}
+            name="name"
+            value={this.props.name}
+            // placeholder={this.state.name}
             placeholder="Batch Name*"
             className="empty-heading__input"
             onChange={this.handleChange}
@@ -56,7 +56,7 @@ export class EmptyHeaderComponent extends React.Component<Props> {
           <input
             type="text"
             name="bottledOn"
-            value={this.props.bottledOn}
+            value={this.props.bottledOn.toString()}
             // placeholder={this.state.bottledOn}
             placeholder={`${currentDate}*`}
             className="empty-heading__input"

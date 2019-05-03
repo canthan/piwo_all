@@ -1,25 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { AsyncResult } from './types/app.types';
 import StorageComponent from './components/storage/storage';
 import { OverallAppState } from './reducers/initialState';
 import { getUserDataAsync } from './actions/app.actions';
+import { AsyncResult } from './types/common.types';
 
 import './App.scss';
 
 interface Props {
-  userId: number;
-  getUserDataAsync(userId: number): AsyncResult;
+  userId: string;
+  getUserDataAsync(userId: string): AsyncResult;
 }
 
 export class App extends React.Component<Props> {
   public componentDidMount(): void {
-    const userId = 1;
+    const userId = '1';
     this.getUserDataAsync(userId);
   }
 
-  public getUserDataAsync = (userId: number): AsyncResult =>
+  public getUserDataAsync = (userId: string): AsyncResult =>
     this.props.getUserDataAsync(userId);
 
   public render() {

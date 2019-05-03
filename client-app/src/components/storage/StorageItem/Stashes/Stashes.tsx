@@ -77,7 +77,7 @@ class QuantityStorageComponent extends React.Component<QuantityStorage, {}> {
 		return (
 			<div className="row quantity__row">
 				<div className="col-4 quantity__caption">
-					<span>{this.props.stash.stashName}</span>
+					<span>{this.props.stash.name}</span>
 				</div>
 				{Object.values(this.props.stash.items).map((item, index) => {
 					const name = Object.keys(this.props.stash.items)[index];

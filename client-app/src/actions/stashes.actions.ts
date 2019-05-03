@@ -1,9 +1,5 @@
 import Axios, { AxiosResponse, AxiosError } from 'axios';
 
-import { CommonStorageService } from './../components/storage/common.service';
-import { AsyncAction, Response, ReduxAction, AnyDispatch } from './../types/app.types';
-import { Stash } from '../types/storage.types';
-
 import {
   ADD_STASH_REQUEST,
   ADD_STASH_SUCCESS,
@@ -17,6 +13,8 @@ import {
   GET_STASHES_FROM_USER_DATA,
 } from './../constants/stashes.action.types';
 import { CONFIG } from './../config/config';
+import { Stash } from '../types/storage.types';
+import { ReduxAction, AsyncAction, Response } from '../types/common.types';
 
 export const addStashRequest = (): ReduxAction<undefined> => ({
   type: ADD_STASH_REQUEST,
@@ -50,7 +48,7 @@ export const deleteStashRequest = (): ReduxAction<undefined> => ({
   type: DELETE_STASH_REQUEST,
 });
 
-export const deleteStashSuccess = (stashId: number): ReduxAction<number> => ({
+export const deleteStashSuccess = (stashId: string): ReduxAction<string> => ({
   payload: stashId,
   type: DELETE_STASH_SUCCESS,
 });
@@ -65,9 +63,9 @@ export const getStashesFromUserData = (stashes: Stash[]): ReduxAction<Stash[]> =
   type: GET_STASHES_FROM_USER_DATA,
 });
 
-export const deleteStashAsync = (userId: number, stashId: number): AsyncAction => async (
-  dispatch: AnyDispatch
-): Promise<ReduxAction<number | AxiosError>> => {
+export const deleteStashAsync = (userId: string, stashId: string): AsyncAction => async (
+  dispatch
+) => {
   dispatch(deleteStashRequest());
   try {
     const response = await Axios.delete(
@@ -83,14 +81,14 @@ export const deleteStashAsync = (userId: number, stashId: number): AsyncAction =
   }
 };
 
-export const addStashAsync = (userId: number, batchId: number, newStash: Stash): AsyncAction => async (
-  dispatch: AnyDispatch
-): Promise<ReduxAction<Stash | AxiosError>> => {
+export const addStashAsync = (userId: string, batchId: string, name: string): AsyncAction => async (
+  dispatch
+) => {
   dispatch(addStashRequest());
   try {
     const response: AxiosResponse<Response<Stash>> = await Axios.post(
       `${CONFIG.STASHES_API}/${userId}/${batchId}`,
-      CommonStorageService.flattenItemsForRequest([newStash])
+      { name }
     );
     const newStashResponse: Stash = { ...response.data.data };
 
@@ -100,14 +98,14 @@ export const addStashAsync = (userId: number, batchId: number, newStash: Stash):
   }
 };
 
-export const updateStashesAsync = (userId: number, batchId: number, stashes: Stash[]): AsyncAction => async (
-  dispatch: AnyDispatch
-): Promise<ReduxAction<Stash[] | AxiosError>> => {
+export const updateStashesAsync = (userId: string, batchId: string, stashes: Stash[]): AsyncAction => async (
+  dispatch
+) => {
   dispatch(updateStashesRequest());
   try {
     const response: AxiosResponse<Response<Stash[]>> = await Axios.put(
       `${CONFIG.STASHES_API}/${userId}/${batchId}`,
-      CommonStorageService.flattenItemsForRequest(stashes)
+      { stashes }
     );
     const updatedStashes: Stash[] = [...response.data.data];
 

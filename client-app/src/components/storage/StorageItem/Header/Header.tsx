@@ -1,25 +1,24 @@
 import * as React from 'react';
 import './Header.scss';
+import { MILISEC_PER_DAY, MILISEC_PER_WEEK } from '../../../../types/storage.constants';
 
 export interface Props {
-	bottledOn: string;
-	batchNumber: string;
-	batchName: string;
+	bottledOn: Date;
+	batchNo: string;
+	name: string;
 }
 
 // tslint:disable function-name
 export function HeaderComponent(props: Props) {
 	const currentDate = new Date();
-	const bottlingDate = new Date(props.bottledOn);
-
-	const age = currentDate.getTime() - bottlingDate.getTime();
+	const age = currentDate.getTime() - props.bottledOn.getTime();
 
 	return (
 		<h3 className="heading">
-			<span className="col-3">#{props.batchNumber}</span>
-			<span className="col-6">{props.batchName}</span>
+			<span className="col-3">#{props.batchNo}</span>
+			<span className="col-6">{props.name}</span>
 			<div className="col-3 heading__dates">
-				<span>bottled: {props.bottledOn}</span>
+				<span>bottled: {props.bottledOn.toLocaleDateString()}</span>
 				<span>
 					{getDaysFromMiliseconds(age)} days ({getWeeksFromMiliseconds(age)}{' '}
 					weeks)
@@ -28,9 +27,6 @@ export function HeaderComponent(props: Props) {
 		</h3>
 	);
 }
-
-const MILISEC_PER_DAY = 86400000;
-const MILISEC_PER_WEEK = 604800000;
 
 function getDaysFromMiliseconds(miliseconds: number) {
 	return Math.round(miliseconds / MILISEC_PER_DAY);

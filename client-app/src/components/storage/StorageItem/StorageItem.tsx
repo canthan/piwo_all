@@ -10,37 +10,39 @@ import { ButtonsComponent } from './Buttons/Buttons';
 import { OptionsComponent } from './Options/Options';
 import {
   Stash,
-  EmptyBatch,
   SelectedStash,
-  BatchInDto,
+  EmptyBatch,
+  Batch,
+  StashOutDTO,
 } from '../../../types/storage.types';
-import {  AsyncResult } from './../../../types/app.types';
 
 import './StorageItem.scss';
 
 import { OverallAppState } from '../../../reducers/initialState';
 import { deleteBatchAsync, editBatchDataAsync } from '../../../actions/batches.actions';
 import { addStashAsync, updateStashesAsync } from '../../../actions/stashes.actions';
+import { initialStash } from '../../../types/storage.constants';
+import { AsyncResult } from '../../../types/common.types';
 
 interface OwnProps {
-  batch: BatchInDto;
-  userId: number;
+  batch: Batch;
+  userId: string;
   stashes: Stash[];
   getSummaryFromStashes(): AnyAction;
 }
 interface MappedBatchActions {
-  deleteBatchAsync(userId: number, batchId: number): AsyncResult;
+  deleteBatchAsync(userId: string, batchId: string): AsyncResult;
   editBatchDataAsync(
-    userId: number,
-    batchId: number,
+    userId: string,
+    batchId: string,
     batchData: EmptyBatch
   ): AsyncResult;
 }
 interface MappedStashActions {
-  addStashAsync(userId: number, batchId: number, newStash: Stash): AsyncResult;
+  addStashAsync(userId: string, batchId: string, stashName: string): AsyncResult;
   updateStashesAsync(
-    userId: number,
-    batchId: number,
+    userId: string,
+    batchId: string,
     stashes: Stash[]
   ): AsyncResult;
 }
@@ -70,8 +72,8 @@ export class ItemComponent extends React.Component<Props, State> {
     modified: false,
     edited: false,
     editedBatchData: {
-      batchName: this.props.batch.batchName,
-      batchNumber: this.props.batch.batchNumber,
+      name: this.props.batch.name,
+      batchNo: this.props.batch.batchNo,
       bottledOn: this.props.batch.bottledOn,
     },
   };
@@ -109,23 +111,27 @@ export class ItemComponent extends React.Component<Props, State> {
   };
 
   public onAddStorageClick = async () => {
-    const newStorageName = prompt('Enter new storage name');
-    if (!newStorageName) {
+    const stashName = prompt('Enter new storage name');
+    if (!stashName) {
       return;
     }
     const {
       batch: { batchId },
       userId,
     } = this.props;
-    const newStash = new Stash(newStorageName, batchId);
-    newStash.stashUserId = userId;
-    await this.props.addStashAsync(userId, batchId, newStash);
+    // const newStash = new Stash(newStorageName, batchId);
+    const newStash = {
+      ...initialStash,
+      name: stashName,
+    }
+    // newStash.userId = userId;
+    await this.props.addStashAsync(userId, batchId, stashName);
   };
 
   public onDeleteClick = async () => {
-    const { batchNumber, batchName } = this.props.batch;
+    const { batchNo, name } = this.props.batch;
     confirm(
-      `Are you sure that Batch no.${batchNumber} - ${batchName} should be deleted?`
+      `Are you sure that Batch no.${batchNo} - ${name} should be deleted?`
     );
     if (!this.props.batch.batchId) {
       return;
@@ -188,7 +194,7 @@ export class ItemComponent extends React.Component<Props, State> {
   };
 
   public render() {
-    const { batchName, batchNumber, bottledOn } = this.props.batch;
+    const { name, batchNo, bottledOn } = this.props.batch;
 
     return (
       <div className="col-xl-6 col-xs-12">
@@ -196,15 +202,15 @@ export class ItemComponent extends React.Component<Props, State> {
           <div className={this.state.modified ? 'item  modified' : 'item'}>
             {this.state.edited ? (
               <EmptyHeaderComponent
-                batchName={this.state.editedBatchData.batchName}
-                batchNumber={this.state.editedBatchData.batchNumber}
+                name={this.state.editedBatchData.name}
+                batchNo={this.state.editedBatchData.batchNo}
                 bottledOn={this.state.editedBatchData.bottledOn}
                 onInputChange={this.onInputChange}
               />
             ) : (
                 <HeaderComponent
-                  batchName={batchName}
-                  batchNumber={batchNumber}
+                  name={name}
+                  batchNo={batchNo}
                   bottledOn={bottledOn}
                 />
               )}

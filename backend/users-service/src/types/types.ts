@@ -1,14 +1,14 @@
 // tslint:disable max-classes-per-file
 // tslint:disable no-any
 
-export type AnyFunction = (...args: any[]) => any;
-export type AsyncFunction = (...args: any[]) => Promise<any>;
+export type AnyFunction = (...args: unknown[]) => unknown;
+export type AsyncFunction = (...args: unknown[]) => Promise<unknown>;
 
 export class Batch {
   public batchId?: number;
-  public batchUserId: number;
-  public batchNumber?: string;
-  public batchName: string;
+  public userId: number;
+  public batchNo?: string;
+  public name: string;
   public bottledOn: string;
   public quantityLitres: number;
   public quantityBottles: number;
@@ -16,15 +16,15 @@ export class Batch {
   public stashes?: Stash[];
 
   constructor(
-    batchUserId = 0,
+    userId = 0,
     bottledOn = '',
-    batchName = '',
+    name = '',
     litres = 0,
     bottles = 0,
     crates = 0
   ) {
-    this.batchUserId = batchUserId;
-    this.batchName = batchName;
+    this.userId = userId;
+    this.name = name;
     this.bottledOn = bottledOn;
     this.quantityLitres = litres;
     this.quantityBottles = bottles;
@@ -35,14 +35,14 @@ export class Batch {
 export class Stash {
   public stashId: number;
   public batchId: number;
-  public stashName: string;
+  public name: string;
   public items: Bottles;
   [key: string]: number | string | Bottles;
-  constructor(stashName: string, batchId: number) {
+  constructor(name: string, batchId: number) {
     this.stashId = 0;
     this.items = new Bottles();
     this.batchId = batchId;
-    this.stashName = stashName;
+    this.name = name;
   }
 }
 

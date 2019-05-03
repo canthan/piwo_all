@@ -1,6 +1,7 @@
 import { Reducer, Action } from 'redux';
 
-import { ReducerFunctionMap, State, AnyFunction } from './../types/app.types';
+import { State } from './../types/app.types';
+import { AnyFunction, ReducerFunctionMap } from '../types/common.types';
 
 // tslint:disable-next-line:array-type
 export const reduceReducers = (...reducers: Reducer<AnyFunction | undefined, Action<unknown>>[]): Reducer<AnyFunction | undefined, Action<unknown>> =>

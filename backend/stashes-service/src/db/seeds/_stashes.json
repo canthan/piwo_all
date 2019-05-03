@@ -1,352 +1,588 @@
 [
-	{
+  {
+    "items": {
+      "b050": 5,
+      "b040": 2,
+      "b033": 1
+    },
+    "_id": "5cc59381ea17261fc806e3cb",
     "stashId": "1",
-		"userId": "2",
-		"batchId": "4",
-		"stashName": "Dom",
-		"b050": 5,
-		"b040": 2,
-		"b033": 1
-	},
-	{
+    "userId": "2",
+    "batchId": "4",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 25,
+      "b040": 2,
+      "b033": 1
+    },
+    "_id": "5cc59381ea17261fc806e3cc",
     "stashId": "2",
-		"userId": "2",
-		"batchId": "5",
-		"stashName": "Piwnica",
-		"b050": 25,
-		"b040": 2,
-		"b033": 1
-	},
-	{
+    "userId": "2",
+    "batchId": "5",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 3
+    },
+    "_id": "5cc59381ea17261fc806e3cd",
     "stashId": "3",
-		"userId": "1",
-		"batchId": "14",
-		"stashName": "Piwnica",
-		"b050": 0,
-		"b040": 0,
-		"b033": 4
-	},
-	{
+    "userId": "1",
+    "batchId": "14",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 3,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3ce",
     "stashId": "4",
-		"userId": "1",
-		"batchId": "3",
-		"stashName": "Piwnica",
-		"b050": 4,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "3",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 5,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3cf",
     "stashId": "5",
-		"userId": "1",
-		"batchId": "53",
-		"stashName": "dd",
-		"b050": 0,
-		"b040": 5,
-		"b033": 0
-	},
-	{
-    "stashId": "6",
-		"userId": "1",
-		"batchId": "18",
-		"stashName": "aaa",
-		"b050": 5,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "53",
+    "name": "dd"
+  },
+  {
+    "items": {
+      "b050": 2,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d1",
     "stashId": "7",
-		"userId": "1",
-		"batchId": "18",
-		"stashName": "Dom",
-		"b050": 2,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "18",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 10,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d2",
     "stashId": "8",
-		"userId": "1",
-		"batchId": "18",
-		"stashName": "Piwnica",
-		"b050": 10,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "18",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": null,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d3",
     "stashId": "9",
-		"userId": "1",
-		"batchId": "6",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "6",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 2,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d4",
     "stashId": "10",
-		"userId": "1",
-		"batchId": "6",
-		"stashName": "Piwnica",
-		"b050": 12,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "6",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 12,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d5",
     "stashId": "11",
-		"userId": "1",
-		"batchId": "7",
-		"stashName": "Piwnica",
-		"b050": 23,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "7",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d6",
     "stashId": "12",
-		"userId": "1",
-		"batchId": "7",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "7",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3d7",
     "stashId": "13",
-		"userId": "1",
-		"batchId": "4",
-		"stashName": "Dom",
-		"b050": 3,
-		"b040": 0,
-		"b033": 10
-	},
-	{
+    "userId": "1",
+    "batchId": "4",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 5,
+      "b040": 0,
+      "b033": 13
+    },
+    "_id": "5cc59381ea17261fc806e3d8",
     "stashId": "14",
-		"userId": "1",
-		"batchId": "4",
-		"stashName": "Piwnica",
-		"b050": 10,
-		"b040": 0,
-		"b033": 13
-	},
-	{
+    "userId": "1",
+    "batchId": "4",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 3,
+      "b040": 0,
+      "b033": 10
+    },
+    "_id": "5cc59381ea17261fc806e3d9",
     "stashId": "15",
-		"userId": "1",
-		"batchId": "5",
-		"stashName": "Piwnica",
-		"b050": 7,
-		"b040": 0,
-		"b033": 11
-	},
-	{
+    "userId": "1",
+    "batchId": "5",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 1
+    },
+    "_id": "5cc59381ea17261fc806e3da",
     "stashId": "16",
-		"userId": "1",
-		"batchId": "5",
-		"stashName": "Dom",
-		"b050": 1,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "17",
-		"userId": "1",
-		"batchId": "10",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "18",
-		"userId": "1",
-		"batchId": "10",
-		"stashName": "Piwnica",
-		"b050": 4,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "19",
-		"userId": "1",
-		"batchId": "13",
-		"stashName": "Piwnica",
-		"b050": 6,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "20",
-		"userId": "1",
-		"batchId": "12",
-		"stashName": "Piwnica",
-		"b050": 2,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "21",
-		"userId": "1",
-		"batchId": "11",
-		"stashName": "Piwnica",
-		"b050": 2,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "22",
-		"userId": "1",
-		"batchId": "11",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "5",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 2,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3e1",
     "stashId": "23",
-		"userId": "1",
-		"batchId": "17",
-		"stashName": "Piwnica",
-		"b050": 33,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "17",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3e2",
     "stashId": "24",
-		"userId": "1",
-		"batchId": "17",
-		"stashName": "Dom",
-		"b050": 3,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "17",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 12,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3e3",
     "stashId": "25",
-		"userId": "1",
-		"batchId": "16",
-		"stashName": "Piwnica",
-		"b050": 12,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "16",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3e4",
     "stashId": "26",
-		"userId": "1",
-		"batchId": "16",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "16",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 4,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3e5",
     "stashId": "27",
-		"userId": "1",
-		"batchId": "15",
-		"stashName": "Piwnica",
-		"b050": 30,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "15",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3e6",
     "stashId": "28",
-		"userId": "1",
-		"batchId": "15",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "29",
-		"userId": "1",
-		"batchId": "9",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "30",
-		"userId": "1",
-		"batchId": "9",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "31",
-		"userId": "1",
-		"batchId": "9",
-		"stashName": "Piwnica",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "32",
-		"userId": "1",
-		"batchId": "9",
-		"stashName": "Piwnica",
-		"b050": 5,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "33",
-		"userId": "1",
-		"batchId": "8",
-		"stashName": "Piwnica",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-		"userId": "34",
-		"batchId": "8",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "35",
-		"userId": "1",
-		"batchId": "8",
-		"stashName": "Piwnica",
-		"b050": 6,
-		"b040": 0,
-		"b033": 0
-	},
-	{
-    "stashId": "36",
-		"userId": "1",
-		"batchId": "8",
-		"stashName": "Dom",
-		"b050": 0,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "15",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3ec",
+    "userId": "34",
+    "batchId": "8",
+    "name": "Dom",
+    "stashId": "b35eb742-2c3a-4005-9903-9af1a09425f9"
+  },
+  {
+    "items": {
+      "b050": 33,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc59381ea17261fc806e3ef",
     "stashId": "37",
-		"userId": "1",
-		"batchId": "19",
-		"stashName": "Piwnica",
-		"b050": 33,
-		"b040": 0,
-		"b033": 0
-	},
-	{
+    "userId": "1",
+    "batchId": "19",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 7,
+      "b040": 0,
+      "b033": 5
+    },
+    "_id": "5cc59381ea17261fc806e3f0",
     "stashId": "38",
-		"userId": "1",
-		"batchId": "19",
-		"stashName": "Dom",
-		"b050": 7,
-		"b040": 0,
-		"b033": 5
-	},
-	{
+    "userId": "1",
+    "batchId": "19",
+    "name": "Dom"
+  },
+  {
+    "items": {
+      "b050": 3,
+      "b040": 0,
+      "b033": 4
+    },
+    "_id": "5cc59381ea17261fc806e3f1",
     "stashId": "39",
-		"userId": "1",
-		"batchId": "2",
-		"stashName": "Piwnica",
-		"b050": 3,
-		"b040": 0,
-		"b033": 4
-	}
+    "userId": "1",
+    "batchId": "2",
+    "name": "Piwnica"
+  },
+  {
+    "items": {
+      "b050": 32,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f1cbc03837013eaf9f99",
+    "name": "piwnica",
+    "batchId": "b89aff84-7ad5-4e10-b95c-01f98285baeb",
+    "userId": "1",
+    "stashId": "4a060969-9333-4396-970b-b05922cdc816",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 25,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f20ec03837013eaf9f9a",
+    "name": "Piwnica",
+    "batchId": "758ce6b6-8536-41c0-9ad2-f92483d6e7e5",
+    "userId": "1",
+    "stashId": "2c6c0017-c320-4732-9f4d-c754cf073a9b",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 2,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f210c03837013eaf9f9b",
+    "name": "dom",
+    "batchId": "758ce6b6-8536-41c0-9ad2-f92483d6e7e5",
+    "userId": "1",
+    "stashId": "d6cb78f8-7e86-4734-832f-e3955c98b753",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 16,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f24fc03837013eaf9f9c",
+    "name": "piwnica",
+    "batchId": "56a25fe4-fab0-43cb-9d54-62ab98022404",
+    "userId": "1",
+    "stashId": "fc919513-7c74-4a24-a7bc-31671e0ecf87",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f252c03837013eaf9f9d",
+    "name": "dom",
+    "batchId": "56a25fe4-fab0-43cb-9d54-62ab98022404",
+    "userId": "1",
+    "stashId": "56f97d9e-d966-41b6-a540-412f6f0c76eb",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 37,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f288c03837013eaf9f9e",
+    "name": "Piwnica",
+    "batchId": "53aa62cd-4693-44f4-89e9-4f5d5e424695",
+    "userId": "1",
+    "stashId": "bcae573b-fe4b-4764-a2f0-bce87df64be1",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 2,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f28cc03837013eaf9f9f",
+    "name": "Dom",
+    "batchId": "53aa62cd-4693-44f4-89e9-4f5d5e424695",
+    "userId": "1",
+    "stashId": "ffe448b8-2695-46d4-bd24-dc84dc5625a3",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 3,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f2c2c03837013eaf9fa0",
+    "name": "dom",
+    "batchId": "b89aff84-7ad5-4e10-b95c-01f98285baeb",
+    "userId": "1",
+    "stashId": "120de7fb-c586-45bb-8081-acddc5e4fa71",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 8,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f333c03837013eaf9fa1",
+    "name": "piwnica",
+    "batchId": "07c100e2-c34c-447c-8c30-1c844a5a8384",
+    "userId": "1",
+    "stashId": "c4ca1651-161f-4115-8a4e-6012f78f8e85",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f336c03837013eaf9fa2",
+    "name": "dom",
+    "batchId": "07c100e2-c34c-447c-8c30-1c844a5a8384",
+    "userId": "1",
+    "stashId": "12b44af7-65e0-491f-89c0-3e0e1db7ca46",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 5,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f362c03837013eaf9fa3",
+    "name": "Piwnica",
+    "batchId": "8ea67e3f-dc44-4257-b74e-6d2dbb684d12",
+    "userId": "1",
+    "stashId": "6807e7e8-d2e1-40fb-951a-051ff9871178",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 10,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f3a7c03837013eaf9fa4",
+    "name": "Piwnica",
+    "batchId": "a35b6d5d-b75b-436b-9c3f-9b951819e96a",
+    "userId": "1",
+    "stashId": "3e31ed8d-dc73-4181-adc1-7b37f37ad9ae",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 8,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f3d3c03837013eaf9fa5",
+    "name": "piwnica",
+    "batchId": "b3fa6b55-87a1-4d48-a33c-023ae7440c99",
+    "userId": "1",
+    "stashId": "90ac574f-a96c-449b-9076-b05f83ec19eb",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 10,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f3e6c03837013eaf9fa6",
+    "name": "piwnica",
+    "batchId": "2988cfb9-bb0e-42d4-a644-2056f561342b",
+    "userId": "1",
+    "stashId": "b05c434c-efb4-4eb2-9fd1-03814e70dcd8",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f3ebc03837013eaf9fa7",
+    "name": "dom",
+    "batchId": "2988cfb9-bb0e-42d4-a644-2056f561342b",
+    "userId": "1",
+    "stashId": "a365dc9d-14d2-46b5-9118-09aaabc97795",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 9,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f4dac03837013eaf9fa8",
+    "name": "piwnica",
+    "batchId": "b0e9e365-5a00-48b9-b52c-f2b2ed88db0f",
+    "userId": "1",
+    "stashId": "f419e5a9-5222-41d7-8b6d-7c9c688a03b0",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f4dfc03837013eaf9fa9",
+    "name": "dom",
+    "batchId": "b0e9e365-5a00-48b9-b52c-f2b2ed88db0f",
+    "userId": "1",
+    "stashId": "17f4c868-fdd4-4dc3-bf38-5bb1e31b9cf2",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f548c03837013eaf9faa",
+    "name": "piwnica",
+    "batchId": "74e18e74-0594-4425-b5d5-cf4299c3b215",
+    "userId": "1",
+    "stashId": "c408ccb5-04dd-45b6-a9bd-12b8400107f5",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f54bc03837013eaf9fab",
+    "name": "dom",
+    "batchId": "74e18e74-0594-4425-b5d5-cf4299c3b215",
+    "userId": "1",
+    "stashId": "8c9b83b2-02b0-4196-95e6-4a8a7b956f2b",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 1,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f56fc03837013eaf9fac",
+    "name": "piwnica",
+    "batchId": "23",
+    "userId": "1",
+    "stashId": "eda1d77c-5e35-45ad-8df1-02d9418ebfd1",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 16,
+      "b040": 0,
+      "b033": 0
+    },
+    "_id": "5cc9f5dbc03837013eaf9fad",
+    "name": "piwnica",
+    "batchId": "98435e47-fdcc-4eeb-807a-e31c78cb5a40",
+    "userId": "1",
+    "stashId": "dc41fb8c-c51b-4541-94d7-a51514dace73",
+    "__v": 0
+  },
+  {
+    "items": {
+      "b050": 0,
+      "b040": 0,
+      "b033": 30
+    },
+    "_id": "5cc9f68cc03837013eaf9fae",
+    "name": "piwnica",
+    "batchId": "83c89deb-9f31-4f85-88ab-0aa09bcb0b16",
+    "userId": "1",
+    "stashId": "da561ef2-e5a5-4d07-b648-a440cddabfb4",
+    "__v": 0
+  }
 ]

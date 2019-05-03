@@ -1,21 +1,24 @@
 localhost:1337
 
 # USERS
-GET /users
+GET /users/all
 GET /users/:userId
 
 # USER DATA
-GET /combinedData/:userId
+GET /combined/:userId 
 
 # BATCHES
-GET /batches
+GET /batches/all
 GET /batches/:userId
 POST /batches/:userId
+PUT /batches/:userId/:batchId
 DELETE /batches/:userId/:batchId
 
 # STASHES
-GET /stashes
+GET /stashes/all
 GET /stashes/:stashId
-GET /stashes/:userId/:batchId
+GET /stashes/user/:userId
+GET /stashes/batch/:batchId
 PUT /stashes/:userId/:batchId
 POST /stashes/:userId/:batchId
+DELETE /stashes/:stashId

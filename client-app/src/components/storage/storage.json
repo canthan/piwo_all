@@ -2,14 +2,14 @@
 	"batches": [
 		{
 			"batchId": "1",
-			"batchName": "Item_1",
+			"name": "Item_1",
 			"bottledOn": "2018.01.02",
 			"quantityLitres": "32",
 			"quantityBottles": "35",
 			"quantityCrates": "1,5",
 			"stashes": [
 				{
-					"stashName": "Storage 1",
+					"name": "Storage 1",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -17,7 +17,7 @@
 					}
 				},
 				{
-					"stashName": "Storage 2",
+					"name": "Storage 2",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -28,14 +28,14 @@
 		},
 		{
 			"batchId": "2",
-			"batchName": "Item_2",
+			"name": "Item_2",
 			"bottledOn": "2018.01.10",
 			"quantityLitres": "25",
 			"quantityBottles": "40",
 			"quantityCrates": "10",
 			"stashes": [
 				{
-					"stashName": "Storage 1",
+					"name": "Storage 1",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -43,7 +43,7 @@
 					}
 				},
 				{
-					"stashName": "Storage 2",
+					"name": "Storage 2",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -54,14 +54,14 @@
 		},
 		{
 			"batchId": "3",
-			"batchName": "Item_3",
+			"name": "Item_3",
 			"bottledOn": "2018.01.24",
 			"quantityLitres": "32",
 			"quantityBottles": "35",
 			"quantityCrates": "1,5",
 			"stashes": [
 				{
-					"stashName": "Storage 1",
+					"name": "Storage 1",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -69,7 +69,7 @@
 					}
 				},
 				{
-					"stashName": "Storage 2",
+					"name": "Storage 2",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -80,14 +80,14 @@
 		},
 		{
 			"batchId": "4",
-			"batchName": "Item_4",
+			"name": "Item_4",
 			"bottledOn": "2017.12.10",
 			"quantityLitres": "32",
 			"quantityBottles": "35",
 			"quantityCrates": "1,5",
 			"stashes": [
 				{
-					"stashName": "Storage 1",
+					"name": "Storage 1",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -95,7 +95,7 @@
 					}
 				},
 				{
-					"stashName": "Storage 2",
+					"name": "Storage 2",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -106,14 +106,14 @@
 		},
 		{
 			"batchId": "5",
-			"batchName": "Item_5",
+			"name": "Item_5",
 			"bottledOn": "2017.04.10",
 			"quantityLitres": "10",
 			"quantityBottles": "10",
 			"quantityCrates": "1,5",
 			"stashes": [
 				{
-					"stashName": "Storage 4",
+					"name": "Storage 4",
 					"items": {
 						"b050": "30",
 						"b040": "0",
@@ -121,7 +121,7 @@
 					}
 				},
 				{
-					"stashName": "Storage 5",
+					"name": "Storage 5",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -132,14 +132,14 @@
 		},
 		{
 			"batchId": "6",
-			"batchName": "Item_6",
+			"name": "Item_6",
 			"bottledOn": "2017.11.10",
 			"quantityLitres": "20",
 			"quantityBottles": "26",
 			"quantityCrates": "1",
 			"stashes": [
 				{
-					"stashName": "Storage 1",
+					"name": "Storage 1",
 					"items": {
 						"b050": "30",
 						"b040": "2",
@@ -147,7 +147,7 @@
 					}
 				},
 				{
-					"stashName": "Storage 2",
+					"name": "Storage 2",
 					"items": {
 						"b050": "30",
 						"b040": "2",
