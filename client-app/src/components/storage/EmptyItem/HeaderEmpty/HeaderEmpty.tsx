@@ -1,12 +1,14 @@
 import * as React from 'react';
+import dayjs from 'dayjs';
+
 import { EmptyBatch } from '../../../../types/storage.types';
+import { DEFAULT_DATE_FORMAT } from '../../../../types/storage.constants';
 
 import './HeaderEmpty.scss';
-
-// tslint:disable no-any
+import { AnyFunction } from '../../../../types/common.types';
 
 interface PropsAction {
-  onInputChange: any;
+  onInputChange: AnyFunction;
 }
 
 interface Event {
@@ -25,41 +27,40 @@ export class EmptyHeaderComponent extends React.Component<Props> {
   };
 
   public render() {
-    let currentDate = new Date().toISOString();
-    currentDate = currentDate.slice(0, currentDate.indexOf('T'));
+    const currentDate = dayjs().format(DEFAULT_DATE_FORMAT);
 
-    return (
+    return ( 
       <div className="empty-heading">
-        <div className="col-3">
+        <div className="col-3 empty-heading__wrapper">
+          <label className="empty-heading__label required">Batch Number</label>
           <input
             type="text"
             name="batchNo"
             value={this.props.batchNo}
             placeholder="#Number*"
-            // placeholder={this.state.batchId.toString()}
-            className="empty-heading__input"
+            className="empty-heading__input form-control"
             onChange={this.handleChange}
           />
         </div>
-        <div className="col-6">
+        <div className="col-6 empty-heading__wrapper">
+          <label className="empty-heading__label required">Batch Name</label>
           <input
             type="text"
             name="name"
             value={this.props.name}
-            // placeholder={this.state.name}
             placeholder="Batch Name*"
-            className="empty-heading__input"
+            className="empty-heading__input form-control"
             onChange={this.handleChange}
           />
         </div>
-        <div className="col-3">
+        <div className="col-3 empty-heading__wrapper">
+          <label className="empty-heading__label required">Bottling Date</label>
           <input
             type="text"
             name="bottledOn"
             value={this.props.bottledOn.toString()}
-            // placeholder={this.state.bottledOn}
             placeholder={`${currentDate}*`}
-            className="empty-heading__input"
+            className="empty-heading__input form-control"
             onChange={this.handleChange}
           />
         </div>

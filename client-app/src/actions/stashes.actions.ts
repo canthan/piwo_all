@@ -69,13 +69,10 @@ export const deleteStashAsync = (userId: string, stashId: string): AsyncAction =
   dispatch(deleteStashRequest());
   try {
     const response = await Axios.delete(
-      `${CONFIG.STASHES_API}/${userId}/${stashId}`
-    );
-    const deletedStash = response.data.data.batches.find(
-      (stash: Stash) => (stash.stashId = stashId)
+      `${CONFIG.STASHES_API}/${stashId}`
     );
 
-    return dispatch(deleteStashSuccess(deletedStash.stashId));
+    return dispatch(deleteStashSuccess(response.data.data.stashId));
   } catch (error) {
     return dispatch(deleteStashFailure(error));
   }

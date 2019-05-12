@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
+import dayjs from 'dayjs';
 
 import { HeaderComponent } from './Header/Header';
 import { EmptyHeaderComponent } from './../EmptyItem/HeaderEmpty/HeaderEmpty';
@@ -13,14 +14,13 @@ import {
   SelectedStash,
   EmptyBatch,
   Batch,
-  StashOutDTO,
 } from '../../../types/storage.types';
 
 import './StorageItem.scss';
 
 import { OverallAppState } from '../../../reducers/initialState';
 import { deleteBatchAsync, editBatchDataAsync } from '../../../actions/batches.actions';
-import { addStashAsync, updateStashesAsync } from '../../../actions/stashes.actions';
+import { addStashAsync, updateStashesAsync, deleteStashAsync } from '../../../actions/stashes.actions';
 import { initialStash } from '../../../types/storage.constants';
 import { AsyncResult } from '../../../types/common.types';
 
@@ -45,6 +45,7 @@ interface MappedStashActions {
     batchId: string,
     stashes: Stash[]
   ): AsyncResult;
+  deleteStashAsync(userId: string, stashId: string): AsyncResult;
 }
 // tslint:disable-next-line no-magic-numbers
 const INCREMENT_BUTTONS = [1, 3, 5];
@@ -87,6 +88,10 @@ export class ItemComponent extends React.Component<Props, State> {
     });
   };
 
+  public onStashDelete = async (userId: string, stashId: string) => {
+    await this.props.deleteStashAsync(userId, stashId);
+  };
+
   public onQuantitySelection = (e: { target: HTMLInputElement }, name: string, stashKey: number) => {
     this.setState({
       selected: {
@@ -119,12 +124,7 @@ export class ItemComponent extends React.Component<Props, State> {
       batch: { batchId },
       userId,
     } = this.props;
-    // const newStash = new Stash(newStorageName, batchId);
-    const newStash = {
-      ...initialStash,
-      name: stashName,
-    }
-    // newStash.userId = userId;
+
     await this.props.addStashAsync(userId, batchId, stashName);
   };
 
@@ -211,7 +211,7 @@ export class ItemComponent extends React.Component<Props, State> {
                 <HeaderComponent
                   name={name}
                   batchNo={batchNo}
-                  bottledOn={bottledOn}
+                  bottledOn={dayjs(bottledOn).toDate()}
                 />
               )}
             <section className="content row">
@@ -220,6 +220,7 @@ export class ItemComponent extends React.Component<Props, State> {
                 stashes={this.props.stashes}
                 onQuantityChange={this.onQuantityChange}
                 onQuantitySelection={this.onQuantitySelection}
+                onStashDelete={this.onStashDelete}
               />
               <ButtonsComponent
                 increase={INCREMENT_BUTTONS}
@@ -262,6 +263,7 @@ const actions = {
   addStashAsync,
   editBatchDataAsync,
   updateStashesAsync,
+  deleteStashAsync,
 };
 
 export default connect(

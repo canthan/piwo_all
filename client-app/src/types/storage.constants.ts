@@ -1,9 +1,17 @@
+import dayjs from 'dayjs';
+
 import { Bottles, StashSummary, EmptyBatch, BatchOutDTO, StashOutDTO } from './storage.types';
 
 export const BOTTLES_IN_CRATE = 20;
 export const HALF_LITER = 0.5;
 export const MILISEC_PER_DAY = 86400000;
 export const MILISEC_PER_WEEK = 604800000;
+
+export const VOLUME_DIVIDER = 100;
+export const BOTTLE_VOL_CODE = /^[b]\d{3}$/;
+export const BOTTLE_VOL = /^\d{3}$/;
+
+export const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
 
 export const initialStashSummary: StashSummary = {
   name: '',
@@ -19,6 +27,7 @@ export const initialStashSummary: StashSummary = {
   },
 }
 
+
 export const initialBatch: BatchOutDTO = {
   bottledOn: new Date(),
   name: 'aaa',
@@ -30,7 +39,7 @@ export const initialBatch: BatchOutDTO = {
 }
 
 export const initialEmptyBatch: EmptyBatch = {
-  bottledOn: new Date(),
+  bottledOn: dayjs().format(DEFAULT_DATE_FORMAT),
   name: 'aaa',
   batchNo: '1',
 }

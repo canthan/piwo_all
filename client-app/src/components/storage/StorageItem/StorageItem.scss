@@ -79,8 +79,29 @@
       text-transform: uppercase;
     }
 
+    &__row {
+      justify-content: space-between;
+      justify-items: baseline;
+    }
+
     &__row:nth-of-type(even)  {
-      background-color: rgba(231, 236, 230, 1);
+        background-color: rgba(231, 236, 230, 1);
+     } 
+
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .remove-button {
+      background-color: inherit;
+      border: none;
+      font-weight: bold;
+      width: 20px;
+      height: 20px;
+      margin-right: 5px;
+      padding: 0;
     }
   }
 

@@ -106,7 +106,7 @@
 		"ter-func-call-spacing": [true, "never"],
 		"handle-callback-err": true,
 		"strict-boolean-expressions": false,
-		"semicolon": false
+    "semicolon": false
 	},
   "rulesDirectory": []
 }

@@ -17,9 +17,30 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/dayjs/index.d.ts"
+    ]
   },
   "include": [
     "src"
-  ]
+  ],
+  "paths": {
+    "@utils/*": [
+      "src/utils/*"
+    ],
+    "@app-types/*": [
+      "src/types/*"
+    ],
+    "@reducers/*": [
+      "src/reducers/*"
+    ],
+    "@constants/*": [
+      "src/constants/*"
+    ],
+    "@actions/*": [
+      "src/actions/*"
+    ]
+  }
 }

@@ -38,7 +38,7 @@ export interface StashCrates {
 export interface BatchOutDTO {
   batchNo: string;
   name: string;
-  bottledOn: Date;
+  bottledOn: Date | string;
   litres: number;
   bottles: number;
   crates: number;
@@ -84,6 +84,7 @@ export interface OverallQuantity {
 export interface QuantityStorage {
   stashKey: number;
   stash: Stash;
+  onStashDelete: AnyFunction;
   onQuantityChange: AnyFunction;
   onQuantitySelection: AnyFunction;
 }
