@@ -3,7 +3,6 @@ import * as React from 'react';
 import { Bottles } from '../../../../../types/storage.types';
 import { UtilsService } from '../../../../../utils/utils.service';
 
-// tslint:disable function-name
 export function StashesHeaderComponent(props: Bottles) {
   return (
     <div className="row">

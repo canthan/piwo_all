@@ -52,10 +52,10 @@ export interface Batch extends BatchOutDTO {
 }
 
 export interface StashOutDTO {
-   name: string;
-   items: Bottles;
-   key?: number | null;
-} 
+  name: string;
+  items: Bottles;
+  key?: number | null;
+}
 
 export interface Stash extends StashOutDTO {
   batchId: string;
@@ -96,16 +96,20 @@ export interface Bottles {
   [size: string]: number;
 }
 
-export interface Buttons {
-  increase: number[];
-  decrease: number[];
-  onQuantityChangeButton: object;
+export interface ChangeCountButtons {
+  values: number[];
+  onQuantityChangeButton: AnyFunction;
+}
+
+export interface SingleChangeCountButtons {
+  value: number;
+  onQuantityChangeButton: AnyFunction;
 }
 
 export interface Options {
   buttons: string[];
   functions: {
-    [buttonFunction: string]: object;
+    [buttonFunction: string]: AnyFunction;
   };
 }
 

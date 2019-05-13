@@ -12,61 +12,59 @@ interface PropsAction {
 }
 
 interface Event {
-  target: { 
-    name: string; 
+  target: {
+    name: string;
     value: string;
   }
 }
 
 type Props = PropsAction & EmptyBatch;
 
-export class EmptyHeaderComponent extends React.Component<Props> {
-  public handleChange = (e: Event ) => {
+export function EmptyHeaderComponent(props: Props) {
+
+  const handleChange = (e: Event) => {
     const changedValue = { [e.target.name]: e.target.value };
-    this.props.onInputChange(changedValue);
+    props.onInputChange(changedValue);
   };
+  const currentDate = dayjs().format(DEFAULT_DATE_FORMAT);
 
-  public render() {
-    const currentDate = dayjs().format(DEFAULT_DATE_FORMAT);
-
-    return ( 
-      <div className="empty-heading">
-        <div className="col-3 empty-heading__wrapper">
-          <label className="empty-heading__label required">Batch Number</label>
-          <input
-            type="text"
-            name="batchNo"
-            value={this.props.batchNo}
-            placeholder="#Number*"
-            className="empty-heading__input form-control"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="col-6 empty-heading__wrapper">
-          <label className="empty-heading__label required">Batch Name</label>
-          <input
-            type="text"
-            name="name"
-            value={this.props.name}
-            placeholder="Batch Name*"
-            className="empty-heading__input form-control"
-            onChange={this.handleChange}
-          />
-        </div>
-        <div className="col-3 empty-heading__wrapper">
-          <label className="empty-heading__label required">Bottling Date</label>
-          <input
-            type="text"
-            name="bottledOn"
-            value={this.props.bottledOn.toString()}
-            placeholder={`${currentDate}*`}
-            className="empty-heading__input form-control"
-            onChange={this.handleChange}
-          />
-        </div>
+  return (
+    <div className="empty-heading">
+      <div className="col-3 empty-heading__wrapper">
+        <label className="empty-heading__label required">Batch Number</label>
+        <input
+          type="text"
+          name="batchNo"
+          value={props.batchNo}
+          placeholder="#Number*"
+          className="empty-heading__input form-control"
+          onChange={handleChange}
+        />
       </div>
-    );
-  }
+      <div className="col-6 empty-heading__wrapper">
+        <label className="empty-heading__label required">Batch Name</label>
+        <input
+          type="text"
+          name="name"
+          value={props.name}
+          placeholder="Batch Name*"
+          className="empty-heading__input form-control"
+          onChange={handleChange}
+        />
+      </div>
+      <div className="col-3 empty-heading__wrapper">
+        <label className="empty-heading__label required">Bottling Date</label>
+        <input
+          type="text"
+          name="bottledOn"
+          value={props.bottledOn.toString()}
+          placeholder={`${currentDate}*`}
+          className="empty-heading__input form-control"
+          onChange={handleChange}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default EmptyHeaderComponent;

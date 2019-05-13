@@ -1,60 +1,38 @@
 import * as React from 'react';
 
-import { Buttons } from '../../../../types/storage.types';
+import { ChangeCountButtons } from '../../../../types/storage.types';
+import { IncreaseButton } from '../../../Common/OptionsButton/IncreaseButton';
+import { DecreaseButton } from '../../../Common/OptionsButton/DecreaseButton';
 
-export class ButtonsComponent extends React.Component<Buttons, {}> {
-	constructor(props: Buttons) {
-		super(props);
-	}
+interface Props {
+  increase: ChangeCountButtons,
+  decrease: ChangeCountButtons,
+};
 
-	public render() {
-		return (
-			<div className="col-md-4 col-xs-12 buttons">
-				<div className="container buttons-row align-items-center">
-					{this.props.increase.map((value, index) => (
-						<IncreaseButton
-							key={index}
-							value={value}
-							onQuantityChangeButton={this.props.onQuantityChangeButton}
-						/>
-					))}
-				</div>
-				<div className="container buttons-row align-items-center">
-					{this.props.decrease.map((value, index) => (
-						<DecreaseButton
-							key={index}
-							value={value}
-							onQuantityChangeButton={this.props.onQuantityChangeButton}
-						/>
-					))}
-				</div>
-			</div>
-		);
-	}
-}
+export function ButtonsComponent(props: Props) {
 
-// tslint:disable no-any
-// tslint:disable function-name
-function IncreaseButton(props: any) {
-	return (
-		<button
-			className="btn btn__plus"
-			onClick={() => props.onQuantityChangeButton(props.value)}
-		>
-			+{props.value}
-		</button>
-	);
-}
-
-function DecreaseButton(props: any) {
-	return (
-		<button
-			className="btn btn__minus"
-			onClick={() => props.onQuantityChangeButton(props.value)}
-		>
-			{props.value}
-		</button>
-	);
+  return (
+    <div className="col-md-4 col-xs-12 buttons">
+      <div className="container buttons-row align-items-center">
+        {props.increase.values.map((value, index) => (
+          <IncreaseButton
+            key={index}
+            value={value}
+            onQuantityChangeButton={props.increase.onQuantityChangeButton}
+          />
+        ))}
+      </div>
+      <div className="container buttons-row align-items-center">
+        {props.decrease.values.map((value, index) => (
+          <DecreaseButton
+            key={index}
+            value={value}
+            onQuantityChangeButton={props.increase.onQuantityChangeButton}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default ButtonsComponent;

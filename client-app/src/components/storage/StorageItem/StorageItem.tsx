@@ -201,9 +201,14 @@ export class ItemComponent extends React.Component<Props, State> {
                   onStashDelete={this.onStashDelete}
                 />
                 <ButtonsComponent
-                  increase={INCREMENT_BUTTONS}
-                  decrease={DECREMENT_BUTTONS}
-                  onQuantityChangeButton={this.onQuantityChangeButton}
+                  increase={{
+                    values: INCREMENT_BUTTONS,
+                    onQuantityChangeButton: this.onQuantityChangeButton,
+                  }}
+                  decrease={{
+                    values: DECREMENT_BUTTONS,
+                    onQuantityChangeButton: this.onQuantityChangeButton,
+                  }}
                 />
               </section>
               <OptionsComponent
