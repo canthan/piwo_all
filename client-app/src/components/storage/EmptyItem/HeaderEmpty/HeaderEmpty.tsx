@@ -2,10 +2,10 @@ import * as React from 'react';
 import dayjs from 'dayjs';
 
 import { EmptyBatch } from '../../../../types/storage.types';
+import { AnyFunction } from '../../../../types/common.types';
 import { DEFAULT_DATE_FORMAT } from '../../../../types/storage.constants';
 
 import './HeaderEmpty.scss';
-import { AnyFunction } from '../../../../types/common.types';
 
 interface PropsAction {
   onInputChange: AnyFunction;

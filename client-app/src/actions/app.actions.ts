@@ -12,6 +12,7 @@ import { getBatchesFromUserData } from './batches.actions';
 import { CONFIG } from './../config/config';
 import { UserData, AppState } from './../types/app.types';
 import { ReduxAction, Response, AsyncAction } from '../types/common.types';
+import { UtilsService } from '../utils/utils.service';
 
 export const getUserDataRequest = (): AnyAction => ({
   type: GET_USER_DATA_REQUEST,
@@ -41,7 +42,7 @@ export const getUserDataAsync = (userId: string): AsyncAction => async (
     );
     const userData = response.data.data;
     dispatch(getUserDataSuccess(userData));
-    dispatch(getBatchesFromUserData(userData.batches));
+    dispatch(getBatchesFromUserData(UtilsService.sortByNumber(userData.batches, "batchNo")));
     dispatch(getStashesFromUserData(userData.stashes));
 
     return dispatch(getSummaryFromStashes(userData.stashes));

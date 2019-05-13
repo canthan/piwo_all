@@ -1,0 +1,20 @@
+.options-button {
+  .btn {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
+    min-width: 70px;
+    border-radius: 0;
+    border: 1px solid grey;
+  
+    &__options {
+      background-color: rgba(231, 236, 230, 1);
+      text-transform: uppercase;
+  
+      &:hover:enabled {
+        background-color: rgba(162, 170, 179, 1) !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 3px 10px rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}

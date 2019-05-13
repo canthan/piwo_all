@@ -1,18 +1,20 @@
-import * as React from 'react';
+import React from 'react';
+
+import { OptionsButton } from '../../../Common/OptionsButton/OptionsButton';
+import { AnyFunction } from '../../../../types/common.types';
 
 import './Options.scss';
 
 export interface Props {
 	buttons: string[];
 	functions: {
-		[buttonFunction: string]: object;
+		[buttonFunction: string]: AnyFunction;
 	};
 	active: {
 		[buttonFunction: string]: boolean;
 	};
 }
 
-// tslint:disable function-name
 export function OptionsComponent(props: Props) {
 	return (
 		<div className="col-12 option-buttons justify-content-center">
@@ -29,20 +31,6 @@ export function OptionsComponent(props: Props) {
 				);
 			})}
 		</div>
-	);
-}
-
-// tslint:disable no-any
-
-function OptionsButton(props: any) {
-	return (
-		<button
-			className="btn btn__options"
-			onClick={() => props.onButtonClick()}
-			disabled={props.disabled}
-		>
-			{props.role}
-		</button>
 	);
 }
 

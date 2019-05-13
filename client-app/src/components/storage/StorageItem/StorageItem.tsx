@@ -9,20 +9,16 @@ import { OverallQuantityComponent } from './OverallQuantity/OverallQuantity';
 import { StashesComponent } from './Stashes/Stashes';
 import { ButtonsComponent } from './Buttons/Buttons';
 import { OptionsComponent } from './Options/Options';
-import {
-  Stash,
-  SelectedStash,
-  EmptyBatch,
-  Batch,
-} from '../../../types/storage.types';
+import { Stash, SelectedStash, EmptyBatch, Batch } from '../../../types/storage.types';
 
 import './StorageItem.scss';
 
 import { OverallAppState } from '../../../reducers/initialState';
 import { deleteBatchAsync, editBatchDataAsync } from '../../../actions/batches.actions';
 import { addStashAsync, updateStashesAsync, deleteStashAsync } from '../../../actions/stashes.actions';
-import { initialStash } from '../../../types/storage.constants';
 import { AsyncResult } from '../../../types/common.types';
+import { ConfirmModalWindow } from '../../Common/Modals/ConfirmModalWindow';
+import { InputModalWindow } from '../../Common/Modals/InputModalWindow';
 
 interface OwnProps {
   batch: Batch;
@@ -60,6 +56,8 @@ interface State {
   modified: boolean;
   edited: boolean;
   editedBatchData: EmptyBatch;
+  deleteBatchModal: boolean;
+  addStashModal: boolean;
 }
 
 export class ItemComponent extends React.Component<Props, State> {
@@ -77,9 +75,11 @@ export class ItemComponent extends React.Component<Props, State> {
       batchNo: this.props.batch.batchNo,
       bottledOn: this.props.batch.bottledOn,
     },
+    deleteBatchModal: false,
+    addStashModal: false,
   };
 
-  public onQuantityChange = (type: number , stashKey: number, target: HTMLInputElement, amount = 0) => {
+  public onQuantityChange = (type: number, stashKey: number, target: HTMLInputElement, amount = 0) => {
     const newState: { stashes: Stash[] } = this.state;
     newState.stashes[stashKey].items[type] = Number(target.value) + amount;
     this.setState({
@@ -115,24 +115,17 @@ export class ItemComponent extends React.Component<Props, State> {
     }
   };
 
-  public onAddStorageClick = async () => {
-    const stashName = prompt('Enter new storage name');
-    if (!stashName) {
-      return;
-    }
-    const {
-      batch: { batchId },
-      userId,
-    } = this.props;
+  public onAddStorageClick = async (name: string) => {
+    this.setState({ addStashModal: false });
 
-    await this.props.addStashAsync(userId, batchId, stashName);
+    const { batch: { batchId }, userId } = this.props;
+
+    await this.props.addStashAsync(userId, batchId, name);
   };
 
   public onDeleteClick = async () => {
-    const { batchNo, name } = this.props.batch;
-    confirm(
-      `Are you sure that Batch no.${batchNo} - ${name} should be deleted?`
-    );
+    this.setState({ deleteBatchModal: false });
+
     if (!this.props.batch.batchId) {
       return;
     }
@@ -144,41 +137,25 @@ export class ItemComponent extends React.Component<Props, State> {
   };
 
   public onModeClick = () => {
-    // console.log(this, 'Mode');
+    console.log(this, 'Mode');
   };
 
   public onSaveClick = async () => {
-    const {
-      userId,
-      batch: { batchId },
-    } = this.props;
+    const { userId, batch: { batchId } } = this.props;
     await this.props.updateStashesAsync(userId, batchId, this.state.stashes);
     this.props.getSummaryFromStashes();
-    this.setState({
-      modified: false,
-    });
+    this.setState({ modified: false, });
   };
 
   public isInputSelected = () => (!!this.state.selected.name ? true : false);
 
   public onEditClick = () => {
     if (this.state.edited) {
-      const {
-        userId,
-        batch: { batchId },
-      } = this.props;
-      this.props.editBatchDataAsync(
-        userId,
-        batchId,
-        this.state.editedBatchData
-      );
-      this.setState({
-        edited: false,
-      });
+      const { userId, batch: { batchId } } = this.props;
+      this.props.editBatchDataAsync(userId, batchId, this.state.editedBatchData);
+      this.setState({ edited: false, });
     } else {
-      this.setState({
-        edited: true,
-      });
+      this.setState({ edited: true, });
     }
   };
 
@@ -197,53 +174,76 @@ export class ItemComponent extends React.Component<Props, State> {
     const { name, batchNo, bottledOn } = this.props.batch;
 
     return (
-      <div className="col-xl-6 col-xs-12">
-        <div className="itemOverlay">
-          <div className={this.state.modified ? 'item  modified' : 'item'}>
-            {this.state.edited ? (
-              <EmptyHeaderComponent
-                name={this.state.editedBatchData.name}
-                batchNo={this.state.editedBatchData.batchNo}
-                bottledOn={this.state.editedBatchData.bottledOn}
-                onInputChange={this.onInputChange}
-              />
-            ) : (
-                <HeaderComponent
-                  name={name}
-                  batchNo={batchNo}
-                  bottledOn={dayjs(bottledOn).toDate()}
+      <>
+        <div className="col-xl-6 col-xs-12">
+          <div className="itemOverlay">
+            <div className={this.state.modified ? 'item  modified' : 'item'}>
+              {this.state.edited ? (
+                <EmptyHeaderComponent
+                  name={this.state.editedBatchData.name}
+                  batchNo={this.state.editedBatchData.batchNo}
+                  bottledOn={this.state.editedBatchData.bottledOn}
+                  onInputChange={this.onInputChange}
                 />
-              )}
-            <section className="content row">
-              <OverallQuantityComponent stashes={this.props.stashes} />
-              <StashesComponent
-                stashes={this.props.stashes}
-                onQuantityChange={this.onQuantityChange}
-                onQuantitySelection={this.onQuantitySelection}
-                onStashDelete={this.onStashDelete}
+              ) : (
+                  <HeaderComponent
+                    name={name}
+                    batchNo={batchNo}
+                    bottledOn={dayjs(bottledOn).toDate()}
+                  />
+                )}
+              <section className="content row">
+                <OverallQuantityComponent stashes={this.props.stashes} />
+                <StashesComponent
+                  stashes={this.props.stashes}
+                  onQuantityChange={this.onQuantityChange}
+                  onQuantitySelection={this.onQuantitySelection}
+                  onStashDelete={this.onStashDelete}
+                />
+                <ButtonsComponent
+                  increase={INCREMENT_BUTTONS}
+                  decrease={DECREMENT_BUTTONS}
+                  onQuantityChangeButton={this.onQuantityChangeButton}
+                />
+              </section>
+              <OptionsComponent
+                buttons={['Edit', 'Save', 'Delete', 'Mode', 'Add Storage']}
+                functions={{
+                  Edit: this.onEditClick,
+                  Save: this.onSaveClick,
+                  Delete: () => this.setState({ deleteBatchModal: true }),
+                  Mode: this.onModeClick,
+                  AddStorage: () => this.setState({ addStashModal: true }),
+                }}
+                active={{
+                  Save: !this.state.modified,
+                }}
               />
-              <ButtonsComponent
-                increase={INCREMENT_BUTTONS}
-                decrease={DECREMENT_BUTTONS}
-                onQuantityChangeButton={this.onQuantityChangeButton}
-              />
-            </section>
-            <OptionsComponent
-              buttons={['Edit', 'Save', 'Delete', 'Mode', 'Add Storage']}
-              functions={{
-                Edit: this.onEditClick,
-                Save: this.onSaveClick,
-                Delete: this.onDeleteClick,
-                Mode: this.onModeClick,
-                AddStorage: this.onAddStorageClick,
-              }}
-              active={{
-                Save: !this.state.modified,
-              }}
-            />
+            </div>
           </div>
         </div>
-      </div>
+
+        {
+          this.state.deleteBatchModal
+            ? <ConfirmModalWindow
+              title={"Delete Batch"}
+              body={`Are you sure you want to delete batch no. ${this.props.batch.batchNo} - ${this.props.batch.name} and all associated stashes?`}
+              onConfirm={() => this.onDeleteClick()}
+              onCancel={() => this.setState({ deleteBatchModal: false })}
+            ></ConfirmModalWindow>
+            : null
+        }
+        {
+          this.state.addStashModal
+            ? <InputModalWindow
+              title={"Add new Stash"}
+              body={`Please enter new stash name:`}
+              onConfirm={(value: string) => this.onAddStorageClick(value)}
+              onCancel={() => this.setState({ addStashModal: false })}
+            ></InputModalWindow>
+            : null
+        }
+      </>
     );
   }
 

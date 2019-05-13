@@ -1,10 +1,15 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 
 import { QuantityStorage } from '../../../../../types/storage.types';
+import { ConfirmModalWindow } from '../../../../Common/Modals/ConfirmModalWindow';
 
-export class StashesItemComponent extends React.Component<QuantityStorage, {}> {
+type Props = QuantityStorage;
 
-  public onQuantitySelection = (e: React.MouseEvent<HTMLInputElement>, name: string, stashKey: number) => {
+export function StashesItemComponent(props: Props) {
+
+  const [modal, setModal] = useState(false);
+
+  const onQuantitySelection = (e: React.MouseEvent<HTMLInputElement>, name: string, stashKey: number) => {
     const input = e.target as HTMLInputElement;
     const node = input && input.parentElement && input.parentElement.parentElement as HTMLInputElement;
     const elements: HTMLCollectionOf<Element> | null = node && node.getElementsByClassName('quantity__input');
@@ -16,25 +21,26 @@ export class StashesItemComponent extends React.Component<QuantityStorage, {}> {
     }
 
     input.classList.add('selected');
-    this.props.onQuantitySelection(e, name, stashKey);
+    props.onQuantitySelection(e, name, stashKey);
   };
 
-  public onQuantityChange = (name: string, stashKey: number, e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.onQuantityChange(name, stashKey, e.target as HTMLInputElement);
+  const onQuantityChange = (name: string, stashKey: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    props.onQuantityChange(name, stashKey, e.target as HTMLInputElement);
   };
 
-  public removeStash = () => {
-    this.props.onStashDelete(this.props.stash.userId, this.props.stash.stashId);
+  const removeStash = () => {
+    setModal(false);
+    props.onStashDelete(props.stash.userId, props.stash.stashId);
   }
 
-  public render() {
-    return (
+  return (
+    <>
       <div className="row quantity__row">
         <div className="col-4 quantity__caption">
-          <span>{this.props.stash.name}</span>
+          <span>{props.stash.name}</span>
         </div>
-        {Object.values(this.props.stash.items).map((item, index) => {
-          const name = Object.keys(this.props.stash.items)[index];
+        {Object.values(props.stash.items).map((item, index) => {
+          const name = Object.keys(props.stash.items)[index];
 
           return (
             <input
@@ -44,10 +50,10 @@ export class StashesItemComponent extends React.Component<QuantityStorage, {}> {
               name={name}
               value={item ? item : 0}
               onClick={(e: React.MouseEvent<HTMLInputElement>) =>
-                this.onQuantitySelection(e, name, this.props.stashKey)
+                onQuantitySelection(e, name, props.stashKey)
               }
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                this.onQuantityChange(name, this.props.stashKey, e)
+                onQuantityChange(name, props.stashKey, e)
               }
             />
           );
@@ -55,10 +61,21 @@ export class StashesItemComponent extends React.Component<QuantityStorage, {}> {
         <div className="button-wrapper">
           <button className="remove-button"
             type="button"
-            onClick={() => this.removeStash()}
+            onClick={() => setModal(true)}
           >&#10007;</button>
         </div>
       </div>
-    );
-  }
+
+      {
+        modal
+          ? <ConfirmModalWindow
+            title={"Delete Stash"}
+            body={`Are you sure you want to delete stash?`}
+            onConfirm={() => removeStash()}
+            onCancel={() => setModal(false)}
+          ></ConfirmModalWindow>
+          : null
+      }
+    </>
+  );
 }
