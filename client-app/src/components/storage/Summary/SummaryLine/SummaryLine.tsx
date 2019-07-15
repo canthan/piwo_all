@@ -13,7 +13,7 @@ export class StorageSummaryLineComponent extends React.Component<Props> {
 			<div className="container summary">
 				<ul className="col-12 summary__list justify-content-around">
 					<li className="col-1">{this.props.summary.name}</li>
-					<li className="col-1">{this.props.summary.litres}</li>
+					<li className="col-1">{this.props.summary.litres.toFixed(2)}</li>
 					<li className="col-1">{this.props.summary.crates.overall}</li>
 					<li className="col-1">{this.props.summary.crates.empty}</li>
 					<li className="col-1">{this.props.summary.crates.full}</li>

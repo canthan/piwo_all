@@ -1,38 +1,33 @@
 import {
-	Stash,
-	StashSummary,
-	GrouppedStash,
+  Stash,
+  StashSummary,
+  GrouppedStash,
 } from '../../../types/storage.types';
 import { CommonStorageService } from '../common.service';
 import { initialStashSummary, HALF_LITER } from '../../../types/storage.constants';
 
 
 export class SummaryService {
-	public static createSummary(stashes: Stash[]): StashSummary[] {
-		const grouppedStashes = [...this.groupStashes(stashes)];
-		const stashSummary: StashSummary[] = this.composeSummary(grouppedStashes);
+  public static createSummary(stashes: Stash[]): StashSummary[] {
+    const grouppedStashes = [...this.groupStashes(stashes)];
+    const stashSummary: StashSummary[] = this.composeSummary(grouppedStashes);
 
-		return stashSummary;
-	}
+    return stashSummary;
+  }
 
-	private static composeSummary(
-		grouppedStashes: GrouppedStash[],
-		stashSummary: StashSummary[] = []
-	) {
-		grouppedStashes.forEach(grouppedStash => {
-			const summary: StashSummary = this.createSummaryForStash(grouppedStash);
-			summary.bottles.small = this.getSmallBottles(grouppedStash);
-			summary.litres = this.getLiters(grouppedStash);
+  private static composeSummary(grouppedStashes: GrouppedStash[], stashSummary: StashSummary[] = []) {
+    grouppedStashes.forEach(grouppedStash => {
+      const summary: StashSummary = this.createSummaryForStash(grouppedStash);
+      summary.bottles.small = this.getSmallBottles(grouppedStash);
+      summary.litres = this.getLiters(grouppedStash);
 
-			stashSummary.push(summary);
-		});
+      stashSummary.push(summary);
+    });
 
-		return stashSummary;
-	}
+    return stashSummary;
+  }
 
-	private static createSummaryForStash(
-		grouppedStash: GrouppedStash
-	): StashSummary {
+  private static createSummaryForStash(grouppedStash: GrouppedStash): StashSummary {
     return {
       ...initialStashSummary,
       name: grouppedStash.name,
@@ -41,63 +36,53 @@ export class SummaryService {
         halfLiter: grouppedStash.items.b050,
       },
     }
-		// return new StashSummary(grouppedStash.name, grouppedStash.items.b050);
-	}
+  }
 
-	private static getLiters(grouppedStash: GrouppedStash): number {
-		let litres = 0;
-		for (const [key, value] of Object.entries(grouppedStash.items)) {
-			litres += CommonStorageService.decodeBottleVolume(key) * value;
-		}
+  private static getLiters(grouppedStash: GrouppedStash): number {
+    return Object.entries(grouppedStash.items).reduce((acc, item) => {
+      return acc + CommonStorageService.decodeBottleVolume(item[0]) * item[1];
+    }, 0);
+  }
 
-		return litres;
-	}
+  private static getSmallBottles(grouppedStash: GrouppedStash): number {
+    return Object.entries(grouppedStash.items).filter(
+      item => CommonStorageService.decodeBottleVolume(item[0]) < HALF_LITER
+    ).reduce((acc, item) => {
+      return acc + item[1];
+    }, 0);
+  }
 
-	private static getSmallBottles(grouppedStash: GrouppedStash): number {
-		let bottlesSmall = 0;
-		for (const [key, value] of Object.entries(grouppedStash.items)) {
-			if (CommonStorageService.decodeBottleVolume(key) < HALF_LITER) {
-				bottlesSmall += value;
-			}
-		}
+  private static groupStashes(stashes: Stash[]): GrouppedStash[] {
+    const grouppedStashes: GrouppedStash[] = [];
+    stashes.forEach(stash => {
+      stash.name = stash.name.toUpperCase();
+      grouppedStashes.find(groupped => stash.name === groupped.name)
+        ? this.addBottles(grouppedStashes, stash)
+        : this.createNewGroup(grouppedStashes, stash);
+    });
 
-		return bottlesSmall;
-	}
+    return grouppedStashes;
+  }
 
-	private static groupStashes(stashes: Stash[]): GrouppedStash[] {
-		const grouppedStashes: GrouppedStash[] = [];
-		stashes.forEach(stash => {
-			grouppedStashes.find(groupped => stash.name === groupped.name)
-				? this.addBottles(grouppedStashes, stash)
-				: this.createNewGroup(grouppedStashes, stash);
-		});
+  private static addBottles(grouppedStashes: GrouppedStash[], stash: Stash) {
+    const grouppedStash = grouppedStashes.find(groupped => groupped.name === stash.name);
 
-		return grouppedStashes;
-	}
+    if (!grouppedStash) {
+      return;
+    }
+    Object.keys(stash.items).forEach(item => {
+      const quantity = Object.keys(grouppedStash.items).find(
+        grouppedItem => grouppedItem === item
+      );
+      if (!quantity) return;
+      grouppedStash.items[quantity] += stash.items[quantity];
+    });
+  }
 
-	private static addBottles(grouppedStashes: GrouppedStash[], stash: Stash) {
-		const grouppedStash = grouppedStashes.find(
-			groupped => groupped.name === stash.name
-		);
-		if (!grouppedStash) {
-			return;
-		}
-		Object.keys(stash.items).forEach(item => {
-			const quantity = Object.keys(grouppedStash.items).find(
-				grouppedItem => grouppedItem === item
-			);
-			if (!quantity) return;
-			grouppedStash.items[quantity] += stash.items[quantity];
-		});
-	}
-
-	private static createNewGroup(
-		grouppedStashes: GrouppedStash[],
-		stash: Stash
-	) {
-		const { name, items } = stash;
-		grouppedStashes.push({ name, items: { ...items }, cratesTotal: 0 });
-	}
+  private static createNewGroup(grouppedStashes: GrouppedStash[], stash: Stash) {
+    const { name, items } = stash;
+    grouppedStashes.push({ name, items: { ...items }, cratesTotal: 0 });
+  }
 }
 
 export default SummaryService;

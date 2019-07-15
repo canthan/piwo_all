@@ -19,6 +19,7 @@ import { addStashAsync, updateStashesAsync, deleteStashAsync } from '../../../ac
 import { AsyncResult } from '../../../types/common.types';
 import { ConfirmModalWindow } from '../../Common/Modals/ConfirmModalWindow';
 import { InputModalWindow } from '../../Common/Modals/InputModalWindow';
+import { INCREMENT_BUTTONS, DECREMENT_BUTTONS, OptionsButtons } from '../../../constants/app.constants';
 
 interface OwnProps {
   batch: Batch;
@@ -43,10 +44,6 @@ interface MappedStashActions {
   ): AsyncResult;
   deleteStashAsync(userId: string, stashId: string): AsyncResult;
 }
-// tslint:disable-next-line no-magic-numbers
-const INCREMENT_BUTTONS = [1, 3, 5];
-// tslint:disable-next-line no-magic-numbers
-const DECREMENT_BUTTONS = [-1, -3, -5];
 
 type Props = MappedBatchActions & MappedStashActions & OwnProps;
 
@@ -212,7 +209,7 @@ export class ItemComponent extends React.Component<Props, State> {
                 />
               </section>
               <OptionsComponent
-                buttons={['Edit', 'Save', 'Delete', 'Mode', 'Add Storage']}
+                buttons={Object.values(OptionsButtons)}
                 functions={{
                   Edit: this.onEditClick,
                   Save: this.onSaveClick,
