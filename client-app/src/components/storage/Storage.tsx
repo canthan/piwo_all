@@ -9,7 +9,7 @@ import StorageSummaryComponent from './Summary/Summary';
 import { OverallAppState } from '../../reducers/initialState';
 import { Stash, Batch } from '../../types/storage.types';
 
-import './storage.scss';
+import './Storage.scss';
 import { getSummaryFromStashes } from '../../actions/summary.actions';
 // tslint:disable no-any
 

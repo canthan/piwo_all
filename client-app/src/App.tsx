@@ -1,37 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Router, Route } from 'react-router-dom';
 
-import StorageComponent from './components/storage/storage';
+import StorageComponent from './components/storage/Storage';
 import { OverallAppState } from './reducers/initialState';
 import { getUserDataAsync } from './actions/app.actions';
 import { AsyncResult } from './types/common.types';
 
 import './App.scss';
+// import { Login } from './components/Login/Login';
 
 interface Props {
-  userId: string;
+  // userId: string;
   getUserDataAsync(userId: string): AsyncResult;
 }
 
-export class App extends React.Component<Props> {
-  public componentDidMount(): void {
-    const userId = '1';
-    this.getUserDataAsync(userId);
-  }
+interface State {
+  userId: string;
+}
 
-  public getUserDataAsync = (userId: string): AsyncResult =>
-    this.props.getUserDataAsync(userId);
+export function App(props: Props) {
 
-  public render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Storage app</h1>
-        </header>
-        <StorageComponent userId={this.props.userId} />
-      </div>
-    );
-  }
+  const [userId, setUserId] = useState('1');
+  useEffect(() => {
+    getUserDataAsync(userId);
+  })
+
+  const getUserDataAsync = (userId: string): AsyncResult => props.getUserDataAsync(userId);
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1 className="App-title">Storage app</h1>
+      </header>
+      {/* <Router>
+        <Route path='/' exact component={Login}/>
+        <Route path='/storage' exact component={StorageComponent}/>
+        <StorageComponent userId={userId} />
+
+      </Router> */}
+
+      <StorageComponent userId={userId} />
+
+    </div>
+  );
 }
 
 const mapStateToProps = (state: OverallAppState) => ({
@@ -39,7 +51,7 @@ const mapStateToProps = (state: OverallAppState) => ({
 });
 
 const actions = {
-	getUserDataAsync,
+  getUserDataAsync,
 };
 
 export default connect(
