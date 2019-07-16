@@ -70,7 +70,7 @@ export function StashesItemComponent(props: Props) {
         modal
           ? <ConfirmModalWindow
             title={"Delete Stash"}
-            body={`Are you sure you want to delete stash?`}
+            body={`Are you sure you want to delete stash ${props.stash.name}?`}
             onConfirm={() => removeStash()}
             onCancel={() => setModal(false)}
           ></ConfirmModalWindow>

@@ -76,9 +76,11 @@ export class ItemComponent extends React.Component<Props, State> {
     addStashModal: false,
   };
 
-  public onQuantityChange = (type: number, stashKey: number, target: HTMLInputElement, amount = 0) => {
+  public onQuantityChange = (type: number, stashKey: number, target: HTMLInputElement | null, amount = 0) => {
     const newState: { stashes: Stash[] } = this.state;
-    newState.stashes[stashKey].items[type] = Number(target.value) + amount;
+    if (target) {
+      newState.stashes[stashKey].items[type] = +target.value + amount;
+    }
     this.setState({
       ...newState,
       modified: true,
@@ -100,7 +102,7 @@ export class ItemComponent extends React.Component<Props, State> {
   };
 
   public onQuantityChangeButton = (quantity: number) => {
-    if (!this.state.selected) {
+    if (!this.state.selected.name) {
       return;
     }
     const { name = 0, stashKey = 0, target } = this.state.selected;
@@ -172,57 +174,53 @@ export class ItemComponent extends React.Component<Props, State> {
 
     return (
       <>
-        <div className="col-xl-6 col-xs-12">
-          <div className="itemOverlay">
-            <div className={this.state.modified ? 'item  modified' : 'item'}>
-              {this.state.edited ? (
-                <EmptyHeaderComponent
-                  name={this.state.editedBatchData.name}
-                  batchNo={this.state.editedBatchData.batchNo}
-                  bottledOn={this.state.editedBatchData.bottledOn}
-                  onInputChange={this.onInputChange}
-                />
-              ) : (
-                  <HeaderComponent
-                    name={name}
-                    batchNo={batchNo}
-                    bottledOn={dayjs(bottledOn).toDate()}
-                  />
-                )}
-              <section className="content row">
-                <OverallQuantityComponent stashes={this.props.stashes} />
-                <StashesComponent
-                  stashes={this.props.stashes}
-                  onQuantityChange={this.onQuantityChange}
-                  onQuantitySelection={this.onQuantitySelection}
-                  onStashDelete={this.onStashDelete}
-                />
-                <ButtonsComponent
-                  increase={{
-                    values: INCREMENT_BUTTONS,
-                    onQuantityChangeButton: this.onQuantityChangeButton,
-                  }}
-                  decrease={{
-                    values: DECREMENT_BUTTONS,
-                    onQuantityChangeButton: this.onQuantityChangeButton,
-                  }}
-                />
-              </section>
-              <OptionsComponent
-                buttons={Object.values(OptionsButtons)}
-                functions={{
-                  Edit: this.onEditClick,
-                  Save: this.onSaveClick,
-                  Delete: () => this.setState({ deleteBatchModal: true }),
-                  Mode: this.onModeClick,
-                  AddStorage: () => this.setState({ addStashModal: true }),
-                }}
-                active={{
-                  Save: !this.state.modified,
-                }}
+        <div className={this.state.modified ? 'modified' : ''}>
+          {this.state.edited ? (
+            <EmptyHeaderComponent
+              name={this.state.editedBatchData.name}
+              batchNo={this.state.editedBatchData.batchNo}
+              bottledOn={this.state.editedBatchData.bottledOn}
+              onInputChange={this.onInputChange}
+            />
+          ) : (
+              <HeaderComponent
+                name={name}
+                batchNo={batchNo}
+                bottledOn={dayjs(bottledOn).toDate()}
               />
-            </div>
-          </div>
+            )}
+          <section className="content row">
+            <OverallQuantityComponent stashes={this.props.stashes} />
+            <StashesComponent
+              stashes={this.props.stashes}
+              onQuantityChange={this.onQuantityChange}
+              onQuantitySelection={this.onQuantitySelection}
+              onStashDelete={this.onStashDelete}
+            />
+            <ButtonsComponent
+              increase={{
+                values: INCREMENT_BUTTONS,
+                onQuantityChangeButton: this.onQuantityChangeButton,
+              }}
+              decrease={{
+                values: DECREMENT_BUTTONS,
+                onQuantityChangeButton: this.onQuantityChangeButton,
+              }}
+            />
+          </section>
+          <OptionsComponent
+            buttons={Object.values(OptionsButtons)}
+            functions={{
+              Edit: this.onEditClick,
+              Save: this.onSaveClick,
+              Delete: () => this.setState({ deleteBatchModal: true }),
+              Mode: this.onModeClick,
+              AddStorage: () => this.setState({ addStashModal: true }),
+            }}
+            active={{
+              Save: !this.state.modified,
+            }}
+          />
         </div>
 
         {
