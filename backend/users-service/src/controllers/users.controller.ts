@@ -1,62 +1,126 @@
 import { Context } from 'koa';
 import { getLogger } from 'log4js';
+import * as bcrypt from 'bcryptjs';
+
+import { NotFoundException } from '../common/exceptions/not-found.exception';
+import { UnauthorizedException } from '../common/exceptions/unauthorized.exception';
+import config, { AppConfig } from '../common/utils/config.loader';
+import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
 
 import { UsersService } from './../services/user.service';
+import { removePassword, mapUserOutDTO } from '../services/mapper.service';
+
 import { AnyFunction } from '../types/types';
-import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
+import { ErrorText } from '../constants/messeges';
 
 const logger = getLogger();
 
 export class UsersController {
 
-    public getUserById = async (
-        ctx: Context,
-        next: AnyFunction
-    ): Promise<void> => {
-        try {
-            const id = ctx.params.userId;
-            const user = await UsersService.getUserById(id);
-            logger.info(`Got ${user.username} user`);
+  public getUserById = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const id = ctx.params.userId;
+      const user = await UsersService.getUserById(id);
+      logger.info(`Got ${user.username} user`);
 
-            ctx.body = {
-                status: HTTP_STATUS.OK,
-                data: user,
-            };
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: user,
+      };
 
-        } catch (error) {
-            ctx.throw(ctx.status, error);
-        }
+    } catch (error) {
+      ctx.throw(ctx.status, error);
     }
+  }
 
-    public getUsers = async (
-        ctx: Context,
-        next: AnyFunction
-    ): Promise<void> => {
-        try {
-            const users = await UsersService.getUsers();
-            logger.info(`Got ${users.length} users`);
+  public login = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const email = ctx.request.body.email;
+      const password = ctx.request.body.password;
 
-            ctx.body = {
-                status: HTTP_STATUS.OK,
-                data: users,
-            };
+      const user = await UsersService.getUserByEmail(email);
+      if (!user) {
+        throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
+      }
 
-        } catch (error) {
-            ctx.throw(ctx.status, error);
-        }
+      if (user && await bcrypt.compare(password, user.password)) {
+        ctx.body = {
+          status: HTTP_STATUS.OK,
+          data: removePassword(mapUserOutDTO(user)),
+        };
+      } else {
+        throw new UnauthorizedException(ErrorText.WRONG_PASSWORD);
+      }
+    } catch (error) {
+      ctx.throw(ctx.status, error);
     }
+  }
 
-    public getTest = async (ctx: Context, next: AnyFunction): Promise<void> => {
-		try {
-            logger.info(`Test users`);            
-            logger.info(ctx);
+  public register = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const email = ctx.request.body.email;
+      const password = ctx.request.body.password;
 
-			ctx.body = {
-				status: HTTP_STATUS.OK,
-				data: 'hello, users!',
-			};
-		} catch (error) {
-			ctx.throw(ctx.status, error);
-		}
-	};
+      const user = await UsersService.getUserByEmail(email);
+      if (user) {
+        throw new NotFoundException(ErrorText.USER_EXIST);
+      }
+      
+      const hashedPassword = await bcrypt.hash(password, config.get(AppConfig.BCRYPT_ROUNDS));
+      const registeredUser = await UsersService.registerUser(email, hashedPassword);
+
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: {
+          email: registeredUser.email,
+          userId: registeredUser.userId,
+          registrationDate: registeredUser.registrationDate,
+        },
+      };
+
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  }
+
+  public getUsers = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const users = await UsersService.getUsers();
+      logger.info(`Got ${users.length} users`);
+
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: users,
+      };
+
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  }
+
+  public getTest = async (ctx: Context, next: AnyFunction): Promise<void> => {
+    try {
+      logger.info(`Test users`);
+      logger.info(ctx);
+
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: 'hello, users!',
+      };
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  };
 }

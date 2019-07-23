@@ -8,12 +8,12 @@ export type UserModel = Document & User;
 
 export const UserSchema = new Schema({
     userId: { type: String, default: uuid.v4 },
-    username: { type: String, required: true },
-    firstname: { type: String, required: true },
-    surname: { type: String, required: true },
+    username: { type: String, required: false },
+    firstname: { type: String, required: false },
+    surname: { type: String, required: false },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    registrationDate: Date,
+    registrationDate: { type: Date, default: new Date() },
 });
 
 UserSchema.plugin(timestamps);

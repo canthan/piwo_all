@@ -7,9 +7,6 @@ import config, { AppConfig } from './common/utils/config.loader';
 import configureLoggers from './common/utils/logger-config';
 
 import { IndexRouter } from './routes/index.router';
-// import { BatchesRouter } from './routes/batches.router';
-// import { StashesRouter } from './routes/stashes.router';
-// import { CombinedDataRouter } from './routes/combined-data.router';
 import { UsersRouter } from './routes/users.router';
 import {
     errorEmitter,
@@ -17,7 +14,6 @@ import {
 } from './common/middlewares/error-handler.middleware';
 import mongoConnector from './common/utils/mongo.connector';
 import { CombinedDataRouter } from './routes/combined-data.router';
-
 
 export async function bootstrap(): Promise<Koa> {
     config.load();
@@ -34,14 +30,12 @@ export async function bootstrap(): Promise<Koa> {
     app.use(cors());
 
     const router = new Router();
-    // BatchesRouter.init(router, '/batches');
-    // StashesRouter.init(router, '/stashes');
+
     UsersRouter.init(router, '/users');
     CombinedDataRouter.init(router, '/combined');
     IndexRouter.init(router);
 
     app.use(router.routes());
-
 
     return app;
 }

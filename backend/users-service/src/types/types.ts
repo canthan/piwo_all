@@ -1,73 +1,60 @@
-// tslint:disable max-classes-per-file
-// tslint:disable no-any
-
 export type AnyFunction = (...args: unknown[]) => unknown;
 export type AsyncFunction = (...args: unknown[]) => Promise<unknown>;
 
-export class Batch {
-  public batchId?: number;
-  public userId: number;
-  public batchNo?: string;
-  public name: string;
-  public bottledOn: string;
-  public quantityLitres: number;
-  public quantityBottles: number;
-  public quantityCrates: number;
-  public stashes?: Stash[];
-
-  constructor(
-    userId = 0,
-    bottledOn = '',
-    name = '',
-    litres = 0,
-    bottles = 0,
-    crates = 0
-  ) {
-    this.userId = userId;
-    this.name = name;
-    this.bottledOn = bottledOn;
-    this.quantityLitres = litres;
-    this.quantityBottles = bottles;
-    this.quantityCrates = crates;
-  }
+export interface BatchOutDTO {
+	userId: string;
+	batchNo: string;
+	name: string;
+	bottledOn: Date;
+	quantityLitres: number;
+	quantityBottles: number;
+	quantityCrates: number;
 }
 
-export class Stash {
-  public stashId: number;
-  public batchId: number;
-  public name: string;
-  public items: Bottles;
-  [key: string]: number | string | Bottles;
-  constructor(name: string, batchId: number) {
-    this.stashId = 0;
-    this.items = new Bottles();
-    this.batchId = batchId;
-    this.name = name;
-  }
+export interface BatchWithStashes extends Batch {
+  stashes: Stash[];
 }
 
-export interface User {
+export interface Batch extends BatchOutDTO {
+  batchId: string;
+}
+
+export interface StashOutDTO {
+  name: string;
+  items: Bottles;
+  batchId: string;
+  userId: string;
+}
+
+export interface Stash extends StashOutDTO {
+  stashId: string;
+}
+
+export interface Bottles {
+  b050: number;
+  b040: number;
+  b033: number;
+  [size: string]: number;
+}
+
+export interface UserOutDTO {
   email: string;
-  firstname: string;
   password: string;
   registrationDate: string;
-  surname: string;
-  userId: number;
-  username: string;
+  firstname?: string;
+  surname?: string;
+  username?: string;
 }
+
+export interface User extends UserOutDTO {
+  userId: number;
+}
+
+export type UserNoPassword = Omit<User, 'password'>;
 
 export interface UserData extends User {
   batches: Batch[];
   stashes: Stash[];
-}
-
-export class Bottles {
-  constructor(b033 = 0, b040 = 0, b050 = 0) {
-    this.b033 = b033;
-    this.b040 = b040;
-    this.b050 = b050;
-  }
-  [bottleSize: string]: number | string | Bottles;
 }
 
 export interface DeletedRecords {

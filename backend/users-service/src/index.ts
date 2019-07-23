@@ -12,7 +12,7 @@ bootstrap()
 			nconf.get(AppConfig.LISTENING_PORT),
 			async (): Promise<void> =>
 				defaultLogger.info(
-					`Server is listening on port ${config.get(AppConfig.LISTENING_PORT)}`
+          `Server is listening on port ${config.get(AppConfig.LISTENING_PORT)}`
 				)
 		);
 	})
