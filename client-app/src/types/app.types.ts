@@ -12,12 +12,12 @@ export type State = Partial<{ app: AppState } & { batches: BatchesState } & { st
 
 export interface User {
 	email: string;
-	firstname: string;
+	userId: string;
 	password: string;
 	registrationDate: string;
-	surname: string;
-	userId: string;
-	username: string;
+	firstname?: string;
+	surname?: string;
+	username?: string;
 }
 
 export interface UserData extends User {
