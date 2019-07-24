@@ -7,8 +7,10 @@ import { UnauthorizedException } from '../common/exceptions/unauthorized.excepti
 import config, { AppConfig } from '../common/utils/config.loader';
 import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
 
+import { TokenService } from './../services/token.service';
 import { UsersService } from './../services/user.service';
 import { removePassword, mapUserOutDTO } from '../services/mapper.service';
+import { generateJwt } from '../services/token.utils';
 
 import { AnyFunction } from '../types/types';
 import { ErrorText } from '../constants/messeges';
@@ -50,9 +52,18 @@ export class UsersController {
       }
 
       if (user && await bcrypt.compare(password, user.password)) {
+
+        const refreshToken = await TokenService.getTokenByUserId(user.userId);
+        const token = generateJwt(user.id);
+
+        // to be changed to handle tokens correctly
         ctx.body = {
           status: HTTP_STATUS.OK,
-          data: removePassword(mapUserOutDTO(user)),
+          data: { 
+            ...removePassword(mapUserOutDTO(user)),
+            refreshToken,
+            token,
+          },
         };
       } else {
         throw new UnauthorizedException(ErrorText.WRONG_PASSWORD);
@@ -77,10 +88,14 @@ export class UsersController {
       
       const hashedPassword = await bcrypt.hash(password, config.get(AppConfig.BCRYPT_ROUNDS));
       const registeredUser = await UsersService.registerUser(email, hashedPassword);
+      const tokens: [string, string] = await TokenService.createToken(registeredUser.userId);
 
+      // to be changed to handle tokens correctly
       ctx.body = {
         status: HTTP_STATUS.OK,
         data: {
+          token: tokens[0],
+          refreshToken: tokens[1],
           email: registeredUser.email,
           userId: registeredUser.userId,
           registrationDate: registeredUser.registrationDate,

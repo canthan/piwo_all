@@ -8,5 +8,6 @@
   "LISTENING_PORT": 3000,
   "SERVICE_NAME": "users-service",
   "ENV_MODE": "DEV",
-  "BCRYPT_ROUNDS": 10
+  "BCRYPT_ROUNDS": 10,
+  "JWT_SECRET": "JWT_SECRET"
 }

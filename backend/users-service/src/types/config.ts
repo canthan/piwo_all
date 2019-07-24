@@ -4,4 +4,13 @@ export enum AppConfig {
 	ENV_MODE = 'ENV_MODE',
   SERVICE_NAME = 'SERVICE_NAME',
   BCRYPT_ROUNDS = 'BCRYPT_ROUNDS',
+  JWT_SECRET = 'JWT_SECRET',
+}
+
+const MS_IN_SECOND = 1000;
+const SECONDS_IN_MIN = 60;
+const TOKEN_EXPIRY_MIN = 30;
+
+export const CONFIG = {
+  tokenExpiration: MS_IN_SECOND * SECONDS_IN_MIN * TOKEN_EXPIRY_MIN,
 }

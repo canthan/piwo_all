@@ -1,6 +1,7 @@
 import { StashModel } from '../models/stashes.model';
 import { UserModel } from '../models/user.model';
-import { Stash, User, UserNoPassword } from '../types/types';
+import { Stash, User, UserNoPassword, Token } from '../types/types';
+import { TokenModel } from '../models/token.model';
 
 export const mapStashOutDTO = (stashModel: StashModel): Stash => {
   const { name, batchId, stashId, userId, items } = stashModel;
@@ -25,6 +26,17 @@ export const mapUserOutDTO = (userModel: UserModel): User => {
     firstname,
     surname,
     username,
+  }
+}
+
+export const mapTokenOutDTO = (tokenModel: TokenModel): Token => {
+  const { userId, token, creationDate, expirationDate } = tokenModel;
+
+  return {
+    userId, 
+    token, 
+    creationDate, 
+    expirationDate,
   }
 }
 

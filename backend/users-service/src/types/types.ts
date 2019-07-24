@@ -47,7 +47,7 @@ export interface UserOutDTO {
 }
 
 export interface User extends UserOutDTO {
-  userId: number;
+  userId: string;
 }
 
 export type UserNoPassword = Omit<User, 'password'>;
@@ -60,4 +60,11 @@ export interface UserData extends User {
 export interface DeletedRecords {
   batches: Batch[];
   stashes: Stash[];
+}
+
+export interface Token {
+  userId: string;
+  token: string;
+  expirationDate: Date;
+  creationDate: Date;
 }
