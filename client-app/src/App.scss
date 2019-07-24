@@ -1,4 +1,8 @@
+@import './styles/colors.scss';
+
 .App {
+  background-color: $background-primary;
+  min-height: 100vh;
   text-align: center;
   font-size:14px;
 }

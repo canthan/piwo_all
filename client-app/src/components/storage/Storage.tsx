@@ -7,11 +7,13 @@ import EmptyItemComponent from './EmptyItem/EmptyItem';
 import StorageSummaryComponent from './Summary/Summary';
 
 import { OverallAppState } from '../../reducers/initialState';
+import { getSummaryFromStashes } from '../../actions/summary.actions';
+import { getUserDataAsync } from '../../actions/app.actions';
+
 import { Stash, Batch } from '../../types/storage.types';
+import { AsyncResult } from '../../types/common.types';
 
 import './Storage.scss';
-import { getSummaryFromStashes } from '../../actions/summary.actions';
-// tslint:disable no-any
 
 const ItemComponent = React.lazy(() => import('./StorageItem/StorageItem'));
 
@@ -23,13 +25,18 @@ interface MappedProps {
 
 interface MappedActions {
   getSummaryFromStashes(stashes: Stash[]): AnyAction;
+  getUserDataAsync(userId: string): AsyncResult;
 }
 
 type Props = MappedActions & MappedProps;
 
 export class StorageComponent extends React.Component<Props> {
-  public getSummaryFromStashes = () =>
-    this.props.getSummaryFromStashes(this.props.stashes);
+  public getSummaryFromStashes = () => this.props.getSummaryFromStashes(this.props.stashes);
+  public getUserDataAsync = (userId: string): AsyncResult => this.props.getUserDataAsync(userId);
+
+  componentDidMount() {
+    this.getUserDataAsync(this.props.userId);
+  }
 
   public renderItem(batch: Batch, index: number) {
     const stashes = this.props.stashes.filter(
@@ -42,7 +49,6 @@ export class StorageComponent extends React.Component<Props> {
           batch={batch}
           key={index}
           stashes={stashes}
-          // userId={this.props.userId}
           getSummaryFromStashes={this.getSummaryFromStashes}
         />} />
       </React.Suspense>
@@ -70,12 +76,14 @@ export class StorageComponent extends React.Component<Props> {
 }
 
 const mapStateToProps = (state: OverallAppState) => ({
+  userId: state.app.user.userId,
   batches: state.batches.batches,
   stashes: state.stashes.stashes,
 });
 
 const actions = {
   getSummaryFromStashes,
+  getUserDataAsync,
 };
 
 export default connect(

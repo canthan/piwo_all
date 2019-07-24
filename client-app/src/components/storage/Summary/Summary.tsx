@@ -12,7 +12,7 @@ interface Props {
 
 export function StorageSummaryComponent(props: Props) {
   return (
-    <>
+    <div className="summary">
       <StorageSummaryHeaderComponent />
       {props.summary.map(stashSummary => (
         <StorageSummaryLineComponent
@@ -20,7 +20,7 @@ export function StorageSummaryComponent(props: Props) {
           key={stashSummary.name}
         />
       ))}
-    </>
+    </div>
   );
 }
 

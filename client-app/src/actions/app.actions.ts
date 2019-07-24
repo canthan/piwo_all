@@ -73,13 +73,13 @@ export const loginFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
   type: LOGIN_FAILURE,
 });
 
-export const loginAsync = (email: string, password: string): AsyncAction => async (
+export const loginAsync = (email: string, password: string, register = false): AsyncAction => async (
   dispatch
 ) => {
   dispatch(loginRequest());
   try {
     const response: AxiosResponse<Response<UserData>> = await Axios.post(
-      `${CONFIG.USERS_API}/${Endpoints.login}`,
+      `${CONFIG.USERS_API}/${register ? Endpoints.register : Endpoints.login}`,
       { email, password }
     );
     const userData = response.data.data;
