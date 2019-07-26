@@ -10,6 +10,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from './../constants/app.action.types';
 import { getSummaryFromStashes } from './summary.actions';
 import { getStashesFromUserData } from './stashes.actions';
@@ -87,5 +90,34 @@ export const loginAsync = (email: string, password: string, register = false): A
     return dispatch(loginSuccess(userData));
   } catch (error) {
     return dispatch(loginFailure(error));
+  }
+};
+
+export const logoutRequest = () => ({
+  type: LOGOUT_REQUEST,
+});
+
+export const logoutSuccess = (): ReduxAction<AppState> => ({
+  type: LOGOUT_SUCCESS,
+});
+
+export const logoutFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
+  payload: error,
+  type: LOGOUT_FAILURE,
+});
+
+export const logoutAsync = (email: string): AsyncAction => async (
+  dispatch
+) => {
+  dispatch(logoutRequest());
+  try {
+    const response: AxiosResponse<Response<UserData>> = await Axios.post(
+      `${CONFIG.USERS_API}/${Endpoints.logout}`,
+      { email }
+    );
+
+    return dispatch(logoutSuccess());
+  } catch (error) {
+    return dispatch(logoutFailure(error));
   }
 };

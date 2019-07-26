@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouterProps } from 'react-router';
 import { connect } from 'react-redux';
-import { Formik, Form, Field, ErrorMessage, FormikBag } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import { ErrorText } from '../Common/ErrorText/ErrorText';
 import { LoginSchema } from '../../constants/schemas';
@@ -11,6 +11,7 @@ import { AsyncResult } from '../../types/common.types';
 import { LOGIN_SUCCESS } from '../../constants/app.action.types';
 
 import './Login.scss';
+import { Routes } from '../../constants/routes';
 
 interface MappedActions {
   loginAsync(email: string, password: string, register: boolean): AsyncResult;
@@ -35,7 +36,7 @@ export function Login(props: Props) {
     await loginAsync(values.email, values.password, values.register)
       .then(response => {
         if (response && response.type === LOGIN_SUCCESS) {
-          props.history.push('/storage');
+          props.history.push(Routes.storage);
         }
       })
       .catch(error => console.error(error))
