@@ -59,7 +59,7 @@ export class UsersController {
         // to be changed to handle tokens correctly
         ctx.body = {
           status: HTTP_STATUS.OK,
-          data: { 
+          data: {
             ...removePassword(mapUserOutDTO(user)),
             refreshToken,
             token,
@@ -68,6 +68,29 @@ export class UsersController {
       } else {
         throw new UnauthorizedException(ErrorText.WRONG_PASSWORD);
       }
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  }
+
+  public logout = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const email = ctx.request.body.email;
+
+      const user = await UsersService.getUserByEmail(email);
+      if (!user) {
+        throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
+      }
+
+      // to add token management
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: {},
+      }
+
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
@@ -85,7 +108,7 @@ export class UsersController {
       if (user) {
         throw new NotFoundException(ErrorText.USER_EXIST);
       }
-      
+
       const hashedPassword = await bcrypt.hash(password, config.get(AppConfig.BCRYPT_ROUNDS));
       const registeredUser = await UsersService.registerUser(email, hashedPassword);
       const tokens: [string, string] = await TokenService.createToken(registeredUser.userId);
