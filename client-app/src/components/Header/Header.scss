@@ -1,0 +1,19 @@
+@import '../../styles/colors.scss';
+
+.header {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  background-color: $background-dark;
+  padding: 10px;
+  color: white;
+  
+  &__title {
+    font-size: 1.5em;    
+  }
+  
+  &__user {
+    display: flex;
+    flex-direction: row;
+  }
+}

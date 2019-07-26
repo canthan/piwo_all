@@ -33,7 +33,7 @@ type Props = MappedActions & MappedProps;
 export class StorageComponent extends React.Component<Props> {
   public getSummaryFromStashes = () => this.props.getSummaryFromStashes(this.props.stashes);
   public getUserDataAsync = (userId: string): AsyncResult => this.props.getUserDataAsync(userId);
-
+  
   componentDidMount() {
     this.getUserDataAsync(this.props.userId);
   }

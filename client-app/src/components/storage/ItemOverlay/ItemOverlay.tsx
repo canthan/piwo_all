@@ -2,9 +2,7 @@ import * as React from 'react';
 
 import './ItemOverlay.scss';
 
-interface Props {
-  children?: any;
-}
+type Props = Partial<JSX.ElementChildrenAttribute>;
 
 export function ItemOverlay(props: Props) {
   return (

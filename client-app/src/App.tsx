@@ -5,30 +5,23 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import ProtectedRoute from './components/Common/ProtectedRoute/ProtectedRoute';
 import { NotFound } from './components/Common/NotFound/NotFound';
 import StorageComponent from './components/storage/Storage';
+import Login from './components/Login/Login';
+import Header from './components/Header/Header';
+
 import { OverallAppState } from './reducers/initialState';
 
 import './App.scss';
-import Login from './components/Login/Login';
+import { UserProfile } from './components/UserProfile/UserProfile';
 
-interface Props {
-
-}
-
-interface State {
-  userId: string;
-}
-
-export function App(props: Props) {
-
+export function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">Storage app</h1>
-      </header>
+    <div className="app">
       <Router>
+        <Route path='/' component={Header} />
         <Switch>
           <Route path='/' exact component={Login} />
           <ProtectedRoute path='/storage' exact component={StorageComponent} />
+          <ProtectedRoute path='/profile' exact component={UserProfile} />
           <Route component={NotFound} />
         </Switch>
       </Router>

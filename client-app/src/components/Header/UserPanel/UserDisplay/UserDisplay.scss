@@ -1,0 +1,22 @@
+@import '../../../../styles/colors.scss';
+@import '../../../../styles/common.constants.scss';
+
+.user-display {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: $font-size-bigger;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $background-grey;
+  }
+
+  &__icon {
+    font-size: $font-size-biggest;
+    margin-left: 5px;
+  }
+}
