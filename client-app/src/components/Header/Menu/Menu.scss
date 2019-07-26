@@ -1,0 +1,10 @@
+@import '../../../styles/common.constants.scss';
+
+.menu{
+  display: flex;
+  justify-content: flex-start;
+
+  &__icon {
+    font-size: $font-size-biggest;
+  }
+}
