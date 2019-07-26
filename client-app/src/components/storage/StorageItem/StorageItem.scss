@@ -8,7 +8,6 @@
   display: flex;
 
   > * {
-    background-color: rgba(255, 255, 255, 0.2);
     background-clip: content-box;
     margin-bottom: 5px;
   }
@@ -68,7 +67,7 @@
     }
 
     &__row:nth-of-type(even)  {
-        background-color: rgba(231, 236, 230, 1);
+        background-color: $row-distinction;
      } 
 
     .button-wrapper {

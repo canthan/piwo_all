@@ -1,7 +1,13 @@
 @import '../../../styles/colors.scss';
 
 .summary {
-  background-color: $White;
+  background-color: $background-secondary;
+  padding-top: 6px;
+
+  &__line:nth-of-type(even) {
+    background-color: $row-distinction;
+  }
+
   &__list {
     list-style: none;
     display: flex;
@@ -13,8 +19,4 @@
       text-transform: capitalize;
     }  
   }
-}
-
-.summary:nth-of-type(even) {
-  background-color: $FrenchGrey;
 }
