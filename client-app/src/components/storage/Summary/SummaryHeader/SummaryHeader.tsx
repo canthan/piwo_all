@@ -6,7 +6,7 @@ import '../Summary.scss';
 
 function StorageSummaryHeaderComponent() {
   return (
-    <div className='container summary'>
+    <div className='container summary__line'>
       <ul className='col-3 col-md-12 summary__list justify-content-around'>
         {Object.values(SummaryHeaders).map(header => {
           return <li className='col-12 col-md-1' key={header}>{header}</li>;

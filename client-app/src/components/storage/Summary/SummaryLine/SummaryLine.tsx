@@ -10,7 +10,7 @@ interface Props {
 export class StorageSummaryLineComponent extends React.Component<Props> {
 	public render() {
 		return (
-			<div className="container summary">
+			<div className="container summary__line">
 				<ul className="col-12 summary__list justify-content-around">
 					<li className="col-1">{this.props.summary.name}</li>
 					<li className="col-1">{this.props.summary.litres.toFixed(2)}</li>
