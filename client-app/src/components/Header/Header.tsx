@@ -9,9 +9,10 @@ import { OverallAppState } from '../../reducers/initialState';
 import { logoutAsync } from '../../actions/app.actions';
 
 import { AsyncResult } from '../../types/common.types';
+import { Routes } from '../../constants/routes';
+import { getHeaderTitle } from '../../constants/text.constants';
 
 import './Header.scss';
-import { Routes } from '../../constants/routes';
 
 interface MappedProps {
   loggedIn: boolean;
@@ -40,7 +41,7 @@ export function Header(props: Props) {
         {props.loggedIn ? <Menu /> : null}
       </div>
       <div className="header__title col-6">
-        <h2>Storage app</h2>
+        <h2>{getHeaderTitle(props.history.location.pathname)}</h2>
       </div>
       <div className="header__user col-3">
         {props.loggedIn ? <UserToggle onClick={(e) => navigate(e)} /> : null}

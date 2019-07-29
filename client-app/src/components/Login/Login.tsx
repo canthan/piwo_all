@@ -66,45 +66,45 @@ export function Login(props: Props) {
             onSubmit={handleSubmit}
           >
             {({ isSubmitting, setFieldValue, handleSubmit, errors }) => (
-                <Form>
-                  <div className="form-group common__form">
-                    <label className="common__form__label">Email</label>
-                    <Field
-                      type="email"
-                      className={`form-control common__form__input ${errors.email ? 'common__form__input--invalid' : ''} `}
-                      name="email"
-                      placeholder="Email address" />
-                    <ErrorMessage name="email" render={msg => ErrorText({ message: msg })} />
-                  </div>
-                  <div className="form-group common__form">
-                    <label className="common__form__label">Password</label>
-                    <Field
-                      type="password"
-                      className={`form-control common__form__input ${errors.password ? 'common__form__input--invalid' : ''}`}
-                      name="password"
-                      placeholder="Password" />
-                    <ErrorMessage name="password" render={msg => ErrorText({ message: msg })} />
-                  </div>
-                  <div className="form-group login__buttons">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting || !!Object.entries(errors).length}
-                      className="btn btn-primary col-7">
-                      Log in
+              <Form>
+                <div className="form-group common__form">
+                  <label className="common__form__label">Email</label>
+                  <Field
+                    type="email"
+                    className={`form-control common__form__input ${errors.email ? 'common__form__input--invalid' : ''} `}
+                    name="email"
+                    placeholder="Email address" />
+                  <ErrorMessage name="email" render={msg => ErrorText({ message: msg })} />
+                </div>
+                <div className="form-group common__form">
+                  <label className="common__form__label">Password</label>
+                  <Field
+                    type="password"
+                    className={`form-control common__form__input ${errors.password ? 'common__form__input--invalid' : ''}`}
+                    name="password"
+                    placeholder="Password" />
+                  <ErrorMessage name="password" render={msg => ErrorText({ message: msg })} />
+                </div>
+                <div className="form-group login__buttons">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || !!Object.entries(errors).length}
+                    className="btn btn-primary col-7">
+                    Log in
                     </button>
-                    <button
-                      type="submit"
-                      onClick={() => {
-                        setFieldValue('register', true);
-                        handleSubmit();
-                      }}
-                      disabled={isSubmitting || !!Object.entries(errors).length}
-                      className="btn btn-outline-secondary col-4">
-                      Sign in
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      setFieldValue('register', true);
+                      handleSubmit();
+                    }}
+                    disabled={isSubmitting || !!Object.entries(errors).length}
+                    className="btn btn-outline-secondary col-4">
+                    Sign in
                     </button>
-                  </div>
-                </Form>
-              )}
+                </div>
+              </Form>
+            )}
           </Formik>
         </div>
       </div>

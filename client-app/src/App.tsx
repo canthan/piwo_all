@@ -7,11 +7,11 @@ import { NotFound } from './components/Common/NotFound/NotFound';
 import StorageComponent from './components/storage/Storage';
 import Login from './components/Login/Login';
 import Header from './components/Header/Header';
+import { UserProfile } from './components/UserProfile/UserProfile';
 
 import { OverallAppState } from './reducers/initialState';
 
 import './App.scss';
-import { UserProfile } from './components/UserProfile/UserProfile';
 
 export function App() {
   return (
