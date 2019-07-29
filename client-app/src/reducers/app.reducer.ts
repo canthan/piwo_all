@@ -12,6 +12,7 @@ import {
 import { createConditionalSliceReducer } from './utils';
 import { AppState, User } from '../types/app.types';
 import overallAppState from './initialState';
+import { AxiosError } from 'axios';
 
 export const initialAppState: { app: AppState } = {
 	app: {
@@ -24,7 +25,8 @@ export const initialAppState: { app: AppState } = {
       // email: '',
       email: 'andrzej.globisz@gmail.com',
       registrationDate: '',
-		},
+    },
+    error: null,
 	},
 };
 
@@ -70,17 +72,17 @@ const appReducerMapping = () => ({
 			},
 		},
 	}),
-	[GET_USER_DATA_FAILURE]: (state: AppState, payload: unknown) => ({
+	[GET_USER_DATA_FAILURE]: (state: AppState, payload: AxiosError) => ({
 		...state,
-		...{ error: payload },
+		...{ error: payload.response && payload.response.data.message },
 	}),
-	[LOGIN_FAILURE]: (state: AppState, payload: unknown) => ({
+	[LOGIN_FAILURE]: (state: AppState, payload: AxiosError) => ({
 		...state,
-		...{ error: payload },
+		...{ error: payload.response && payload.response.data.message },
 	}),
-	[LOGOUT_FAILURE]: (state: AppState, payload: unknown) => ({
+	[LOGOUT_FAILURE]: (state: AppState, payload: AxiosError) => ({
 		...state,
-		...{ error: payload },
+		...{ error: payload.response && payload.response.data.message },
 	}),
 });
 

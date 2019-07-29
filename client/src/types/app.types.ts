@@ -15,7 +15,8 @@ export interface AppState {
 		email: string;
 	};
 	loaded: boolean;
-	loggedIn: boolean;
+  loggedIn: boolean;
+  error?: string;
 }
 
 export interface User {

@@ -5,7 +5,8 @@ import { Omit } from './common.types';
 export interface AppState {
 	user: Omit<User, 'password'>
 	loaded: boolean;
-	loggedIn: boolean;
+  loggedIn: boolean;
+  error: string | null;
 }
 
 export type State = Partial<{ app: AppState } & { batches: BatchesState } & { stashes: StashesState } & { summary: SummaryState }>;

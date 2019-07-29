@@ -30,6 +30,7 @@ export const getUserDataSuccess = (userData: UserData): ReduxAction<AppState> =>
     user: userData,
     loaded: true,
     loggedIn: true,
+    error: null,
   },
   type: GET_USER_DATA_SUCCESS,
 });
@@ -67,6 +68,7 @@ export const loginSuccess = (userData: UserData): ReduxAction<AppState> => ({
     user: userData,
     loaded: true,
     loggedIn: true,
+    error: null,
   },
   type: LOGIN_SUCCESS,
 });
@@ -89,6 +91,8 @@ export const loginAsync = (email: string, password: string, register = false): A
 
     return dispatch(loginSuccess(userData));
   } catch (error) {
+    console.log(error);
+    console.log(error.response);
     return dispatch(loginFailure(error));
   }
 };
