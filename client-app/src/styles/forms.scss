@@ -1,0 +1,19 @@
+@import './colors.scss';
+
+.common {
+  &__form {
+    justify-content: flex-start;
+  
+    &__label {
+      display: block;
+      padding-left: 8px;
+      text-align: left;
+    }
+
+    &__input {
+      &--invalid {
+        border-color: red!important;
+      }
+    }
+  }
+}
