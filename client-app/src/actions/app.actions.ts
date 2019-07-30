@@ -13,11 +13,14 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
+  EDIT_USER_DATA_REQUEST,
+  EDIT_USER_DATA_SUCCESS,
+  EDIT_USER_DATA_FAILURE,
 } from './../constants/app.action.types';
 import { getSummaryFromStashes } from './summary.actions';
 import { getStashesFromUserData } from './stashes.actions';
 import { getBatchesFromUserData } from './batches.actions';
-import { UserData, AppState } from './../types/app.types';
+import { UserData, AppState, User, UserProfileFields } from './../types/app.types';
 import { ReduxAction, Response, AsyncAction } from '../types/common.types';
 import { Endpoints } from '../constants/endpoint.constants';
 
@@ -91,8 +94,6 @@ export const loginAsync = (email: string, password: string, register = false): A
 
     return dispatch(loginSuccess(userData));
   } catch (error) {
-    console.log(error);
-    console.log(error.response);
     return dispatch(loginFailure(error));
   }
 };
@@ -123,5 +124,42 @@ export const logoutAsync = (email: string): AsyncAction => async (
     return dispatch(logoutSuccess());
   } catch (error) {
     return dispatch(logoutFailure(error));
+  }
+};
+
+
+export const editProfileRequest = () => ({
+  type: EDIT_USER_DATA_REQUEST,
+});
+
+export const editProfileSuccess = (userData: User): ReduxAction<AppState> => ({
+  payload: {
+    user: userData,
+    loaded: true,
+    loggedIn: true,
+    error: null,
+  },
+  type: EDIT_USER_DATA_SUCCESS,
+});
+
+export const editProfileFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
+  payload: error,
+  type: EDIT_USER_DATA_FAILURE,
+});
+
+export const editProfileAsync = (user: UserProfileFields): AsyncAction => async (
+  dispatch
+) => {
+  dispatch(editProfileRequest());
+  try {
+    const response: AxiosResponse<Response<UserData>> = await Axios.put(
+      `${CONFIG.USERS_API}/${Endpoints.editProfile}`,
+      { user}
+    );
+    const userData = response.data.data;
+
+    return dispatch(editProfileSuccess(userData));
+  } catch (error) {
+    return dispatch(editProfileFailure(error));
   }
 };

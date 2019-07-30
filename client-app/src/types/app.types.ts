@@ -15,11 +15,13 @@ export interface User {
 	email: string;
 	userId: string;
 	password: string;
-	registrationDate: string;
+	registrationDate?: string;
 	firstname?: string;
 	surname?: string;
 	username?: string;
 }
+
+export type UserProfileFields = Partial<User>
 
 export interface UserData extends User {
 	batches: Batch[];

@@ -8,6 +8,9 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_FAILURE,
   LOGOUT_SUCCESS,
+  EDIT_USER_DATA_REQUEST,
+  EDIT_USER_DATA_FAILURE,
+  EDIT_USER_DATA_SUCCESS,
 } from '../constants/app.action.types';
 import { createConditionalSliceReducer } from './utils';
 import { AppState, User } from '../types/app.types';
@@ -32,6 +35,7 @@ export const initialAppState: { app: AppState } = {
 
 const appReducerMapping = () => ({
 	[GET_USER_DATA_REQUEST]: (state: AppState) => ({ ...state }),
+	[EDIT_USER_DATA_REQUEST]: (state: AppState) => ({ ...state }),
 	[LOGIN_REQUEST]: (state: AppState) => ({ ...state }),
 	[LOGOUT_REQUEST]: (state: AppState) => ({ ...state }),
 	[GET_USER_DATA_SUCCESS]: (state: AppState, payload: { user: User; loaded: boolean; loggedIn: boolean }) => ({
@@ -55,7 +59,17 @@ const appReducerMapping = () => ({
 			loggedIn: payload.loggedIn,
 			user: {
 				userId: payload.user.userId,
-				username: payload.user.username,
+				firstname: payload.user.firstname,
+				surname: payload.user.surname,
+				email: payload.user.email,
+			},
+		},
+	}),
+	[EDIT_USER_DATA_SUCCESS]: (state: AppState, payload: { user: User }) => ({
+		...state,
+		...{
+			user: {
+				...state.user,
 				firstname: payload.user.firstname,
 				surname: payload.user.surname,
 				email: payload.user.email,
@@ -73,6 +87,10 @@ const appReducerMapping = () => ({
 		},
 	}),
 	[GET_USER_DATA_FAILURE]: (state: AppState, payload: AxiosError) => ({
+		...state,
+		...{ error: payload.response && payload.response.data.message },
+	}),
+	[EDIT_USER_DATA_FAILURE]: (state: AppState, payload: AxiosError) => ({
 		...state,
 		...{ error: payload.response && payload.response.data.message },
 	}),
