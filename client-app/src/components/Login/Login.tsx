@@ -8,7 +8,7 @@ import { ToastMessage } from '../Common/ToastMessage/ToastMessage';
 
 import { OverallAppState } from '../../reducers/initialState';
 import { loginAsync } from '../../actions/app.actions';
-import { LoginSchema } from '../../constants/schemas';
+import { LoginSchema, LoginFormValues, initialLoginFormValues } from '../../constants/schemas';
 import { Routes } from '../../constants/routes';
 
 import { AsyncResult } from '../../types/common.types';
@@ -24,11 +24,6 @@ interface MappedProps {
   error: string | null;
 }
 
-interface FormValues {
-  email: string,
-  password: string,
-  register: boolean,
-}
 interface FormSubmitting {
   setSubmitting: (isSubmitting: boolean) => void,
 }
@@ -38,7 +33,7 @@ type Props = MappedProps & MappedActions & RouterProps;
 export function Login(props: Props) {
   const loginAsync = (email: string, password: string, register: boolean): AsyncResult => props.loginAsync(email, password, register);
 
-  const handleSubmit = async (values: FormValues, { setSubmitting }: FormSubmitting) => {
+  const handleSubmit = async (values: LoginFormValues, { setSubmitting }: FormSubmitting) => {
     setSubmitting(true);
     await loginAsync(values.email, values.password, values.register)
       .then(response => {
@@ -60,8 +55,7 @@ export function Login(props: Props) {
       <div className="row justify-content-md-center">
         <div className="login col-4">
           <Formik
-            initialValues={{ email: '', password: '', register: false }}
-            // initialValues={{ email: 'andrzej.globisz@gmail.com', password: 'canthan12', register: false }}
+            initialValues={initialLoginFormValues}
             validationSchema={LoginSchema}
             onSubmit={handleSubmit}
           >
