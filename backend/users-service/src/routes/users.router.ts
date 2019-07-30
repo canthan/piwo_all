@@ -10,6 +10,7 @@ export class UsersRouter {
     router.get(path, usersController.getTest);
     router.get(`${path}/${Endpoints.all}`, usersController.getUsers);
     router.get(`${path}/:userId`, usersController.getUserById);
+    router.put(`${path}/${Endpoints.editProfile}`, usersController.editProfile);
     router.post(`${path}/${Endpoints.login}`, usersController.login);
     router.post(`${path}/${Endpoints.logout}`, usersController.logout);
     router.post(`${path}/${Endpoints.register}`, usersController.register);

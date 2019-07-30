@@ -73,6 +73,37 @@ export class UsersController {
     }
   }
 
+  public editProfile = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const { userId, email, firstname, surname } = ctx.request.body.user;
+
+      const user = await UsersService.getUserById(userId);
+      if (!user) {
+        throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
+      }
+
+      const editedUser = await UsersService.editUser({
+        ...user,
+        userId,
+        email,
+        firstname,
+        surname,
+      });
+
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: {
+          ...removePassword(editedUser),
+        },
+      }
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  }
+
   public logout = async (
     ctx: Context,
     next: AnyFunction
