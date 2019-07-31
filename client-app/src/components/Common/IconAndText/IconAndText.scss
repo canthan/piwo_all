@@ -1,0 +1,31 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/common.constants.scss';
+
+.icon-and-text {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 3px;
+  padding: 0 4px;
+  font-size: $font-size-bigger;
+  cursor: pointer;
+  width: fit-content;
+
+  &:hover {
+    background-color: $background-grey;
+  }
+
+  &--normal {
+    flex-direction: row-reverse;
+  }
+
+  &--reversed {
+    flex-direction: row;
+  }
+
+  &__icon {
+    font-size: $font-size-biggest;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}

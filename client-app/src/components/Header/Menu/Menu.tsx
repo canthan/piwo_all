@@ -1,16 +1,36 @@
 import React from 'react';
-
+import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBoxes } from '@fortawesome/free-solid-svg-icons'
 
-import './Menu.scss';
+import { CustomToggleWrapper } from '../../Common/CustomToggleWrapper/CustomToggleWrapper';
+import { IconAndText, defaultIconAndTextConfig } from '../../Common/IconAndText/IconAndText';
 
-export const Menu = () => {
+import { AnyFunction } from '../../../types/common.types';
+import { Routes } from '../../../constants/routes';
+
+interface OwnProps {
+  onClick: AnyFunction,
+}
+
+type Props = OwnProps;
+
+export const Menu = (props: Props) => {
   return (
-    <div className="menu">
-      <div className="menu__icon">
-        <FontAwesomeIcon icon={faBars} />
-      </div>
-    </div>
+    <Dropdown>
+      <Dropdown.Toggle as={CustomToggleWrapper} id="dropdown-user">
+        <IconAndText
+          onClick={() => { }}
+          text="Menu"
+          icon={faBars}
+          config={{
+            ...defaultIconAndTextConfig,
+          }}
+        />
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item onClick={() => props.onClick(Routes.storage)}><FontAwesomeIcon icon={faBoxes} /> Storage</Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   )
 }
