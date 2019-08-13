@@ -1,6 +1,9 @@
 import * as React from 'react';
-import './Header.scss';
+
 import { MILISEC_PER_DAY, MILISEC_PER_WEEK } from '../../../../types/storage.constants';
+import { getCurrentDate, dateInStandardFormat } from '../../../../utils/utils.service';
+
+import './Header.scss';
 
 export interface Props {
 	bottledOn: Date;
@@ -8,9 +11,8 @@ export interface Props {
 	name: string;
 }
 
-// tslint:disable function-name
-export function HeaderComponent(props: Props) {
-	const currentDate = new Date();
+export const HeaderComponent = (props: Props) => {
+	const currentDate = getCurrentDate();
 	const age = currentDate.getTime() - props.bottledOn.getTime();
 
 	return (
@@ -18,7 +20,7 @@ export function HeaderComponent(props: Props) {
 			<span className="col-3">#{props.batchNo}</span>
 			<span className="col-6">{props.name}</span>
 			<div className="col-3 heading__dates">
-				<span>bottled: {props.bottledOn.toLocaleDateString()}</span>
+				<span>bottled: {dateInStandardFormat(props.bottledOn)}</span>
 				<span>
 					{getDaysFromMiliseconds(age)} days ({getWeeksFromMiliseconds(age)}{' '}
 					weeks)

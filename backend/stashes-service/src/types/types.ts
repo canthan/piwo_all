@@ -3,7 +3,7 @@ export type AsyncFunction = (...args: unknown[]) => Promise<unknown>;
 
 export interface StashOutDTO {
   name: string;
-  items: Bottles;
+  items: Bottles[];
   batchId: string;
   userId: string;
 }
@@ -13,17 +13,24 @@ export interface Stash extends StashOutDTO {
 }
 
 export interface Bottles {
-  b050: number;
-  b040: number;
-  b033: number;
-  [size: string]: number;
+  volume: number,
+  amount: number,
 }
 
-export const initialBottles: Bottles = {
-  b033: 0,
-  b040: 0,
-  b050: 0,
-}
+export const initialBottles: Bottles[] = [
+  {
+    volume: 0.5,
+    amount: 0,
+  },
+  {
+    volume: 0.4,
+    amount: 0,
+  },
+  {
+    volume: 0.33,
+    amount: 0,
+  },
+]
 
 export const initialStash: StashOutDTO = {
   name: '',

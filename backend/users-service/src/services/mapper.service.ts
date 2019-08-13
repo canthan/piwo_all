@@ -16,12 +16,13 @@ export const mapStashOutDTO = (stashModel: StashModel): Stash => {
 }
 
 export const mapUserOutDTO = (userModel: UserModel): User => {
-  const { email, password, registrationDate, userId, firstname, surname, username } = userModel;
+  const { email, password, registrationDate, userId, firstname, surname, username, stashConfig } = userModel;
 
   return {
     email,
     password,
     registrationDate,
+    stashConfig,
     userId,
     firstname,
     surname,

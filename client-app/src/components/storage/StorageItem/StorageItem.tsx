@@ -19,7 +19,7 @@ import { addStashAsync, updateStashesAsync, deleteStashAsync } from '../../../ac
 import { AsyncResult } from '../../../types/common.types';
 import { ConfirmModalWindow } from '../../Common/Modals/ConfirmModalWindow';
 import { InputModalWindow } from '../../Common/Modals/InputModalWindow';
-import { INCREMENT_BUTTONS, DECREMENT_BUTTONS, OptionsButtons } from '../../../constants/app.constants';
+import { INCREMENT_BUTTONS, DECREMENT_BUTTONS, OptionsButtons, DEFAULT_DATE_FORMAT } from '../../../types/storage.constants';
 
 interface OwnProps {
   batch: Batch;
@@ -79,7 +79,7 @@ export class ItemComponent extends React.Component<Props, State> {
   public onQuantityChange = (type: number, stashKey: number, target: HTMLInputElement | null, amount = 0) => {
     const newState: { stashes: Stash[] } = this.state;
     if (target) {
-      newState.stashes[stashKey].items[type] = +target.value + amount;
+      newState.stashes[stashKey].items[type].amount = +target.value + amount;
     }
     this.setState({
       ...newState,
@@ -179,7 +179,7 @@ export class ItemComponent extends React.Component<Props, State> {
             <EmptyHeaderComponent
               name={this.state.editedBatchData.name}
               batchNo={this.state.editedBatchData.batchNo}
-              bottledOn={this.state.editedBatchData.bottledOn}
+              bottledOn={dayjs(this.state.editedBatchData.bottledOn).format(DEFAULT_DATE_FORMAT)}
               onInputChange={this.onInputChange}
             />
           ) : (

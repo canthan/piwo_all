@@ -18,21 +18,16 @@ import {
 import { CONFIG } from '../config/config';
 import { Batch, EmptyBatch, DeletedRecords } from '../types/storage.types';
 import { ReduxAction, AsyncAction, Response } from '../types/common.types';
-import { CommonStorageService } from './../components/storage/common.service';
 
 export const getBatchesDataRequest = (): ReduxAction<undefined> => ({
   type: GET_USER_STORAGE_REQUEST,
 });
 
-export const getBatchesDataSuccess = (data: Batch[]): ReduxAction<Batch[]> => {
-  const batches = CommonStorageService.formatDateForDisplay(data);
-  CommonStorageService.calculateQuantities(batches);
+export const getBatchesDataSuccess = (data: Batch[]): ReduxAction<Batch[]> => ({
+  payload: data,
+  type: GET_USER_STORAGE_SUCCESS,
+});
 
-  return {
-    payload: batches,
-    type: GET_USER_STORAGE_SUCCESS,
-  };
-};
 export const getBatchesDataFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
   payload: error,
   type: GET_USER_STORAGE_FAILURE,
@@ -42,14 +37,10 @@ export const addBatchRequest = (): ReduxAction<undefined> => ({
   type: ADD_BATCH_REQUEST,
 });
 
-export const addBatchSuccess = (batch: Batch): ReduxAction<Batch> => {
-  const newBatch = CommonStorageService.formatDateForDisplay([batch])[0];
-
-  return {
-    payload: newBatch,
-    type: ADD_BATCH_SUCCESS,
-  };
-};
+export const addBatchSuccess = (batch: Batch): ReduxAction<Batch> => ({
+  payload: batch,
+  type: ADD_BATCH_SUCCESS,
+});
 
 export const addBatchFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
   payload: error,
@@ -60,16 +51,10 @@ export const editBatchDataRequest = (): ReduxAction<undefined> => ({
   type: EDIT_BATCH_DATA_REQUEST,
 });
 
-export const editBatchDataSuccess = (editedBatch: Batch): ReduxAction<Batch> => {
-  const formattedBatch = CommonStorageService.formatDateForDisplay([
-    editedBatch,
-  ])[0];
-
-  return {
-    payload: formattedBatch,
-    type: EDIT_BATCH_DATA_SUCCESS,
-  };
-};
+export const editBatchDataSuccess = (editedBatch: Batch): ReduxAction<Batch> => ({
+  payload: editedBatch,
+  type: EDIT_BATCH_DATA_SUCCESS,
+});
 
 export const editBatchDataFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
   payload: error,
@@ -90,15 +75,10 @@ export const deleteBatchFailure = (error: AxiosError): ReduxAction<AxiosError> =
   type: DELETE_BATCH_FAILURE,
 });
 
-export const getBatchesFromUserData = (batches: Batch[]): ReduxAction<Batch[]> => {
-  const formattedBatches = CommonStorageService.formatDateForDisplay(batches);
-  formattedBatches.forEach(batch => delete batch.stashes);
-
-  return {
-    payload: batches,
-    type: GET_BATCHES_FROM_USER_DATA,
-  };
-};
+export const getBatchesFromUserData = (batches: Batch[]): ReduxAction<Batch[]> => ({
+  payload: batches,
+  type: GET_BATCHES_FROM_USER_DATA,
+});
 
 export const getBatchesDataAsync = (userId: string): AsyncAction => async (
   dispatch

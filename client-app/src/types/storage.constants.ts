@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { Bottles, StashSummary, EmptyBatch, BatchOutDTO, StashOutDTO } from './storage.types';
+import { Bottle, StashSummary, EmptyBatch, BatchOutDTO, StashOutDTO } from './storage.types';
 
 export const BOTTLES_IN_CRATE = 20;
 export const HALF_LITER = 0.5;
@@ -8,8 +8,6 @@ export const MILISEC_PER_DAY = 86400000;
 export const MILISEC_PER_WEEK = 604800000;
 
 export const VOLUME_DIVIDER = 100;
-export const BOTTLE_VOL_CODE = /^[b]\d{3}$/;
-export const BOTTLE_VOL = /^\d{3}$/;
 
 export const DEFAULT_DATE_FORMAT = "YYYY-MM-DD";
 
@@ -44,14 +42,35 @@ export const initialEmptyBatch: EmptyBatch = {
   batchNo: '1',
 }
 
-export const initialBottles: Bottles = {
-  b033: 0,
-  b040: 0,
-  b050: 0,
-}
+export const initialBottles: Bottle[] = [
+  {
+    volume: 0.5,
+    amount: 0,
+  },
+  {
+    volume: 0.4,
+    amount: 0,
+  },
+  {
+    volume: 0.33,
+    amount: 0,
+  },
+]
 
-export const initialStash: StashOutDTO = { 
+export const initialStash: StashOutDTO = {
   name: '',
   key: null,
   items: initialBottles,
 }
+
+export enum OptionsButtons {
+  Edit = 'Edit',
+  Save = 'Save',
+  Delete = 'Delete',
+  Mode = 'Mode',
+  AddStorage = 'Add Storage'
+}
+
+// tslint:disable-next-line no-magic-numbers
+export const INCREMENT_BUTTONS = [1, 3, 5];
+export const DECREMENT_BUTTONS = [-1, -3, -5];

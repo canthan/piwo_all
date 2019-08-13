@@ -1,3 +1,6 @@
+import { createConditionalSliceReducer } from './utils';
+import { getStashesFromBatch } from '../components/storage/common.service';
+
 import {
   GET_USER_STORAGE_REQUEST,
   GET_USER_STORAGE_SUCCESS,
@@ -13,10 +16,8 @@ import {
   DELETE_BATCH_FAILURE,
 } from './../constants/batches.actions.types';
 import { GET_BATCHES_FROM_USER_DATA } from './../constants/app.action.types';
-import { CommonStorageService } from '../components/storage/common.service';
 import { BatchesState, Batch } from './../types/storage.types';
 import { ReducerFunctionMap } from '../types/common.types';
-import { createConditionalSliceReducer } from './utils';
 
 export const initialBatchesState = {
   batches:
@@ -35,7 +36,7 @@ const batchesReducerMapping = (): ReducerFunctionMap => ({
     ...{ batches: [...state.batches, newBatch] },
   }),
   [EDIT_BATCH_DATA_SUCCESS]: (state: BatchesState, editedBatch: Batch) => {
-    editedBatch.stashes = CommonStorageService.getStashesFromBatch(
+    editedBatch.stashes = getStashesFromBatch(
       [...state.batches],
       editedBatch.batchId
     );

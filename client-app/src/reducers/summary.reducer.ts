@@ -1,12 +1,11 @@
+import { createConditionalSliceReducer } from './utils';
+
 import {
   GET_SUMMARY_FROM_STASHES,
 	CHANGE_SUMMARY_BOTTLES_AMOUNT,
 } from './../constants/summary.action.types';
-
 import { SummaryState } from './../types/storage.types';
 import { StashSummary } from '../types/storage.types';
-import { CommonStorageService } from '../components/storage/common.service';
-import { createConditionalSliceReducer } from './utils';
 
 const HALF_LITER = 0.5;
 export const initialSummaryState = {
@@ -19,14 +18,14 @@ const changeBottlesAmount = (
 	currentSummary: StashSummary[],
 	name: string,
 	amount: number,
-	bottleType: string
+	bottleVolume: number
 ) => {
 	const changedSummary: StashSummary[] = [...currentSummary];
 	const changedStash: StashSummary | undefined = changedSummary.find(
 		summary => summary.name === name
 	);
 	if (!!changedStash) {
-		CommonStorageService.decodeBottleVolume(bottleType) === HALF_LITER
+		bottleVolume === HALF_LITER
 			? (changedStash.bottles.halfLiter += amount)
 			: (changedStash.bottles.small += amount);
 	}
@@ -37,7 +36,7 @@ const changeBottlesAmount = (
 interface Temporary {
   name: string,
   amount: number,
-  bottleType: string,
+  volume: number,
 }
 const summaryReducerMapping = () => ({
 	[GET_SUMMARY_FROM_STASHES]: (state: SummaryState, summary: SummaryState) => ({
@@ -51,7 +50,7 @@ const summaryReducerMapping = () => ({
 				state.summary,
 				payload.name,
 				payload.amount,
-				payload.bottleType
+				payload.volume
 			),
 		},
 	}),

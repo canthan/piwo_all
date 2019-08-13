@@ -41,9 +41,15 @@ export interface UserOutDTO {
   email: string;
   password: string;
   registrationDate: string;
+  stashConfig: StashConfig[];
   firstname?: string;
   surname?: string;
   username?: string;
+}
+
+export interface StashConfig {
+  name: string;
+  cratesTotal: number;
 }
 
 export interface User extends UserOutDTO {
@@ -52,7 +58,7 @@ export interface User extends UserOutDTO {
 
 export type UserNoPassword = Omit<User, 'password'>;
 
-export interface UserData extends User {
+export interface UserData extends UserNoPassword {
   batches: Batch[];
   stashes: Stash[];
 }

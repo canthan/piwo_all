@@ -1,46 +1,37 @@
-import * as React from 'react';
-import { CommonStorageService } from '../../common.service';
+import React, { useState, useEffect }  from 'react';
+
+import { getHalfLiterBottleAmount, getSmallBottleAmount, getLitres } from '../../common.service';
+
 import { Stash } from '../../../../types/storage.types';
+import { BOTTLES_IN_CRATE } from '../../../../types/storage.constants';
 
 interface Props {
 	stashes: Stash[];
 }
 
-interface State {
-	litres: string;
-	crates: string;
-	bottles: string;
-}
+export const OverallQuantityComponent = (props: Props) => {
 
-export class OverallQuantityComponent extends React.Component<Props, State> {
-	public state = {
-		litres: '0.00',
-		crates: '0.00',
-		bottles: '0',
-	};
-	public componentWillReceiveProps(nextProps: Props) {
-		const {
-			litres,
-			crates,
-			bottles,
-		} = CommonStorageService.getOverallQuantities(nextProps.stashes);
-		this.setState({
-			litres,
-			crates,
-			bottles,
-		});
-	}
-	public render() {
-		const { litres, crates, bottles } = this.state;
+  const [litres, setLitres] = useState(0);
+  const [crates, setCrates] = useState(0);
+  const [bottles, setBottles] = useState('0');
+
+  useEffect(() => {
+    const halfLiterBottles = getHalfLiterBottleAmount(props.stashes);
+    const smallBottles = getSmallBottleAmount(props.stashes);
+
+    setLitres(getLitres(props.stashes));
+    setCrates(halfLiterBottles/BOTTLES_IN_CRATE);
+    setBottles(smallBottles ? `${halfLiterBottles} + ${smallBottles}` : `${halfLiterBottles}`);
+  })
 
 		return (
 			<div className="col-md-2 col-xs-12 overall">
 				<ul className="overall__list">
 					<li>
-						<span className="overall__list__number">{litres}</span> Litres
+						<span className="overall__list__number">{litres.toFixed(1)}</span> Litres
 					</li>
 					<li>
-						<span className="overall__list__number">{crates}</span> Crates
+						<span className="overall__list__number">{crates.toFixed(1)}</span> Crates
 					</li>
 					<li>
 						<span className="overall__list__number">{bottles}</span> Bottles
@@ -48,7 +39,6 @@ export class OverallQuantityComponent extends React.Component<Props, State> {
 				</ul>
 			</div>
 		);
-	}
 }
 
 export default OverallQuantityComponent;

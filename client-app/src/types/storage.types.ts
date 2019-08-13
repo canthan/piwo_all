@@ -24,6 +24,20 @@ export interface StashSummary {
   bottles: StashBottles
 }
 
+export const initialStashSummary: StashSummary = {
+  name: '',
+  crates: {
+    overall: 0,
+    full: 0,
+    empty: 0,
+  },
+  litres: 0,
+  bottles: {
+    halfLiter: 0,
+    small: 0,
+  }
+}
+
 export interface StashBottles {
   small: number;
   halfLiter: number;
@@ -53,7 +67,7 @@ export interface Batch extends BatchOutDTO {
 
 export interface StashOutDTO {
   name: string;
-  items: Bottles;
+  items: Bottle[];
   key?: number | null;
 }
 
@@ -71,7 +85,7 @@ export interface SelectedStash {
 
 export interface GrouppedStash {
   name: string;
-  items: Bottles;
+  items: Bottle[];
   cratesTotal: number;
 }
 
@@ -89,11 +103,9 @@ export interface QuantityStorage {
   onQuantitySelection: AnyFunction;
 }
 
-export interface Bottles {
-  b050: number;
-  b040: number;
-  b033: number;
-  [size: string]: number;
+export interface Bottle {
+  volume: number;
+  amount: number;
 }
 
 export interface ChangeCountButtons {

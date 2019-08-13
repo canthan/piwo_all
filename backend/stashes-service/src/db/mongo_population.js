@@ -18,7 +18,7 @@ const databases = [
         port: 27019,
         name: 'stashes',
         collection: 'stashes',
-        mock: require('./seeds/_stashes.json'),
+        mock: require('./seeds/stashes_mapped.json'),
     },
 ];
 

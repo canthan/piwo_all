@@ -3,14 +3,19 @@ import { connect } from 'react-redux';
 
 import StorageSummaryHeaderComponent from './SummaryHeader/SummaryHeader';
 import { StorageSummaryLineComponent } from './SummaryLine/SummaryLine';
-import { StashSummary } from '../../../types/storage.types';
+
 import { OverallAppState } from '../../../reducers/initialState';
+
+import { StashSummary } from '../../../types/storage.types';
+import { StashConfig } from '../../../types/app.types';
 
 interface Props {
   summary: StashSummary[];
+  stashConfig: StashConfig[];
 }
 
-export function StorageSummaryComponent(props: Props) {
+export const StorageSummaryComponent = (props: Props) => {
+
   return (
     <div className="summary">
       <StorageSummaryHeaderComponent />
@@ -24,8 +29,9 @@ export function StorageSummaryComponent(props: Props) {
   );
 }
 
-const mapStateToProps = (state: OverallAppState) => ({
-  summary: state.summary.summary,
+const mapStateToProps = ({ summary: { summary }, app: { user: { stashConfig = [] } } }: OverallAppState) => ({
+  summary,
+  stashConfig,
 });
 
 export default connect(mapStateToProps)(StorageSummaryComponent);

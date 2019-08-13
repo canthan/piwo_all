@@ -1,0 +1,962 @@
+[
+  {
+    "name": "Dom",
+    "batchId": "4",
+    "stashId": "1",
+    "userId": "2",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 5
+      },
+      {
+        "volume": 0.4,
+        "amount": 2
+      },
+      {
+        "volume": 0.33,
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "5",
+    "stashId": "2",
+    "userId": "2",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 25
+      },
+      {
+        "volume": 0.4,
+        "amount": 2
+      },
+      {
+        "volume": 0.33,
+        "amount": 1
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "14",
+    "stashId": "3",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 3
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "3",
+    "stashId": "4",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 3
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "18",
+    "stashId": "7",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 2
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "18",
+    "stashId": "8",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 10
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "6",
+    "stashId": "9",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": null
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "6",
+    "stashId": "10",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 2
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "7",
+    "stashId": "11",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 12
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "7",
+    "stashId": "12",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "4",
+    "stashId": "13",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "4",
+    "stashId": "14",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 5
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 13
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "5",
+    "stashId": "15",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 3
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 10
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "5",
+    "stashId": "16",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "17",
+    "stashId": "23",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 2
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "17",
+    "stashId": "24",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "16",
+    "stashId": "25",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 12
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "16",
+    "stashId": "26",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "15",
+    "stashId": "27",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 4
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "15",
+    "stashId": "28",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "8",
+    "stashId": "046c667b-6524-4f25-9978-19ba9eefac59",
+    "userId": "34",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "19",
+    "stashId": "37",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 33
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "19",
+    "stashId": "38",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 7
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 5
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "b89aff84-7ad5-4e10-b95c-01f98285baeb",
+    "stashId": "4a060969-9333-4396-970b-b05922cdc816",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 30
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "758ce6b6-8536-41c0-9ad2-f92483d6e7e5",
+    "stashId": "2c6c0017-c320-4732-9f4d-c754cf073a9b",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 24
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "758ce6b6-8536-41c0-9ad2-f92483d6e7e5",
+    "stashId": "d6cb78f8-7e86-4734-832f-e3955c98b753",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "56a25fe4-fab0-43cb-9d54-62ab98022404",
+    "stashId": "fc919513-7c74-4a24-a7bc-31671e0ecf87",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 16
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "56a25fe4-fab0-43cb-9d54-62ab98022404",
+    "stashId": "56f97d9e-d966-41b6-a540-412f6f0c76eb",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "53aa62cd-4693-44f4-89e9-4f5d5e424695",
+    "stashId": "bcae573b-fe4b-4764-a2f0-bce87df64be1",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 35
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Dom",
+    "batchId": "53aa62cd-4693-44f4-89e9-4f5d5e424695",
+    "stashId": "ffe448b8-2695-46d4-bd24-dc84dc5625a3",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 2
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "b89aff84-7ad5-4e10-b95c-01f98285baeb",
+    "stashId": "120de7fb-c586-45bb-8081-acddc5e4fa71",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "07c100e2-c34c-447c-8c30-1c844a5a8384",
+    "stashId": "c4ca1651-161f-4115-8a4e-6012f78f8e85",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 8
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "07c100e2-c34c-447c-8c30-1c844a5a8384",
+    "stashId": "12b44af7-65e0-491f-89c0-3e0e1db7ca46",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "8ea67e3f-dc44-4257-b74e-6d2dbb684d12",
+    "stashId": "6807e7e8-d2e1-40fb-951a-051ff9871178",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 5
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "a35b6d5d-b75b-436b-9c3f-9b951819e96a",
+    "stashId": "3e31ed8d-dc73-4181-adc1-7b37f37ad9ae",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 9
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "b3fa6b55-87a1-4d48-a33c-023ae7440c99",
+    "stashId": "90ac574f-a96c-449b-9076-b05f83ec19eb",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 8
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "2988cfb9-bb0e-42d4-a644-2056f561342b",
+    "stashId": "b05c434c-efb4-4eb2-9fd1-03814e70dcd8",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 9
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "2988cfb9-bb0e-42d4-a644-2056f561342b",
+    "stashId": "a365dc9d-14d2-46b5-9118-09aaabc97795",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "b0e9e365-5a00-48b9-b52c-f2b2ed88db0f",
+    "stashId": "f419e5a9-5222-41d7-8b6d-7c9c688a03b0",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 7
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "b0e9e365-5a00-48b9-b52c-f2b2ed88db0f",
+    "stashId": "17f4c868-fdd4-4dc3-bf38-5bb1e31b9cf2",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "74e18e74-0594-4425-b5d5-cf4299c3b215",
+    "stashId": "c408ccb5-04dd-45b6-a9bd-12b8400107f5",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "74e18e74-0594-4425-b5d5-cf4299c3b215",
+    "stashId": "8c9b83b2-02b0-4196-95e6-4a8a7b956f2b",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "23",
+    "stashId": "eda1d77c-5e35-45ad-8df1-02d9418ebfd1",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 1
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "98435e47-fdcc-4eeb-807a-e31c78cb5a40",
+    "stashId": "dc41fb8c-c51b-4541-94d7-a51514dace73",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 16
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "83c89deb-9f31-4f85-88ab-0aa09bcb0b16",
+    "stashId": "da561ef2-e5a5-4d07-b648-a440cddabfb4",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 0
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 30
+      }
+    ]
+  },
+  {
+    "name": "Piwnica",
+    "batchId": "1b327751-560c-436e-a533-3531af45a269",
+    "stashId": "176cb70b-593a-4d8f-8b09-f30868aaf7a1",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 2
+      },
+      {
+        "volume": 0.4,
+        "amount": 0
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  },
+  {
+    "name": "piwnica",
+    "batchId": "3b9e34d1-d3b8-4acc-a3d5-ca2e5f6503cf",
+    "stashId": "d3f26240-1f39-4b61-928b-214570561875",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 12
+      },
+      {
+        "volume": 0.4,
+        "amount": 2
+      },
+      {
+        "volume": 0.33,
+        "amount": 5
+      }
+    ]
+  },
+  {
+    "name": "dom",
+    "batchId": "3b9e34d1-d3b8-4acc-a3d5-ca2e5f6503cf",
+    "stashId": "ffc86442-339a-434c-9432-09490cd2f8d9",
+    "userId": "1",
+    "items": [
+      {
+        "volume": 0.5,
+        "amount": 15
+      },
+      {
+        "volume": 0.4,
+        "amount": 5
+      },
+      {
+        "volume": 0.33,
+        "amount": 0
+      }
+    ]
+  }
+]

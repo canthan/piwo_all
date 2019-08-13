@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { Stash } from '../../../../types/storage.types';
-import { AnyFunction } from '../../../../types/common.types';
 import { StashesHeaderComponent } from './StashesHeader/StashesHeader';
 import { StashesItemComponent } from './StashesItem/StashesItem';
+
+import { Stash } from '../../../../types/storage.types';
+import { AnyFunction } from '../../../../types/common.types';
 
 interface Props {
   stashes: Stash[];
@@ -16,9 +17,7 @@ export function StashesComponent(props: Props) {
 
   return (
     <div className={'col-md-6  col-xs-12 quantity'}>
-      {props.stashes.length > 0 && (
-        <StashesHeaderComponent {...props.stashes[0].items} />
-      )}
+      <StashesHeaderComponent bottles={props.stashes[0] ? props.stashes[0].items : []} />
       {props.stashes.map((stash, index) => (
         <StashesItemComponent
           key={index}

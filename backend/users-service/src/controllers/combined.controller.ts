@@ -2,9 +2,8 @@ import { Context } from 'koa';
 import { getLogger } from 'log4js';
 
 import { UsersService } from './../services/user.service';
-import { AnyFunction, User, UserData, Stash } from '../types/types';
+import { AnyFunction, UserData } from '../types/types';
 import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
-import { OutputService } from '../services/output.service';
 import { BatchesService } from '../services/batches.service';
 import { StashesService } from '../services/stashes.service';
 
@@ -44,12 +43,12 @@ export class CombinedController {
       const batches = await this.batchesService.getBatchesByUserId(id);
       const stashes = await this.stashesService.getStashesByUserId(id);
 
-      const { email, firstname, password, registrationDate, surname, userId, username } = user
+      const { email, firstname, registrationDate, surname, userId, username, stashConfig } = user
       const outputData: UserData = {
         email, 
         firstname, 
-        password, 
         registrationDate, 
+        stashConfig,
         surname, 
         userId, 
         username,
@@ -72,7 +71,7 @@ export class CombinedController {
     try {
       logger.info(`Test combined`);
       logger.info(ctx);
-
+      
       ctx.body = {
         status: HTTP_STATUS.OK,
         data: 'hello, combined!',

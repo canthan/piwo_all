@@ -15,7 +15,7 @@ export class StorageSummaryLineComponent extends React.Component<Props> {
 					<li className="col-1">{this.props.summary.name}</li>
 					<li className="col-1">{this.props.summary.litres.toFixed(2)}</li>
 					<li className="col-1">{this.props.summary.crates.overall}</li>
-					<li className="col-1">{this.props.summary.crates.empty}</li>
+					<li className="col-1">{this.props.summary.crates.empty.toFixed(2)}</li>
 					<li className="col-1">{this.props.summary.crates.full}</li>
 					<li className="col-1">{this.props.summary.bottles.halfLiter}</li>
 					<li className="col-1">{this.props.summary.bottles.small}</li>

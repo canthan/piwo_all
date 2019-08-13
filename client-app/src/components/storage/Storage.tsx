@@ -14,26 +14,33 @@ import { Stash, Batch } from '../../types/storage.types';
 import { AsyncResult } from '../../types/common.types';
 
 import './Storage.scss';
+// import Auth from '../Auth/auth';
+import { StashConfig } from '../../types/app.types';
 
 const ItemComponent = React.lazy(() => import('./StorageItem/StorageItem'));
 
 interface MappedProps {
   userId: string;
+  stashConfig: StashConfig[];
   batches: Batch[];
   stashes: Stash[];
 }
 
+interface OwnProps {
+  // auth: Auth;
+}
+
 interface MappedActions {
-  getSummaryFromStashes(stashes: Stash[]): AnyAction;
+  getSummaryFromStashes(stashes: Stash[], config: StashConfig[]): AnyAction;
   getUserDataAsync(userId: string): AsyncResult;
 }
 
-type Props = MappedActions & MappedProps;
+type Props = OwnProps & MappedActions & MappedProps;
 
 export class StorageComponent extends React.Component<Props> {
-  public getSummaryFromStashes = () => this.props.getSummaryFromStashes(this.props.stashes);
+  public getSummaryFromStashes = () => this.props.getSummaryFromStashes(this.props.stashes, this.props.stashConfig);
   public getUserDataAsync = (userId: string): AsyncResult => this.props.getUserDataAsync(userId);
-  
+
   componentDidMount() {
     this.getUserDataAsync(this.props.userId);
   }
@@ -75,10 +82,11 @@ export class StorageComponent extends React.Component<Props> {
   }
 }
 
-const mapStateToProps = (state: OverallAppState) => ({
-  userId: state.app.user.userId,
-  batches: state.batches.batches,
-  stashes: state.stashes.stashes,
+const mapStateToProps = ({ app, batches, stashes }: OverallAppState) => ({
+  userId: app.user.userId,
+  stashConfig: app.user.stashConfig,
+  batches: batches.batches,
+  stashes: stashes.stashes,
 });
 
 const actions = {

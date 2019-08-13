@@ -33,8 +33,8 @@ export class StashesController {
       const stashes = await StashesService.getAllStashes();
 
       logger.info(`Got ${stashes.length} stashes`);
-
-      ctx.body = {
+      
+        ctx.body = {
         status: HTTP_STATUS.OK,
         data: stashes,
       };

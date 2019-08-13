@@ -1,15 +1,18 @@
 import * as React from 'react';
 
-import { Bottles } from '../../../../../types/storage.types';
-import { UtilsService } from '../../../../../utils/utils.service';
+import { Bottle } from '../../../../../types/storage.types';
 
-export function StashesHeaderComponent(props: Bottles) {
+interface Props {
+  bottles: Bottle[];
+}
+
+export function StashesHeaderComponent(props: Props) {
   return (
     <div className="row">
       <div className="col-4" />
-      {Object.keys(props).map((item, index) => (
+      {props.bottles.map((item, index) => (
         <div className="col-2 quantity__volume" key={index}>
-          {UtilsService.decodeVolume(item)}
+          {item.volume}
         </div>
       ))}
     </div>

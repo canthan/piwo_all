@@ -1,5 +1,4 @@
-import { StashesState, SummaryState } from './../../../client/src/types/storage.types';
-import { Batch, Stash, BatchesState } from './storage.types';
+import { Batch, Stash, BatchesState, StashesState, SummaryState } from './storage.types';
 import { Omit } from './common.types';
 
 export interface AppState {
@@ -14,11 +13,17 @@ export type State = Partial<{ app: AppState } & { batches: BatchesState } & { st
 export interface User {
 	email: string;
 	userId: string;
-	password: string;
+  password: string;
+  stashConfig: StashConfig[];
 	registrationDate?: string;
 	firstname?: string;
 	surname?: string;
 	username?: string;
+}
+
+export interface StashConfig {
+  name: string;
+  cratesTotal: number;
 }
 
 export type UserProfileFields = Partial<User>

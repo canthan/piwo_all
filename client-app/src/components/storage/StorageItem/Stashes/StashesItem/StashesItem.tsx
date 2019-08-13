@@ -48,7 +48,7 @@ export function StashesItemComponent(props: Props) {
               key={index}
               type="text"
               name={name}
-              value={item ? item : 0}
+              value={item.amount ? item.amount : 0}
               onClick={(e: React.MouseEvent<HTMLInputElement>) =>
                 onQuantitySelection(e, name, props.stashKey)
               }
