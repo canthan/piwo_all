@@ -6,7 +6,7 @@ import { Endpoints } from '../constants/endpoints';
 export class UsersRouter {
   public static init(router: Router, path: string = '/') {
     const usersController: UsersController = new UsersController();
-    
+
     router.get(path, usersController.getTest);
     router.get(`${path}/${Endpoints.all}`, usersController.getUsers);
     router.get(`${path}/:userId`, usersController.getUserById);

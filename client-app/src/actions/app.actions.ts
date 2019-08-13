@@ -1,7 +1,9 @@
 import Axios, { AxiosResponse, AxiosError } from 'axios';
 import { AnyAction } from 'redux';
 
-import { UtilsService } from '../utils/utils.service';
+import http from '../utils/http.service';
+import { sortByNumber } from '../utils/utils.service';
+
 import { CONFIG } from './../config/config';
 import {
   GET_USER_DATA_REQUEST,
@@ -48,15 +50,15 @@ export const getUserDataAsync = (userId: string): AsyncAction => async (
 ) => {
   dispatch(getUserDataRequest());
   try {
-    const response: AxiosResponse<Response<UserData>> = await Axios.get(
-      `${CONFIG.COMBINED_DATA_API}/${userId}`
+    const response: AxiosResponse<Response<UserData>> = await http.get(
+      `${CONFIG.COMBINED_DATA_API}/${userId}`,
     );
     const userData = response.data.data;
     dispatch(getUserDataSuccess(userData));
-    dispatch(getBatchesFromUserData(UtilsService.sortByNumber(userData.batches, "batchNo")));
+    dispatch(getBatchesFromUserData(sortByNumber(userData.batches, "batchNo")));
     dispatch(getStashesFromUserData(userData.stashes));
 
-    return dispatch(getSummaryFromStashes(userData.stashes));
+    return dispatch(getSummaryFromStashes(userData.stashes, userData.stashConfig));
   } catch (error) {
     return dispatch(getUserDataFailure(error));
   }
@@ -88,7 +90,7 @@ export const loginAsync = (email: string, password: string, register = false): A
   try {
     const response: AxiosResponse<Response<UserData>> = await Axios.post(
       `${CONFIG.USERS_API}/${register ? Endpoints.register : Endpoints.login}`,
-      { email, password }
+      { email, password },
     );
     const userData = response.data.data;
 
@@ -154,7 +156,7 @@ export const editProfileAsync = (user: UserProfileFields): AsyncAction => async 
   try {
     const response: AxiosResponse<Response<UserData>> = await Axios.put(
       `${CONFIG.USERS_API}/${Endpoints.editProfile}`,
-      { user}
+      { user }
     );
     const userData = response.data.data;
 

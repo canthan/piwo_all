@@ -1,3 +1,5 @@
+import { Routes } from './routes';
+
 export enum ErrorMessages {
   emailRequired = 'Please enter email address',
   emailInvalid = 'Invalid email address',
@@ -15,11 +17,12 @@ export enum HeaderTitles {
 
 export const getHeaderTitle = (route: string): HeaderTitles => {
   switch (route) {
-    case '/':
+    case Routes.default:
+    case Routes.callback:
       return HeaderTitles.login;
-    case '/storage':
+    case Routes.storage:
       return HeaderTitles.storage;
-    case '/profile':
+    case Routes.profile:
       return HeaderTitles.userProfile;
     default:
       return HeaderTitles.notExist;

@@ -5,6 +5,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 import { ErrorText } from '../Common/ErrorText/ErrorText';
 import { ToastMessage } from '../Common/ToastMessage/ToastMessage';
+import Auth from '../Auth/auth';
 
 import { OverallAppState } from '../../reducers/initialState';
 import { loginAsync } from '../../actions/app.actions';
@@ -24,16 +25,21 @@ interface MappedProps {
   error: string | null;
 }
 
+interface OwnProps {
+  auth: Auth;
+}
+
 interface FormSubmitting {
   setSubmitting: (isSubmitting: boolean) => void,
 }
 
-type Props = MappedProps & MappedActions & RouterProps;
+type Props = OwnProps & MappedProps & MappedActions & RouterProps;
 
 export function Login(props: Props) {
   const loginAsync = (email: string, password: string, register: boolean): AsyncResult => props.loginAsync(email, password, register);
 
   const handleSubmit = async (values: LoginFormValues, { setSubmitting }: FormSubmitting) => {
+    // props.auth.login();
     setSubmitting(true);
     await loginAsync(values.email, values.password, values.register)
       .then(response => {
@@ -100,6 +106,8 @@ export function Login(props: Props) {
               </Form>
             )}
           </Formik>
+          {/* to be removed */}
+        {/* <button type="button" onClick={props.auth.login} className="btn btn-outline-success col-4">Sign in auth0</button> */}
         </div>
       </div>
     </div>

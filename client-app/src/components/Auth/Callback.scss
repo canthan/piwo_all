@@ -1,0 +1,11 @@
+.callback {
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .spinner-border {
+    width: 5rem;
+    height: 5rem;
+  }
+}

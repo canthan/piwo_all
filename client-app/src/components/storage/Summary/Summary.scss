@@ -3,9 +3,14 @@
 .summary {
   background-color: $background-secondary;
   padding-top: 6px;
+  padding-bottom: 1px;
+
+  &__line {
+    background-color: $row-distinction;
+  }
 
   &__line:nth-of-type(even) {
-    background-color: $row-distinction;
+    background-color: $row-distinction-secondary;
   }
 
   &__list {

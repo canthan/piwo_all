@@ -13,6 +13,8 @@ export enum AppConfig {
     ENV_MODE = 'ENV_MODE',
     SERVICE_NAME = 'SERVICE_NAME',
     BCRYPT_ROUNDS = 'BCRYPT_ROUNDS',
+    AUTH0_DOMAIN = 'AUTH0_DOMAIN',
+    AUTH0_AUDIENCE = 'AUTH0_AUDIENCE',
 }
 
 class Config {

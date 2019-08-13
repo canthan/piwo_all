@@ -13,6 +13,11 @@ import { Routes } from '../../constants/routes';
 import { getHeaderTitle } from '../../constants/text.constants';
 
 import './Header.scss';
+import Auth from '../Auth/auth';
+
+interface OwnProps {
+  auth: Auth;
+}
 
 interface MappedProps {
   loggedIn: boolean;
@@ -23,7 +28,7 @@ interface MappedActions {
   logoutAsync: (email: string) => AsyncResult;
 }
 
-type Props = MappedProps & MappedActions & RouterProps;
+type Props = OwnProps & MappedProps & MappedActions & RouterProps;
 
 export function Header(props: Props) {
 
@@ -47,6 +52,9 @@ export function Header(props: Props) {
       <div className="header__user col-3">
         {props.loggedIn ? <UserToggle onClick={(e) => navigate(e)} /> : null}
       </div>
+      {/* <div className="col-1">
+        <button type="button" className="btn btn-secondary" onClick={props.auth.logout}>Log Out</button>
+      </div> */}
     </header>
   )
 }

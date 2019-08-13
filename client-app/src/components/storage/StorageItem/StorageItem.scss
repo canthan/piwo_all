@@ -64,11 +64,12 @@
     &__row {
       justify-content: space-between;
       justify-items: baseline;
+      background-color: $row-distinction-secondary;
     }
 
     &__row:nth-of-type(even)  {
         background-color: $row-distinction;
-     } 
+    } 
 
     .button-wrapper {
       display: flex;

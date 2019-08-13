@@ -14,7 +14,7 @@ import { Stash, Batch } from '../../types/storage.types';
 import { AsyncResult } from '../../types/common.types';
 
 import './Storage.scss';
-// import Auth from '../Auth/auth';
+import Auth from '../Auth/auth';
 import { StashConfig } from '../../types/app.types';
 
 const ItemComponent = React.lazy(() => import('./StorageItem/StorageItem'));
@@ -27,7 +27,7 @@ interface MappedProps {
 }
 
 interface OwnProps {
-  // auth: Auth;
+  auth: Auth;
 }
 
 interface MappedActions {

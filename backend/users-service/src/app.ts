@@ -9,33 +9,45 @@ import configureLoggers from './common/utils/logger-config';
 import { IndexRouter } from './routes/index.router';
 import { UsersRouter } from './routes/users.router';
 import {
-    errorEmitter,
-    errorHandlerMiddleware,
+  errorEmitter,
+  errorHandlerMiddleware,
 } from './common/middlewares/error-handler.middleware';
 import mongoConnector from './common/utils/mongo.connector';
 import { CombinedDataRouter } from './routes/combined-data.router';
 
 export async function bootstrap(): Promise<Koa> {
-    config.load();
-    configureLoggers();
 
-    await mongoConnector(AppConfig.MONGODB_USERS_URI);
+  // app.use(jwt({
+  //   secret: jwksRsa.koaJwtSecret({
+  //     cache: true,
+  //     rateLimit: true,
+  //     jwksRequestsPerMinute: 5,
+  //     jwksUri: `https://${config.get(AppConfig.AUTH0_DOMAIN)}/.well-known/jwks.json`,
+  //   }),
+  //   audience: config.get(AppConfig.AUTH0_AUDIENCE),
+  //   issuer: `https://${config.get(AppConfig.AUTH0_DOMAIN)}/`,
+  //   algorithms: ["RS256"],
+  // }))
+  config.load();
+  configureLoggers();
 
-    const app: Koa = new Koa();
+  await mongoConnector(AppConfig.MONGODB_USERS_URI);
 
-    app.use(errorHandlerMiddleware);
-    app.on('error', errorEmitter);
+  const app: Koa = new Koa();
 
-    app.use(bodyParser());
-    app.use(cors());
+  app.use(errorHandlerMiddleware);
+  app.on('error', errorEmitter);
 
-    const router = new Router();
+  app.use(bodyParser());
+  app.use(cors());
 
-    UsersRouter.init(router, '/users');
-    CombinedDataRouter.init(router, '/combined');
-    IndexRouter.init(router);
+  const router = new Router();
 
-    app.use(router.routes());
+  UsersRouter.init(router, '/users');
+  CombinedDataRouter.init(router, '/combined');
+  IndexRouter.init(router);
 
-    return app;
+  app.use(router.routes());
+
+  return app;
 }
