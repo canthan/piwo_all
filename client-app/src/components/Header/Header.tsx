@@ -42,20 +42,22 @@ export function Header(props: Props) {
   }
 
   return (
-    <header className="header">
-      <div className="header__menu col-3">
-        {props.loggedIn ? <Menu onClick={(e) => navigate(e)}/> : null}
-      </div>
-      <div className="header__title col-6">
-        <h2>{getHeaderTitle(props.history.location.pathname)}</h2>
-      </div>
-      <div className="header__user col-3">
-        {props.loggedIn ? <UserToggle onClick={(e) => navigate(e)} /> : null}
-      </div>
-      {/* <div className="col-1">
+    <div className="sticky-top">
+      <header className="header">
+        <div className="header__menu col-3">
+          {props.loggedIn ? <Menu onClick={(e) => navigate(e)} /> : null}
+        </div>
+        <div className="header__title col-6">
+          <h2>{getHeaderTitle(props.history.location.pathname)}</h2>
+        </div>
+        <div className="header__user col-3">
+          {props.loggedIn ? <UserToggle onClick={(e) => navigate(e)} /> : null}
+        </div>
+        {/* <div className="col-1">
         <button type="button" className="btn btn-secondary" onClick={props.auth.logout}>Log Out</button>
       </div> */}
-    </header>
+      </header>
+    </div>
   )
 }
 

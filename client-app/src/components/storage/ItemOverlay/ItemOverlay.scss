@@ -1,16 +1,21 @@
 @import './../../../styles/colors.scss';
 
 .itemOverlay {
-  background-color: white;
+  background-color: $background-secondary;
   margin: 15px;
   padding: 15px;
 }
 
 .item {
-  background-color: white;
-  border: 1px solid grey;
+  background-color: $background-secondary;
+  border: 1px solid $background-grey;
   min-height: 200px;
   padding: 20px;
+
+  &__loader {
+    display: flex;
+    justify-content: center;
+  }
 
   &:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);

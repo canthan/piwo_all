@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 import './ItemOverlay.scss';
 
@@ -13,8 +14,10 @@ export function ItemOverlay(props: Props) {
             ? <div>{props.children}</div>
             : <>
               <h3>Loading batch...</h3>
-              <div className="spinner-border" role="status">
-                <span className="sr-only">Loading...</span>
+              <div className="item__loader">
+                <ClimbingBoxLoader color={"#2d2d2d"}>
+                  <span>Loading...</span>
+                </ClimbingBoxLoader>
               </div>
             </>
           }

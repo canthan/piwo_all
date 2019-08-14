@@ -9,10 +9,6 @@
     background-color: $row-distinction;
   }
 
-  &__line:nth-of-type(even) {
-    background-color: $row-distinction-secondary;
-  }
-
   &__list {
     list-style: none;
     display: flex;

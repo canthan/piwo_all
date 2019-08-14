@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { RouterProps } from 'react-router';
-import { Spinner } from 'react-bootstrap';
+import { ClimbingBoxLoader } from 'react-spinners';
 
 import Auth from './auth';
 
@@ -24,9 +24,13 @@ export const Callback = (props: Props) => {
 
   return (
     <div className="container callback">
-      <Spinner animation="border" role="status">
+      <ClimbingBoxLoader color={"#2d2d2d"}>
+        <span>Loading...</span>
+      </ClimbingBoxLoader>
+
+      {/* <Spinner animation="border" role="status">
         <span className="sr-only">Loading...</span>
-      </Spinner>
+      </Spinner> */}
     </div>
   );
 };
