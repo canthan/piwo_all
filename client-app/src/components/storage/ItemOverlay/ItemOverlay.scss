@@ -11,10 +11,14 @@
   border: 1px solid $background-grey;
   min-height: 200px;
   padding: 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 
   &__loader {
     display: flex;
     justify-content: center;
+    margin: auto;
   }
 
   &:hover {
