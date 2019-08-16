@@ -14,6 +14,7 @@ import { getHeaderTitle } from '../../constants/text.constants';
 
 import './Header.scss';
 import Auth from '../Auth/auth';
+import Actions from './Actions/Actions';
 
 interface OwnProps {
   auth: Auth;
@@ -30,7 +31,7 @@ interface MappedActions {
 
 type Props = OwnProps & MappedProps & MappedActions & RouterProps;
 
-export function Header(props: Props) {
+export const Header = (props: Props) => {
 
   const logoutAsync = (email: string): AsyncResult => props.logoutAsync(email);
 
@@ -45,7 +46,14 @@ export function Header(props: Props) {
     <div className="sticky-top">
       <header className="header">
         <div className="header__menu col-3">
-          {props.loggedIn ? <Menu onClick={(e) => navigate(e)} /> : null}
+          {
+            props.loggedIn
+              ? <>
+                <Menu onClick={(e) => navigate(e)} />
+                <Actions/>
+              </>
+              : null
+          }
         </div>
         <div className="header__title col-6">
           <h2>{getHeaderTitle(props.history.location.pathname)}</h2>

@@ -18,6 +18,7 @@ import {
 import { GET_BATCHES_FROM_USER_DATA } from './../constants/app.action.types';
 import { BatchesState, Batch } from './../types/storage.types';
 import { ReducerFunctionMap } from '../types/common.types';
+import { sortByNumber } from '../utils/utils.service';
 
 export const initialBatchesState = {
   batches:
@@ -44,12 +45,12 @@ const batchesReducerMapping = (): ReducerFunctionMap => ({
     return {
       ...state,
       ...{
-        batches: [
+        batches: sortByNumber([
           ...state.batches.filter(
             batch => batch.batchId !== editedBatch.batchId
           ),
           editedBatch,
-        ],
+        ], 'batchNo'),
       },
     };
   },

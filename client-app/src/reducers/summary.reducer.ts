@@ -3,6 +3,7 @@ import { createConditionalSliceReducer } from './utils';
 import {
   GET_SUMMARY_FROM_STASHES,
 	CHANGE_SUMMARY_BOTTLES_AMOUNT,
+  CHANGE_SUMMARY_CRATES,
 } from './../constants/summary.action.types';
 import { SummaryState } from './../types/storage.types';
 import { StashSummary } from '../types/storage.types';
@@ -53,7 +54,11 @@ const summaryReducerMapping = () => ({
 				payload.volume
 			),
 		},
-	}),
+  }),
+  [CHANGE_SUMMARY_CRATES]: (state: SummaryState, summary: SummaryState) => ({
+    ...state,
+		...{ summary },
+  })
 });
 
 export const summaryReducer = createConditionalSliceReducer(

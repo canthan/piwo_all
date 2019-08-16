@@ -18,11 +18,14 @@ import {
   EDIT_USER_DATA_REQUEST,
   EDIT_USER_DATA_SUCCESS,
   EDIT_USER_DATA_FAILURE,
+  EDIT_STASH_CONFIG_REQUEST,
+  EDIT_STASH_CONFIG_SUCCESS,
+  EDIT_STASH_CONFIG_FAILURE,
 } from './../constants/app.action.types';
 import { getSummaryFromStashes } from './summary.actions';
 import { getStashesFromUserData } from './stashes.actions';
 import { getBatchesFromUserData } from './batches.actions';
-import { UserData, AppState, User, UserProfileFields } from './../types/app.types';
+import { UserData, AppState, User, UserProfileFields, StashConfig } from './../types/app.types';
 import { ReduxAction, Response, AsyncAction } from '../types/common.types';
 import { Endpoints } from '../constants/endpoint.constants';
 
@@ -97,6 +100,37 @@ export const loginAsync = (email: string, password: string, register = false): A
     return dispatch(loginSuccess(userData));
   } catch (error) {
     return dispatch(loginFailure(error));
+  }
+};
+
+export const changeStashConfigRequest = () => ({
+  type: EDIT_STASH_CONFIG_REQUEST,
+});
+
+export const changeStashConfigSuccess = (stashConfig: StashConfig[]): ReduxAction<{ stashConfig: StashConfig[] }> => ({
+  payload: { stashConfig },
+  type: EDIT_STASH_CONFIG_SUCCESS,
+});
+
+export const changeStashConfigFailure = (error: AxiosError): ReduxAction<AxiosError> => ({
+  payload: error,
+  type: EDIT_STASH_CONFIG_FAILURE,
+});
+
+export const changeStashConfigAsync = (userId: string, stashConfig: StashConfig[]): AsyncAction => async (
+  dispatch
+) => {
+  dispatch(changeStashConfigRequest());
+  try {
+    const response: AxiosResponse<Response<UserData>> = await Axios.patch(
+      `${CONFIG.USERS_API}/${userId}`,
+      { stashConfig },
+    );
+    const returnedStashConfig = response.data.data.stashConfig;
+
+    return dispatch(changeStashConfigSuccess(returnedStashConfig));
+  } catch (error) {
+    return dispatch(changeStashConfigFailure(error));
   }
 };
 

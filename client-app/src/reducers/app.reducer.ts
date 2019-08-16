@@ -1,3 +1,5 @@
+import { StashConfig } from './../../../backend/users-service/src/types/types';
+import { requestReducer, errorReducer } from './index';
 import {
   GET_USER_DATA_REQUEST,
   GET_USER_DATA_SUCCESS,
@@ -11,11 +13,13 @@ import {
   EDIT_USER_DATA_REQUEST,
   EDIT_USER_DATA_FAILURE,
   EDIT_USER_DATA_SUCCESS,
+  EDIT_STASH_CONFIG_REQUEST,
+  EDIT_STASH_CONFIG_SUCCESS,
+  EDIT_STASH_CONFIG_FAILURE,
 } from '../constants/app.action.types';
 import { createConditionalSliceReducer } from './utils';
 import { AppState, User } from '../types/app.types';
 import overallAppState from './initialState';
-import { AxiosError } from 'axios';
 
 export const initialAppState: { app: AppState } = {
   app: {
@@ -35,10 +39,11 @@ export const initialAppState: { app: AppState } = {
 };
 
 const appReducerMapping = () => ({
-  [GET_USER_DATA_REQUEST]: (state: AppState) => ({ ...state }),
-  [EDIT_USER_DATA_REQUEST]: (state: AppState) => ({ ...state }),
-  [LOGIN_REQUEST]: (state: AppState) => ({ ...state }),
-  [LOGOUT_REQUEST]: (state: AppState) => ({ ...state }),
+  [GET_USER_DATA_REQUEST]: requestReducer,
+  [EDIT_USER_DATA_REQUEST]: requestReducer,
+  [LOGIN_REQUEST]: requestReducer,
+  [LOGOUT_REQUEST]: requestReducer,
+  [EDIT_STASH_CONFIG_REQUEST]: requestReducer,
   [GET_USER_DATA_SUCCESS]: (state: AppState, { user: { userId, username, firstname, surname, email, stashConfig }, loaded, loggedIn }: AppState) => ({
     ...state,
     ...{
@@ -88,22 +93,20 @@ const appReducerMapping = () => ({
       },
     },
   }),
-  [GET_USER_DATA_FAILURE]: (state: AppState, payload: AxiosError) => ({
+  [EDIT_STASH_CONFIG_SUCCESS]: (state: AppState, payload: { stashConfig: StashConfig[] }) => ({
     ...state,
-    ...{ error: payload.response && payload.response.data.message },
+    ...{
+      user: {
+        ...state.user,
+        stashConfig: payload.stashConfig,
+      }
+    }
   }),
-  [EDIT_USER_DATA_FAILURE]: (state: AppState, payload: AxiosError) => ({
-    ...state,
-    ...{ error: payload.response && payload.response.data.message },
-  }),
-  [LOGIN_FAILURE]: (state: AppState, payload: AxiosError) => ({
-    ...state,
-    ...{ error: payload.response && payload.response.data.message },
-  }),
-  [LOGOUT_FAILURE]: (state: AppState, payload: AxiosError) => ({
-    ...state,
-    ...{ error: payload.response && payload.response.data.message },
-  }),
+  [GET_USER_DATA_FAILURE]: errorReducer,
+  [EDIT_USER_DATA_FAILURE]: errorReducer,
+  [LOGIN_FAILURE]: errorReducer,
+  [LOGOUT_FAILURE]: errorReducer,
+  [EDIT_STASH_CONFIG_FAILURE]: errorReducer,
 });
 
 export const appReducer = createConditionalSliceReducer(
