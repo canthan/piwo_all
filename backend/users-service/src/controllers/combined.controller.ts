@@ -1,11 +1,13 @@
 import { Context } from 'koa';
 import { getLogger } from 'log4js';
 
-import { UsersService } from './../services/user.service';
-import { AnyFunction, UserData } from '../types/types';
 import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
+import { UsersService } from './../services/user.service';
 import { BatchesService } from '../services/batches.service';
 import { StashesService } from '../services/stashes.service';
+import { mapStashConfigOutDTO } from '../services/mapper.service';
+
+import { AnyFunction, UserData } from '../types/types';
 
 const logger = getLogger();
 
@@ -48,12 +50,12 @@ export class CombinedController {
         email, 
         firstname, 
         registrationDate, 
-        stashConfig,
         surname, 
         userId, 
         username,
         batches,
         stashes,
+        stashConfig: stashConfig.map(config => mapStashConfigOutDTO(config)),
       };
 
       logger.info(`Got ${outputData.firstname} ${outputData.surname} data`);

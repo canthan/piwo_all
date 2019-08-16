@@ -104,6 +104,30 @@ export class UsersController {
     }
   }
 
+  public updateStashConfig = async (
+    ctx: Context,
+    next: AnyFunction
+  ): Promise<void> => {
+    try {
+      const { userId } = ctx.params;
+      const { stashConfig } = ctx.request.body;
+
+      const user = await UsersService.getUserById(userId);
+      if (!user) {
+        throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
+      }
+
+      const editedUser = await UsersService.updateStashConfig(userId, stashConfig);
+
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: editedUser.stashConfig,
+      }
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  }
+
   public logout = async (
     ctx: Context,
     next: AnyFunction

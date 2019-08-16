@@ -2,9 +2,10 @@ import { Document, model, Schema } from 'mongoose';
 import * as timestamps from 'mongoose-timestamp';
 import * as uuid from 'uuid';
 
-import { User } from '../types/types';
+import { User, StashConfig } from '../types/types';
 
-export type UserModel = Document & User;
+export type UserModel = Document & Omit<User, 'stashConfig'> & {stashConfig: StashConfigModel[]};
+export type StashConfigModel = Document & StashConfig;
 
 export const StashConfigSchema = new Schema({
   name: { type: String, required: true },

@@ -39,7 +39,7 @@ export async function bootstrap(): Promise<Koa> {
   app.on('error', errorEmitter);
 
   app.use(bodyParser());
-  app.use(cors());
+  app.use(cors({ methods: ['GET', 'PATCH', 'PUT', 'POST'] }));
 
   const router = new Router();
 
