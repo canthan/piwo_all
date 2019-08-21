@@ -122,11 +122,11 @@ export const changeStashConfigAsync = (userId: string, stashConfig: StashConfig[
 ) => {
   dispatch(changeStashConfigRequest());
   try {
-    const response: AxiosResponse<Response<UserData>> = await Axios.patch(
+    const response: AxiosResponse<Response<StashConfig[]>> = await Axios.patch(
       `${CONFIG.USERS_API}/${userId}`,
       { stashConfig },
     );
-    const returnedStashConfig = response.data.data.stashConfig;
+    const returnedStashConfig = response.data.data;
 
     return dispatch(changeStashConfigSuccess(returnedStashConfig));
   } catch (error) {

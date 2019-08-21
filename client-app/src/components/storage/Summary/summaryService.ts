@@ -5,46 +5,52 @@ import { initialStashSummary } from '../../../types/storage.constants';
 import { StashConfig } from '../../../types/app.types';
 import { BOTTLES_IN_CRATE } from './../../../types/storage.constants';
 
-export class SummaryService {
-  public static createSummary(stashes: Stash[], stashConfig: StashConfig[]): StashSummary[] {
-    this.nameToLowercase(stashes);
-
-    const summary: StashSummary[] = stashConfig.map(config => {
-
-      const { litres = 0, bottles = initialStashSummary.bottles } = this.decomposeStashes(stashes, config.name);
-      const fullCrates = bottles.halfLiter / BOTTLES_IN_CRATE;
-
-      return {
-        ...initialStashSummary,
-        name: config.name.toUpperCase(),
-        litres,
-        bottles,
-        crates: {
-          overall: config.cratesTotal,
-          full: fullCrates,
-          empty: config.cratesTotal - fullCrates,
-        },
-      }
-    });
-
-    return summary;
+export const createBasicSummary = (stashConfig: StashConfig[]): StashSummary[] => stashConfig.map(stash => ({
+  ...initialStashSummary,
+  name: stash.name.toUpperCase(),
+  crates: {
+    ...initialStashSummary.crates,
+    overall: stash.cratesTotal,
   }
+}))
 
-  private static nameToLowercase(stashes: Stash[]) {
-    stashes.forEach(stash => stash.name = stash.name.toLocaleLowerCase());
-  }
+export const fillSummaryFromStashes = (stashes: Stash[], initialSummary: StashSummary[]): StashSummary[] => {
+  nameToUppercase(stashes);
 
-  private static decomposeStashes(stashes: Stash[], stashName: string): Partial<StashSummary> {
-    const stashByName = stashes.filter(stash => stash.name === stashName);
+  return initialSummary.map(summary => {
+
+    const { litres = 0, bottles = initialStashSummary.bottles } = decomposeStashes(stashes, summary.name);
+    const fullCrates = bottles.halfLiter / BOTTLES_IN_CRATE;
 
     return {
-      litres: getLitres(stashByName),
-      bottles: {
-        halfLiter: getHalfLiterBottleAmount(stashByName),
-        small: getSmallBottleAmount(stashByName),
-      }
+      ...summary,
+      litres,
+      bottles,
+      crates: {
+        ...summary.crates,
+        full: fullCrates,
+        empty: summary.crates.overall - fullCrates,
+      },
+    }
+  });
+}
+
+const nameToLowercase = (stashes: Stash[]) => {
+  stashes.forEach(stash => stash.name = stash.name.toLocaleLowerCase());
+}
+
+const nameToUppercase = (stashes: Stash[]) => {
+  stashes.forEach(stash => stash.name = stash.name.toLocaleUpperCase());
+}
+
+const decomposeStashes = (stashes: Stash[], stashName: string): Partial<StashSummary> => {
+  const stashByName = stashes.filter(stash => stash.name === stashName);
+
+  return {
+    litres: getLitres(stashByName),
+    bottles: {
+      halfLiter: getHalfLiterBottleAmount(stashByName),
+      small: getSmallBottleAmount(stashByName),
     }
   }
 }
-
-export default SummaryService;

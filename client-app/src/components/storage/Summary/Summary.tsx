@@ -25,8 +25,10 @@ type Props = MappedActions & MappedProps;
 export const StorageSummaryComponent = (props: Props) => {
 
   useEffect(() => {
-    props.changeSummaryCrates(props.summary, props.stashConfig);
-  }, [props.stashConfig])
+    if (props.stashConfig.length) {
+      props.changeSummaryCrates(props.summary, props.stashConfig);
+    }
+  }, [props.stashConfig]);
 
   return (
     <div className="summary">
@@ -41,7 +43,10 @@ export const StorageSummaryComponent = (props: Props) => {
   );
 }
 
-const mapStateToProps = ({ summary: { summary }, app: { user: { stashConfig = [] } } }: OverallAppState) => ({
+const mapStateToProps = ({
+  summary: { summary },
+  app: { user: { stashConfig = [] } },
+}: OverallAppState) => ({
   summary,
   stashConfig,
 });

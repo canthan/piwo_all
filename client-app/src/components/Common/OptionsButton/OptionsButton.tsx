@@ -4,12 +4,14 @@ import { AnyFunction } from '../../../types/common.types';
 
 import './OptionsButton.scss';
 
-interface Props {
-  disabled: boolean,
+interface OwnProps {
   role: string,
-  size?: string,
   onButtonClick: AnyFunction;
+  disabled?: boolean,
+  size?: string,
 }
+
+type Props = OwnProps & Partial<JSX.ElementChildrenAttribute>;
 
 export function OptionsButton(props: Props) {
   return (
@@ -17,8 +19,9 @@ export function OptionsButton(props: Props) {
       <button
         className={`btn btn__options ${props.size}`}
         onClick={() => props.onButtonClick()}
-        disabled={props.disabled}
+        disabled={props.disabled || false}
       >
+        {props.children}
         {props.role}
       </button>
     </div>
