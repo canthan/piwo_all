@@ -14,26 +14,38 @@ import { Stash, SelectedStash, EmptyBatch, Batch } from '../../../types/storage.
 import './StorageItem.scss';
 
 import { OverallAppState } from '../../../reducers/initialState';
+import { changeStashConfigAsync } from '../../../actions/app.actions';
 import { deleteBatchAsync, editBatchDataAsync } from '../../../actions/batches.actions';
 import { addStashAsync, updateStashesAsync, deleteStashAsync } from '../../../actions/stashes.actions';
 import { AsyncResult } from '../../../types/common.types';
 import { ConfirmModalWindow } from '../../Common/Modals/ConfirmModalWindow';
 import { InputModalWindow } from '../../Common/Modals/InputModalWindow';
 import { INCREMENT_BUTTONS, DECREMENT_BUTTONS, OptionsButtons, DEFAULT_DATE_FORMAT } from '../../../types/storage.constants';
+import { DropdownModalWindow } from '../../Common/Modals/DropdownModalWindow';
+import { OptionsButton } from '../../Common/OptionsButton/OptionsButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { StashConfig } from '../../../types/app.types';
 
 interface OwnProps {
   batch: Batch;
-  userId: string;
   stashes: Stash[];
   getSummaryFromStashes(): AnyAction;
 }
+
+interface MappedProps {
+  userId: string;
+  stashConfig: StashConfig[],
+  stashNames: string[];
+
+}
+interface MappedAppActions {
+  changeStashConfigAsync(userId: string, stashConfig: StashConfig[]): AsyncResult;
+}
+
 interface MappedBatchActions {
   deleteBatchAsync(userId: string, batchId: string): AsyncResult;
-  editBatchDataAsync(
-    userId: string,
-    batchId: string,
-    batchData: EmptyBatch
-  ): AsyncResult;
+  editBatchDataAsync(userId: string, batchId: string, batchData: EmptyBatch): AsyncResult;
 }
 interface MappedStashActions {
   addStashAsync(userId: string, batchId: string, stashName: string): AsyncResult;
@@ -45,7 +57,7 @@ interface MappedStashActions {
   deleteStashAsync(userId: string, stashId: string): AsyncResult;
 }
 
-type Props = MappedBatchActions & MappedStashActions & OwnProps;
+type Props = MappedAppActions & MappedBatchActions & MappedStashActions & OwnProps & MappedProps;
 
 interface State {
   stashes: Stash[];
@@ -55,6 +67,7 @@ interface State {
   editedBatchData: EmptyBatch;
   deleteBatchModal: boolean;
   addStashModal: boolean;
+  createStashModal: boolean;
 }
 
 export class ItemComponent extends React.Component<Props, State> {
@@ -74,6 +87,7 @@ export class ItemComponent extends React.Component<Props, State> {
     },
     deleteBatchModal: false,
     addStashModal: false,
+    createStashModal: false,
   };
 
   public onQuantityChange = (type: number, stashKey: number, target: HTMLInputElement | null, amount = 0) => {
@@ -114,12 +128,18 @@ export class ItemComponent extends React.Component<Props, State> {
     }
   };
 
-  public onAddStorageClick = async (name: string) => {
+  public onAddExistingStorageClick = async (name: string) => {
     this.setState({ addStashModal: false });
 
     const { batch: { batchId }, userId } = this.props;
 
     await this.props.addStashAsync(userId, batchId, name);
+  };
+
+  public onAddNewStorageClick = async (name: string) => {
+    await this.onAddExistingStorageClick(name);
+    const { stashConfig, userId } = this.props;
+    await this.props.changeStashConfigAsync(userId, [...stashConfig, { name, cratesTotal: 0 }]);
   };
 
   public onDeleteClick = async () => {
@@ -158,9 +178,7 @@ export class ItemComponent extends React.Component<Props, State> {
     }
   };
 
-  // tslint:disable no-any
-
-  public onInputChange = (changedValue: any) => {
+  public onInputChange = (changedValue: { [x: string]: string }) => {
     this.setState({
       editedBatchData: {
         ...this.state.editedBatchData,
@@ -168,6 +186,8 @@ export class ItemComponent extends React.Component<Props, State> {
       },
     });
   };
+
+  public getPossibleStashes = (): string[] => this.props.stashNames.filter(name => !this.props.stashes.map(stash => stash.name).includes(name));
 
   public render() {
     const { name, batchNo, bottledOn } = this.props.batch;
@@ -235,11 +255,31 @@ export class ItemComponent extends React.Component<Props, State> {
         }
         {
           this.state.addStashModal
+            ? <DropdownModalWindow
+              className={this.state.createStashModal ? 'modal--opaque' : ''}
+              title={"Add new Stash"}
+              body={this.getPossibleStashes().length ? `Please select stash:` : 'Please add more stashes'}
+              additionalComponent={
+                <OptionsButton
+                  role={" Add new Stash"}
+                  onButtonClick={() => this.setState({ createStashModal: true })}
+                >
+                  <FontAwesomeIcon icon={faPlusCircle}></FontAwesomeIcon>
+                </OptionsButton>
+              }
+              selectOptions={this.getPossibleStashes()}
+              onConfirm={(value: string) => this.onAddExistingStorageClick(value)}
+              onCancel={() => this.setState({ addStashModal: false })}
+            ></DropdownModalWindow>
+            : null
+        }
+        {
+          this.state.createStashModal
             ? <InputModalWindow
               title={"Add new Stash"}
               body={`Please enter new stash name:`}
-              onConfirm={(value: string) => this.onAddStorageClick(value)}
-              onCancel={() => this.setState({ addStashModal: false })}
+              onConfirm={(value: string) => this.onAddNewStorageClick(value)}
+              onCancel={() => this.setState({ createStashModal: false })}
             ></InputModalWindow>
             : null
         }
@@ -254,8 +294,10 @@ export class ItemComponent extends React.Component<Props, State> {
   }
 }
 
-const mapStateToProps = (state: OverallAppState) => ({
-  userId: state.app.user.userId,
+const mapStateToProps = ({ app: { user } }: OverallAppState) => ({
+  userId: user.userId,
+  stashConfig: user.stashConfig,
+  stashNames: user.stashConfig.map(stash => stash.name.toLocaleUpperCase()),
 });
 
 const actions = {
@@ -264,6 +306,7 @@ const actions = {
   editBatchDataAsync,
   updateStashesAsync,
   deleteStashAsync,
+  changeStashConfigAsync,
 };
 
 export default connect(
