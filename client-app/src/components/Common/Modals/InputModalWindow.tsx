@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import './Modal.scss';
 import { AnyFunction } from '../../../types/common.types';
+
+import './Modal.scss';
 
 interface Props {
   title: string;

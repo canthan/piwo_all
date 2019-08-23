@@ -31,7 +31,9 @@ const NumberWithButton = (props: Props) => {
       <OptionsButton
         role={props.name}
         onButtonClick={() => props.onClick()}
-      >{props.children}</OptionsButton>
+      >
+        {props.children}
+      </OptionsButton>
     </div>
   );
 };

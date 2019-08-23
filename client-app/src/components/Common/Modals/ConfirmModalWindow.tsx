@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import './Modal.scss';
 import { AnyFunction } from '../../../types/common.types';
+
+import './Modal.scss';
 
 interface Props {
   title: string;
@@ -11,9 +12,15 @@ interface Props {
   onCancel: AnyFunction;
 }
 
-export function ConfirmModalWindow(props: Props) {
+export const ConfirmModalWindow = (props: Props) => {
 
   const [show, setShow] = useState<boolean>(true);
+
+  const defaultButton = useRef<HTMLButtonElement & Button<"button">>(null);
+
+  useEffect(() => {
+    if (show && defaultButton.current) defaultButton.current.focus();
+  });
 
   const handleClose = () => {
     props.onCancel();
@@ -33,7 +40,7 @@ export function ConfirmModalWindow(props: Props) {
       <Modal.Body>{props.body}</Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-        <Button variant="primary" onClick={handleConfirm}>Confirm</Button>
+        <Button variant="primary" onClick={handleConfirm} ref={defaultButton}>Confirm</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -11,18 +11,11 @@ interface PropsAction {
   onInputChange: AnyFunction;
 }
 
-interface Event {
-  target: {
-    name: string;
-    value: string;
-  }
-}
-
 type Props = PropsAction & EmptyBatch;
 
 export function EmptyHeaderComponent(props: Props) {
 
-  const handleChange = (e: Event) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const changedValue = { [e.target.name]: e.target.value };
     props.onInputChange(changedValue);
   };

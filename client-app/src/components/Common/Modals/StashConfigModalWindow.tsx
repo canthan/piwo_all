@@ -27,13 +27,11 @@ export function StashConfigModalWindow(props: Props) {
   const [config, setConfig] = useState<StashConfig[]>(props.config);
   const [addNewStash, openNewStashModal] = useState(false);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const defaultButton = useRef<HTMLButtonElement & Button<"button">>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
+    if (show && defaultButton.current) defaultButton.current.focus();
+  });
 
   const handleClose = () => {
     props.onCancel();
@@ -79,7 +77,7 @@ export function StashConfigModalWindow(props: Props) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-          <Button variant="primary" onClick={handleConfirm}>Confirm</Button>
+          <Button variant="primary" onClick={handleConfirm} ref={defaultButton}>Confirm</Button>
         </Modal.Footer>
       </Modal>
       {

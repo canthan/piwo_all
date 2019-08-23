@@ -14,11 +14,6 @@ export const initialSummaryState = {
   },
 };
 
-interface Temporary {
-  name: string,
-  amount: number,
-  volume: number,
-}
 const summaryReducerMapping = () => ({
   [GET_SUMMARY_FROM_STASHES]: (state: SummaryState, summary: StashSummary[]) => ({
     ...state,
