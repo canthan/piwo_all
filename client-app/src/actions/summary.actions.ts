@@ -3,6 +3,7 @@ import { createBasicSummary, fillSummaryFromStashes } from './../components/stor
 import {
   GET_SUMMARY_FROM_STASHES,
   CHANGE_SUMMARY_CRATES,
+  REMOVE_SUMMARY_BY_NAME,
 } from './../constants/summary.action.types';
 import { StashConfig } from './../types/app.types';
 import { Stash, StashSummary } from '../types/storage.types';
@@ -17,6 +18,11 @@ export const getSummaryFromStashes = (stashes: Stash[], stashConfig: StashConfig
     type: GET_SUMMARY_FROM_STASHES,
   };
 };
+
+export const removeSummaryByName = (names: string[]): ReduxAction<string[]> => ({
+  type: REMOVE_SUMMARY_BY_NAME,
+  payload: names.map(name => name.toLocaleUpperCase()),
+})
 
 // export const addStashesSummary = (summary: StashSummary[], stashConfig: StashConfig[]): ReduxAction<StashSummary[]> => {
 //   const summaryStashNames = summary.map(s => s.name);
@@ -45,7 +51,7 @@ export const changeSummaryCrates = (summary: StashSummary[], stashConfig: StashC
   const addedStashesNames = stashConfigNames.filter(name => !summaryStashNames.includes(name));
 
   const updatedSummary: StashSummary[] = summary.map(stash => {
-    const config = stashConfig.find(config => config.name.toLocaleLowerCase() === stash.name.toLocaleLowerCase());
+    const config = stashConfig.find(config => config.name.toLocaleUpperCase() === stash.name.toLocaleUpperCase());
 
     return !config
       ? stash
