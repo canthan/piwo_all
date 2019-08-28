@@ -22,12 +22,18 @@ import {
   EDIT_STASH_CONFIG_SUCCESS,
   EDIT_STASH_CONFIG_FAILURE,
 } from './../constants/app.action.types';
-import { getSummaryFromStashes } from './summary.actions';
-import { getStashesFromUserData } from './stashes.actions';
+import { getSummaryFromStashes, removeSummaryByName } from './summary.actions';
+import { getStashesFromUserData, removeStashesByName } from './stashes.actions';
 import { getBatchesFromUserData } from './batches.actions';
 import { UserData, AppState, User, UserProfileFields, StashConfig } from './../types/app.types';
 import { ReduxAction, Response, AsyncAction } from '../types/common.types';
 import { Endpoints } from '../constants/endpoint.constants';
+
+interface ChangeStashConfigResponse {
+  stashConfig: StashConfig[],
+  deletedStashes: number,
+  deletedStashNames: string[],
+}
 
 export const getUserDataRequest = (): AnyAction => ({
   type: GET_USER_DATA_REQUEST,
@@ -122,11 +128,15 @@ export const changeStashConfigAsync = (userId: string, stashConfig: StashConfig[
 ) => {
   dispatch(changeStashConfigRequest());
   try {
-    const response: AxiosResponse<Response<StashConfig[]>> = await Axios.patch(
+    const response: AxiosResponse<Response<ChangeStashConfigResponse>> = await Axios.patch(
       `${CONFIG.USERS_API}/${userId}`,
       { stashConfig },
     );
-    const returnedStashConfig = response.data.data;
+    const { stashConfig: returnedStashConfig, deletedStashes, deletedStashNames } = response.data.data;
+
+    if (deletedStashes) dispatch(removeStashesByName(deletedStashNames));
+
+    dispatch(removeSummaryByName(deletedStashNames));
 
     return dispatch(changeStashConfigSuccess(returnedStashConfig));
   } catch (error) {

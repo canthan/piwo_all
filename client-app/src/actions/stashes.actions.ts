@@ -11,6 +11,7 @@ import {
   DELETE_STASH_SUCCESS,
   DELETE_STASH_FAILURE,
   GET_STASHES_FROM_USER_DATA,
+  REMOVE_STASHES_BY_NAME,
 } from './../constants/stashes.action.types';
 import { CONFIG } from './../config/config';
 import { Stash } from '../types/storage.types';
@@ -57,6 +58,11 @@ export const deleteStashFailure = (error: AxiosError): ReduxAction<AxiosError> =
   payload: error,
   type: DELETE_STASH_FAILURE,
 });
+
+export const removeStashesByName = (names: string[]): ReduxAction<string[]> => ({
+  type: REMOVE_STASHES_BY_NAME,
+  payload: names.map(name => name.toLocaleUpperCase()),
+})
 
 export const getStashesFromUserData = (stashes: Stash[]): ReduxAction<Stash[]> => ({
   payload: stashes,

@@ -5,12 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPeopleCarry, faBoxes, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 
 import { CustomToggleWrapper } from '../../Common/CustomToggleWrapper/CustomToggleWrapper';
-import { IconAndText, defaultIconAndTextConfig } from '../../Common/IconAndText/IconAndText';
-import { StashConfig } from '../../../types/app.types';
 import { StashConfigModalWindow } from '../../Common/Modals/StashConfigModalWindow';
+import { IconAndText, defaultIconAndTextConfig } from '../../Common/IconAndText/IconAndText';
+
 import { OverallAppState } from '../../../reducers/initialState';
-import { AsyncResult } from '../../../types/common.types';
 import { changeStashConfigAsync } from '../../../actions/app.actions';
+
+import { StashConfig } from '../../../types/app.types';
+import { AsyncResult } from '../../../types/common.types';
 
 interface MappedProps {
   userId: string;

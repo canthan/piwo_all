@@ -8,5 +8,11 @@
       max-width: 80px;
       margin-right: 5px;
     } 
+
+    &__text {
+      &--disabled{
+        text-decoration: line-through;
+      }
+    }
   }
 }

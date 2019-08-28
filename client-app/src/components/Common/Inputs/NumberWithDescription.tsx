@@ -24,7 +24,7 @@ const NumberWithDescription = (props: Props) => {
         value={props.value}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => props.onChange(e.target.value, props.name)}
       ></input>
-      <div className="number-input__line__text">{props.name.toUpperCase()}</div>
+      <div className={props.disabled ? 'number-input__line__text--disabled' : 'number-input__line__text'}>{props.name.toUpperCase()}</div>
     </div>
   );
 };

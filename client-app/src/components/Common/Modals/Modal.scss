@@ -2,6 +2,11 @@
   &__body {
     &__description {
       padding-bottom: 10px;
+
+      &__line {
+        display: flex;
+        align-items: baseline;
+      }
     }
   }
 

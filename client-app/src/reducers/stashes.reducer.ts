@@ -9,6 +9,7 @@ import {
   DELETE_STASH_SUCCESS,
   DELETE_STASH_FAILURE,
   GET_STASHES_FROM_USER_DATA,
+  REMOVE_STASHES_BY_NAME,
 } from './../constants/stashes.action.types';
 import { DELETE_BATCH_SUCCESS } from './../constants/batches.actions.types';
 import { Stash, StashesState } from '../types/storage.types';
@@ -75,6 +76,12 @@ const stashesReducerMapping = () => ({
     ...state,
     ...{ error: payload },
   }),
+  [REMOVE_STASHES_BY_NAME]: (state: StashesState, removedStashNames: string[]) => ({
+    ...state,
+    ...{
+      stashes: state.stashes.filter(stash => !removedStashNames.includes(stash.name.toLocaleUpperCase()))
+    },
+  })
 });
 
 export const stashesReducer = createConditionalSliceReducer(

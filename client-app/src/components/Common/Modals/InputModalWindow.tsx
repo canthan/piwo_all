@@ -20,10 +20,10 @@ export function InputModalWindow(props: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, []);
+    setTimeout(() => {
+      if (inputRef.current) inputRef.current.focus();
+    }, 0);
+  }, [show]);
 
   const handleClose = () => {
     props.onCancel();
@@ -53,12 +53,12 @@ export function InputModalWindow(props: Props) {
           className="form-control"
           value={value}
           ref={inputRef}
-          onChange={handleChange}        
-          />
+          onChange={handleChange}
+        />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-        <Button variant="primary" onClick={handleConfirm}>Confirm</Button>
+        <Button variant="primary" onClick={handleConfirm} disabled={!value}>Confirm</Button>
       </Modal.Footer>
     </Modal>
   );

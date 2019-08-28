@@ -129,17 +129,21 @@ export class ItemComponent extends React.Component<Props, State> {
   };
 
   public onAddExistingStorageClick = async (name: string) => {
-    this.setState({ addStashModal: false });
-
     const { batch: { batchId }, userId } = this.props;
-
     await this.props.addStashAsync(userId, batchId, name);
+
+    this.setState({ addStashModal: false });
   };
 
   public onAddNewStorageClick = async (name: string) => {
     await this.onAddExistingStorageClick(name);
     const { stashConfig, userId } = this.props;
-    await this.props.changeStashConfigAsync(userId, [...stashConfig, { name, cratesTotal: 0 }]);
+    await this.props.changeStashConfigAsync(userId, [...stashConfig, { name: name.toLocaleUpperCase(), cratesTotal: 0 }]);
+
+    this.setState({
+      addStashModal: false,
+      createStashModal: false,
+    });
   };
 
   public onDeleteClick = async () => {
@@ -187,7 +191,9 @@ export class ItemComponent extends React.Component<Props, State> {
     });
   };
 
-  public getPossibleStashes = (): string[] => this.props.stashNames.filter(name => !this.props.stashes.map(stash => stash.name).includes(name));
+  public getPossibleStashes = (): string[] => this.props.stashNames.filter(
+    name => !this.props.stashes.map(stash => stash.name.toLocaleUpperCase()).includes(name)
+  );
 
   public render() {
     const { name, batchNo, bottledOn } = this.props.batch;

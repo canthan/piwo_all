@@ -2,11 +2,16 @@
   &__line {
     display: flex;
     padding-bottom: 5px;
-    align-items: baseline;
 
     &__input {
       max-width: 80px;
       margin-right: 5px;
     } 
   }
+}
+
+.remove-button {
+  cursor: pointer;
+  width: min-content;
+  padding: 5px;
 }
