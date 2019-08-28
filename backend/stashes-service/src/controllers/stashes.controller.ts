@@ -33,8 +33,8 @@ export class StashesController {
       const stashes = await StashesService.getAllStashes();
 
       logger.info(`Got ${stashes.length} stashes`);
-      
-        ctx.body = {
+
+      ctx.body = {
         status: HTTP_STATUS.OK,
         data: stashes,
       };
@@ -92,6 +92,21 @@ export class StashesController {
     }
   };
 
+  public getStashByName = async (ctx: Context, next: AnyFunction): Promise<void> => {
+    try {
+      const stashName = ctx.params.stashName;
+      logger.info(`Getting stashes ${stashName}`);
+      const stashes = await StashesService.getStashByName(stashName);
+
+      ctx.body = {
+        status: HTTP_STATUS.OK,
+        data: stashes,
+      };
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  };
+
   public addStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
     try {
       const { batchId, userId } = ctx.params;
@@ -129,12 +144,12 @@ export class StashesController {
         logger.info(`Updating stash ${stash.stashId} for batch ${batchId}`);
 
         const updatedStash: StashModel = await StashesService.editStash(stash);
-  
+
         if (!!updatedStash) {
           updatedStashes.push(mapStashOutDTO(updatedStash));
           logger.info(`Stash ${updatedStash.stashId} updated`);
         }
-        
+
       });
       ctx.body = !!updatedStashes
         ? { status: HTTP_STATUS.OK, data: updatedStashes }
@@ -145,18 +160,34 @@ export class StashesController {
     }
   };
 
-  public removeStash = async (ctx: Context, next: AnyFunction): Promise<void> => {
-    // to be implemented
+  public removeStashById = async (ctx: Context, next: AnyFunction): Promise<void> => {
     try {
-      const { stashId, userId } = ctx.params;
+      const { stashId } = ctx.params;
 
-      logger.info(`Removing batch ${stashId} for user ${userId}`);
+      logger.info(`Removing stash ${stashId}`);
 
-      const removedStashId: number = await StashesService.deleteStash(stashId);
+      const removedStashId: number = await StashesService.deleteStashById(stashId);
 
       ctx.body = !!removedStashId
-      ? { status: HTTP_STATUS.OK, data: {stashId: removedStashId} }
-      : { status: HTTP_STATUS.BAD_REQUEST, message: 'That stash does not exist' };
+        ? { status: HTTP_STATUS.OK, data: { stashId: removedStashId } }
+        : { status: HTTP_STATUS.BAD_REQUEST, message: 'That stash does not exist' };
+
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  };
+
+  public removeStashByName = async (ctx: Context, next: AnyFunction): Promise<void> => {
+    try {
+      const { stashName } = ctx.params;
+
+      logger.info(`Removing all stashes with name ${stashName}`);
+
+      const removedStashes: number = await StashesService.deleteStashesByName(stashName);
+
+      ctx.body = !!removedStashes
+        ? { data: { removedStashes }, status: HTTP_STATUS.OK }
+        : { status: HTTP_STATUS.BAD_REQUEST, message: `There are no stashes with name ${stashName}` };
 
     } catch (error) {
       ctx.throw(ctx.status, error);

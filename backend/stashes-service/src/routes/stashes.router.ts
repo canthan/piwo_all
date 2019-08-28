@@ -11,9 +11,11 @@ export class StashesRouter {
     router.get(`${path}/user/:userId`, stashesController.getStashesByUserId);
     router.get(`${path}/batch/:batchId`, stashesController.getStashesByBatchId);
     router.get(`${path}/:stashId`, stashesController.getStashById);
+    router.get(`${path}/stashByName/:stashName`, stashesController.getStashByName);
     router.put(`${path}/:userId/:batchId`, stashesController.editStash);
     router.post(`${path}/:userId/:batchId`, stashesController.addStash);
-    router.delete(`${path}/:stashId`, stashesController.removeStash);
+    router.delete(`${path}/:stashId`, stashesController.removeStashById);
+    router.delete(`${path}/stashByName/:stashName`, stashesController.removeStashByName);
   }
 }
  

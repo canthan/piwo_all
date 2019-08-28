@@ -35,6 +35,21 @@ export class StashesService {
     return stash;
   }
 
+  public static async getStashByName(name: string): Promise<StashModel[]> {
+    const stashes = await StashModel.find({
+      name: {
+        $regex: `^${name}$`,
+        $options: 'i',
+      },
+    }).exec();
+
+    if (!stashes) {
+      throw new Exceptions.NotFoundException(`Stash with name: ${name} does not exist`);
+    }
+
+    return stashes;
+  }
+
   public static async addStash(newStash: StashOutDTO): Promise<Stash> {
     const newStashModel: StashModel = await StashModel.create(newStash);
 
@@ -77,7 +92,7 @@ export class StashesService {
     return await StashModel.findOne({ stashId }).exec() as StashModel;
   }
 
-  public static async deleteStash(stashId: number): Promise<number> {
+  public static async deleteStashById(stashId: number): Promise<number> {
     const deletedStash = await StashModel.deleteOne({ stashId }).exec();
 
     if (!deletedStash.ok) {
@@ -85,5 +100,20 @@ export class StashesService {
     }
 
     return stashId;
+  }
+
+  public static async deleteStashesByName(name: string): Promise<number> {
+    const deletedStashes = await StashModel.deleteMany({
+      name: {
+        $regex: `^${name}$`,
+        $options: 'i',
+      },
+    }).exec();
+
+    if (!deletedStashes.ok) {
+      throw new Exceptions.NotFoundException(`Can't find any stash with name: ${name}`);
+    }
+
+    return deletedStashes.n || 0;
   }
 }

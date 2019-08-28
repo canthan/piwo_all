@@ -5,19 +5,23 @@ import * as bcrypt from 'bcryptjs';
 import { NotFoundException } from '../common/exceptions/not-found.exception';
 import { UnauthorizedException } from '../common/exceptions/unauthorized.exception';
 import config, { AppConfig } from '../common/utils/config.loader';
+import { asyncForEach } from '../common/utils/async.foreach';
 import { HTTP_STATUS } from '../common/middlewares/error-handler.middleware';
 
 import { TokenService } from './../services/token.service';
 import { UsersService } from './../services/user.service';
+import { StashesService } from '../services/stashes.service';
 import { removePassword, mapUserOutDTO } from '../services/mapper.service';
 import { generateJwt } from '../services/token.utils';
 
 import { AnyFunction } from '../types/types';
+import { StashConfigDeleted } from './../types/types';
 import { ErrorText } from '../constants/messeges';
 
 const logger = getLogger();
 
 export class UsersController {
+  private stashesService: StashesService = new StashesService();
 
   public getUserById = async (
     ctx: Context,
@@ -110,18 +114,31 @@ export class UsersController {
   ): Promise<void> => {
     try {
       const { userId } = ctx.params;
-      const { stashConfig } = ctx.request.body;
+      const { stashConfig }: { stashConfig: StashConfigDeleted[] } = ctx.request.body;
 
       const user = await UsersService.getUserById(userId);
       if (!user) {
         throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
       }
 
-      const editedUser = await UsersService.updateStashConfig(userId, stashConfig);
+      const removedStashes = stashConfig.filter(stash => stash.deleted);
+      let deletedStashes = 0;
+      const deletedStashNames: string[] = [];
+
+      await asyncForEach(removedStashes, async (stash: StashConfigDeleted) => {
+        deletedStashes += +(await this.stashesService.removeStashesByName(stash.name));
+        deletedStashNames.push(stash.name);
+      });
+
+      const editedUser = await UsersService.updateStashConfig(userId, stashConfig.filter(stash => !stash.deleted));
 
       ctx.body = {
         status: HTTP_STATUS.OK,
-        data: editedUser.stashConfig,
+        data: {
+          deletedStashes,
+          deletedStashNames,
+          stashConfig: editedUser.stashConfig,
+        },
       }
     } catch (error) {
       ctx.throw(ctx.status, error);

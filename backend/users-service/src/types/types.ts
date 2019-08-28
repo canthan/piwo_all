@@ -52,6 +52,10 @@ export interface StashConfig {
   cratesTotal: number;
 }
 
+export interface StashConfigDeleted extends StashConfig {
+  deleted?: boolean;
+}
+
 export interface User extends UserOutDTO {
   userId: string;
 }

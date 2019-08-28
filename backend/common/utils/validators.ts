@@ -9,5 +9,5 @@ export const nonEmptyArrayValidator: SchemaTypeOpts.ValidateOpts = {
 
 export const objectValidator: SchemaTypeOpts.ValidateOpts = {
   validator: value => value.every(isObject),
-  msg: 'Dish should be an object!',
+  msg: 'Should be an object!',
 };

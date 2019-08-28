@@ -1,3 +1,5 @@
+import { AxiosResponse } from 'axios';
+
 import { Stash } from '../types/types';
 import config, { AppConfig } from '../common/utils/config.loader';
 
@@ -19,6 +21,23 @@ export class StashesService {
       const stashes = response.data.data.map(stash => mapStashOutDTO(stash));
 
       return stashes;
+    } catch (error) {
+      throw new NotFoundException(error.response.data.message);
+    }
+  }
+
+  public async removeStashesByName(stashName: string): Promise<number> {
+    try {
+      const requestUrl = `${config.get(AppConfig.STASHES_SERVICE_URI)}/stashByName/${stashName}`;
+      const response: AxiosResponse<{ data: { removedStashes: number } }> = await axiosInstance.delete(
+        requestUrl,
+        {
+          data: { stashName },
+        }
+      )
+
+      return response.data.data.removedStashes;
+
     } catch (error) {
       throw new NotFoundException(error.response.data.message);
     }
