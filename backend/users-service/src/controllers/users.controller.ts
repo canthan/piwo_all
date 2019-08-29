@@ -117,38 +117,18 @@ export class UsersController {
       const { stashConfig }: { stashConfig: StashConfigEdited[] } = ctx.request.body;
 
       const user = await UsersService.getUserById(userId);
-      if (!user) {
-        throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
-      }
 
-      const removedStashes = stashConfig.filter(stash => stash.deleted);
-      const editedStashes = stashConfig.filter(stash => stash.oldName);
+      if (!user) throw new NotFoundException(ErrorText.USER_DOES_NOT_EXIST);
 
-      let removedStashesNo = 0;
-      let editedStashesNo = 0;
-      const removedStashNames: string[] = [];
-      const editedStashNames: EditedStashName[] = [];
-
-      await asyncForEach(removedStashes, async (stash: StashConfigEdited) => {
-        removedStashesNo += +(await this.stashesService.removeStashesByName(stash.name));
-        removedStashNames.push(stash.name);
-      });
-
-      await asyncForEach(editedStashes, async (stash: StashConfigEditedName) => {
-        editedStashesNo += (await this.stashesService.updateStashName(stash.name, stash.oldName));
-        editedStashNames.push({ newName: stash.name, oldName: stash.oldName });
-      });
+      const { removedStashesNo, removedStashNames } = await this.handleRemovingStashes(stashConfig.filter(stash => stash.deleted));
+      const { editedStashesNo, editedStashNames } = await this.handleEditingStashNames(stashConfig.filter(stash => stash.oldName));
 
       const editedUser = await UsersService.updateStashConfig(userId, stashConfig.filter(stash => !stash.deleted));
 
       ctx.body = {
         status: HTTP_STATUS.OK,
         data: {
-          removedStashesNo,
-          editedStashesNo,
-          removedStashNames,
-          editedStashNames,
-          stashConfig: editedUser.stashConfig,
+          removedStashesNo, editedStashesNo, removedStashNames, editedStashNames, stashConfig: editedUser.stashConfig,
         },
       }
     } catch (error) {
@@ -244,4 +224,29 @@ export class UsersController {
       ctx.throw(ctx.status, error);
     }
   };
+
+  private handleRemovingStashes = async (removedStashes: StashConfigEdited[]): Promise<{ removedStashesNo: number; removedStashNames: string[] }> => {
+    let removedStashesNo = 0;
+    const removedStashNames: string[] = [];
+
+    await asyncForEach(removedStashes, async (stash: StashConfigEdited) => {
+      removedStashesNo += +(await this.stashesService.removeStashesByName(stash.name));
+      removedStashNames.push(stash.name);
+    });
+
+    return { removedStashesNo, removedStashNames };
+  }
+
+  private handleEditingStashNames = async (editedStashes: StashConfigEdited[]): Promise<{ editedStashesNo: number; editedStashNames: EditedStashName[] }> => {
+    let editedStashesNo = 0;
+    const editedStashNames: EditedStashName[] = [];
+
+    await asyncForEach(editedStashes, async (stash: StashConfigEditedName) => {
+      editedStashesNo += (await this.stashesService.updateStashName(stash.name, stash.oldName));
+      editedStashNames.push({ newName: stash.name, oldName: stash.oldName });
+    });
+
+    return { editedStashesNo, editedStashNames };
+  }
+
 }
