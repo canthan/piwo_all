@@ -22,18 +22,12 @@ import {
   EDIT_STASH_CONFIG_SUCCESS,
   EDIT_STASH_CONFIG_FAILURE,
 } from './../constants/app.action.types';
-import { getSummaryFromStashes, removeSummaryByName } from './summary.actions';
-import { getStashesFromUserData, removeStashesByName } from './stashes.actions';
+import { getSummaryFromStashes, removeSummaryByName, editSummaryNames } from './summary.actions';
+import { getStashesFromUserData, removeStashesByName, editStashNames } from './stashes.actions';
 import { getBatchesFromUserData } from './batches.actions';
-import { UserData, AppState, User, UserProfileFields, StashConfig } from './../types/app.types';
+import { UserData, AppState, User, UserProfileFields, StashConfig, ChangeStashConfigResponse } from './../types/app.types';
 import { ReduxAction, Response, AsyncAction } from '../types/common.types';
 import { Endpoints } from '../constants/endpoint.constants';
-
-interface ChangeStashConfigResponse {
-  stashConfig: StashConfig[],
-  deletedStashes: number,
-  deletedStashNames: string[],
-}
 
 export const getUserDataRequest = (): AnyAction => ({
   type: GET_USER_DATA_REQUEST,
@@ -132,11 +126,17 @@ export const changeStashConfigAsync = (userId: string, stashConfig: StashConfig[
       `${CONFIG.USERS_API}/${userId}`,
       { stashConfig },
     );
-    const { stashConfig: returnedStashConfig, deletedStashes, deletedStashNames } = response.data.data;
+    const { stashConfig: returnedStashConfig, removedStashesNo, editedStashesNo, removedStashNames, editedStashNames } = response.data.data;
 
-    if (deletedStashes) dispatch(removeStashesByName(deletedStashNames));
+    if (removedStashesNo) {
+      dispatch(removeStashesByName(removedStashNames));
+      dispatch(removeSummaryByName(removedStashNames));
+    }
 
-    dispatch(removeSummaryByName(deletedStashNames));
+    if (editedStashesNo) {
+      dispatch(editStashNames(editedStashNames));
+      dispatch(editSummaryNames(editedStashNames));
+    }
 
     return dispatch(changeStashConfigSuccess(returnedStashConfig));
   } catch (error) {

@@ -26,6 +26,19 @@ export interface StashConfig {
   cratesTotal: number;
 }
 
+export interface ChangeStashConfigResponse {
+  stashConfig: StashConfig[],
+  removedStashesNo: number,
+  editedStashesNo: number,
+  removedStashNames: string[],
+  editedStashNames: EditedStashName[],
+}
+
+export interface EditedStashName {
+  newName: string;
+  oldName: string;
+}
+
 export type UserProfileFields = Partial<User>
 
 export interface UserData extends User {

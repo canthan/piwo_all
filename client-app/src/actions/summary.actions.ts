@@ -4,8 +4,9 @@ import {
   GET_SUMMARY_FROM_STASHES,
   CHANGE_SUMMARY_CRATES,
   REMOVE_SUMMARY_BY_NAME,
+  EDIT_SUMMARY_NAMES,
 } from './../constants/summary.action.types';
-import { StashConfig } from './../types/app.types';
+import { StashConfig, EditedStashName } from './../types/app.types';
 import { Stash, StashSummary } from '../types/storage.types';
 import { ReduxAction } from '../types/common.types';
 
@@ -22,6 +23,14 @@ export const getSummaryFromStashes = (stashes: Stash[], stashConfig: StashConfig
 export const removeSummaryByName = (names: string[]): ReduxAction<string[]> => ({
   type: REMOVE_SUMMARY_BY_NAME,
   payload: names.map(name => name.toLocaleUpperCase()),
+})
+
+export const editSummaryNames = (editedNames: EditedStashName[]): ReduxAction<EditedStashName[]> => ({
+  type: EDIT_SUMMARY_NAMES,
+  payload: editedNames.map(names => ({
+    newName: names.newName.toLocaleUpperCase(),
+    oldName: names.oldName.toLocaleUpperCase(),
+  })),
 })
 
 // export const addStashesSummary = (summary: StashSummary[], stashConfig: StashConfig[]): ReduxAction<StashSummary[]> => {

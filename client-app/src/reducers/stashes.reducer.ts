@@ -10,11 +10,13 @@ import {
   DELETE_STASH_FAILURE,
   GET_STASHES_FROM_USER_DATA,
   REMOVE_STASHES_BY_NAME,
+  EDIT_STASH_NAMES,
 } from './../constants/stashes.action.types';
 import { DELETE_BATCH_SUCCESS } from './../constants/batches.actions.types';
 import { Stash, StashesState } from '../types/storage.types';
 
 import { createConditionalSliceReducer } from './utils';
+import { EditedStashName } from '../types/app.types';
 
 export const initialStashesState = {
   stashes: {
@@ -31,6 +33,16 @@ const updateStashes = (stashes: Stash[], updatedStashes: Stash[]): Stash[] => {
 
   return stashes;
 };
+
+const changeStashNames = (summary: Stash[], editedStashNames: EditedStashName[]): Stash[] => {
+  return summary.map(stash => {
+    const edited = editedStashNames.find(editedStash => editedStash.oldName === stash.name.toLocaleUpperCase());
+
+    return edited
+      ? { ...stash, name: edited.newName }
+      : stash
+  })
+}
 
 const stashesReducerMapping = () => ({
   [DELETE_STASH_REQUEST]: (state: StashesState) => ({ ...state }),
@@ -81,6 +93,10 @@ const stashesReducerMapping = () => ({
     ...{
       stashes: state.stashes.filter(stash => !removedStashNames.includes(stash.name.toLocaleUpperCase()))
     },
+  }),
+  [EDIT_STASH_NAMES]: (state: StashesState, editedStashNames: EditedStashName[]) => ({
+    ...state,
+    ...{ stashes: changeStashNames(state.stashes, editedStashNames) },
   })
 });
 

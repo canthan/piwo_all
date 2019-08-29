@@ -12,10 +12,12 @@ import {
   DELETE_STASH_FAILURE,
   GET_STASHES_FROM_USER_DATA,
   REMOVE_STASHES_BY_NAME,
+  EDIT_STASH_NAMES,
 } from './../constants/stashes.action.types';
 import { CONFIG } from './../config/config';
 import { Stash } from '../types/storage.types';
 import { ReduxAction, AsyncAction, Response } from '../types/common.types';
+import { EditedStashName } from '../types/app.types';
 
 export const addStashRequest = (): ReduxAction<undefined> => ({
   type: ADD_STASH_REQUEST,
@@ -62,6 +64,14 @@ export const deleteStashFailure = (error: AxiosError): ReduxAction<AxiosError> =
 export const removeStashesByName = (names: string[]): ReduxAction<string[]> => ({
   type: REMOVE_STASHES_BY_NAME,
   payload: names.map(name => name.toLocaleUpperCase()),
+})
+
+export const editStashNames = (editedNames: EditedStashName[]): ReduxAction<EditedStashName[]> => ({
+  type: EDIT_STASH_NAMES,
+  payload: editedNames.map(names => ({
+    newName: names.newName.toLocaleUpperCase(),
+    oldName: names.oldName.toLocaleUpperCase(),
+  })),
 })
 
 export const getStashesFromUserData = (stashes: Stash[]): ReduxAction<Stash[]> => ({
