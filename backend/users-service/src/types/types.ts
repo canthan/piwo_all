@@ -52,8 +52,18 @@ export interface StashConfig {
   cratesTotal: number;
 }
 
-export interface StashConfigDeleted extends StashConfig {
+export interface StashConfigEdited extends StashConfig {
   deleted?: boolean;
+  oldName?: string;
+}
+
+export interface StashConfigEditedName extends StashConfigEdited {
+  oldName: string;
+}
+
+export interface EditedStashName {
+  newName: string;
+  oldName: string;
 }
 
 export interface User extends UserOutDTO {

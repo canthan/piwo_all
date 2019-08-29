@@ -14,8 +14,8 @@ import { StashesService } from '../services/stashes.service';
 import { removePassword, mapUserOutDTO } from '../services/mapper.service';
 import { generateJwt } from '../services/token.utils';
 
-import { AnyFunction } from '../types/types';
-import { StashConfigDeleted } from './../types/types';
+import { AnyFunction, StashConfigEditedName, EditedStashName } from '../types/types';
+import { StashConfigEdited } from './../types/types';
 import { ErrorText } from '../constants/messeges';
 
 const logger = getLogger();
@@ -114,7 +114,7 @@ export class UsersController {
   ): Promise<void> => {
     try {
       const { userId } = ctx.params;
-      const { stashConfig }: { stashConfig: StashConfigDeleted[] } = ctx.request.body;
+      const { stashConfig }: { stashConfig: StashConfigEdited[] } = ctx.request.body;
 
       const user = await UsersService.getUserById(userId);
       if (!user) {
@@ -122,12 +122,21 @@ export class UsersController {
       }
 
       const removedStashes = stashConfig.filter(stash => stash.deleted);
-      let deletedStashes = 0;
-      const deletedStashNames: string[] = [];
+      const editedStashes = stashConfig.filter(stash => stash.oldName);
 
-      await asyncForEach(removedStashes, async (stash: StashConfigDeleted) => {
-        deletedStashes += +(await this.stashesService.removeStashesByName(stash.name));
-        deletedStashNames.push(stash.name);
+      let removedStashesNo = 0;
+      let editedStashesNo = 0;
+      const removedStashNames: string[] = [];
+      const editedStashNames: EditedStashName[] = [];
+
+      await asyncForEach(removedStashes, async (stash: StashConfigEdited) => {
+        removedStashesNo += +(await this.stashesService.removeStashesByName(stash.name));
+        removedStashNames.push(stash.name);
+      });
+
+      await asyncForEach(editedStashes, async (stash: StashConfigEditedName) => {
+        editedStashesNo += (await this.stashesService.updateStashName(stash.name, stash.oldName));
+        editedStashNames.push({ newName: stash.name, oldName: stash.oldName });
       });
 
       const editedUser = await UsersService.updateStashConfig(userId, stashConfig.filter(stash => !stash.deleted));
@@ -135,8 +144,10 @@ export class UsersController {
       ctx.body = {
         status: HTTP_STATUS.OK,
         data: {
-          deletedStashes,
-          deletedStashNames,
+          removedStashesNo,
+          editedStashesNo,
+          removedStashNames,
+          editedStashNames,
           stashConfig: editedUser.stashConfig,
         },
       }

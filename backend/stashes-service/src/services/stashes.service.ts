@@ -116,4 +116,22 @@ export class StashesService {
 
     return deletedStashes.n || 0;
   }
+
+  public static async editStashName(newName: string, oldName: string): Promise<number> {
+    const editedStashes = await StashModel.updateMany(
+      {
+        name: {
+          $regex: `^${oldName}$`,
+          $options: 'i',
+        },
+      },
+      { name: newName }
+    ).exec();
+
+    if (!editedStashes.ok) {
+      throw new Exceptions.NotFoundException(`Can't find any stash with name: ${oldName}`);
+    }
+
+    return editedStashes.n || 0;
+  }
 }

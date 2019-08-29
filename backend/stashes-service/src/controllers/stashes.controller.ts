@@ -193,4 +193,21 @@ export class StashesController {
       ctx.throw(ctx.status, error);
     }
   };
+
+  public editStashName = async (ctx: Context, next: AnyFunction): Promise<void> => {
+    try {
+      const { newName, oldName } = ctx.request.body;
+
+      logger.info(`Changing stash name from ${oldName} to ${newName}`);
+
+      const editedStashesNo: number = await StashesService.editStashName(newName, oldName);
+
+      ctx.body = !!editedStashesNo
+        ? { data: { editedStashesNo }, status: HTTP_STATUS.OK }
+        : { data: { editedStashesNo }, status: HTTP_STATUS.NO_CONTENT };
+
+    } catch (error) {
+      ctx.throw(ctx.status, error);
+    }
+  };
 }

@@ -1,12 +1,12 @@
 import { AxiosResponse } from 'axios';
 
-import { Stash } from '../types/types';
+import { NotFoundException } from '../common/exceptions/not-found.exception';
 import config, { AppConfig } from '../common/utils/config.loader';
 
-import axiosInstance from '../utils/axios';
-import { NotFoundException } from '../common/exceptions/not-found.exception';
-import { StashModel } from '../models/stashes.model';
 import { mapStashOutDTO } from './mapper.service';
+import axiosInstance from '../utils/axios';
+import { StashModel } from '../models/stashes.model';
+import { Stash } from '../types/types';
 
 export class StashesService {
   public async getStashesByUserId(userId: string): Promise<Stash[]> {
@@ -37,6 +37,21 @@ export class StashesService {
       )
 
       return response.data.data.removedStashes;
+
+    } catch (error) {
+      throw new NotFoundException(error.response.data.message);
+    }
+  }
+
+  public async updateStashName(newName: string, oldName: string): Promise<number> {
+    try {
+      const requestUrl = `${config.get(AppConfig.STASHES_SERVICE_URI)}/stashByName`;
+      const response: AxiosResponse<{ data: { editedStashesNo: number } }> = await axiosInstance.patch(
+        requestUrl,
+        { newName, oldName }
+      )
+
+      return response.data.data.editedStashesNo;
 
     } catch (error) {
       throw new NotFoundException(error.response.data.message);
