@@ -16,7 +16,7 @@ import {
 } from './../constants/stashes.action.types';
 import { CONFIG } from './../config/config';
 import { Stash } from '../types/storage.types';
-import { ReduxAction, AsyncAction, Response } from '../types/common.types';
+import { ReduxAction, AsyncAction } from '../types/common.types';
 import { EditedStashName } from '../types/app.types';
 
 export const addStashRequest = (): ReduxAction<undefined> => ({
@@ -84,11 +84,11 @@ export const deleteStashAsync = (userId: string, stashId: string): AsyncAction =
 ) => {
   dispatch(deleteStashRequest());
   try {
-    const response = await Axios.delete(
+    const response: AxiosResponse<{stashId: string}> = await Axios.delete(
       `${CONFIG.STASHES_API}/${stashId}`
     );
 
-    return dispatch(deleteStashSuccess(response.data.data.stashId));
+    return dispatch(deleteStashSuccess(response.data.stashId));
   } catch (error) {
     return dispatch(deleteStashFailure(error));
   }
@@ -99,11 +99,11 @@ export const addStashAsync = (userId: string, batchId: string, name: string): As
 ) => {
   dispatch(addStashRequest());
   try {
-    const response: AxiosResponse<Response<Stash>> = await Axios.post(
+    const response: AxiosResponse<Stash> = await Axios.post(
       `${CONFIG.STASHES_API}/${userId}/${batchId}`,
       { name }
     );
-    const newStashResponse: Stash = { ...response.data.data };
+    const newStashResponse: Stash = { ...response.data };
 
     return dispatch(addStashSuccess(newStashResponse));
   } catch (error) {
@@ -116,11 +116,11 @@ export const updateStashesAsync = (userId: string, batchId: string, stashes: Sta
 ) => {
   dispatch(updateStashesRequest());
   try {
-    const response: AxiosResponse<Response<Stash[]>> = await Axios.put(
+    const response: AxiosResponse<Stash[]> = await Axios.put(
       `${CONFIG.STASHES_API}/${userId}/${batchId}`,
       { stashes }
     );
-    const updatedStashes: Stash[] = [...response.data.data];
+    const updatedStashes: Stash[] = response.data;
 
     return dispatch(updateStashesSuccess(updatedStashes));
   } catch (error) {

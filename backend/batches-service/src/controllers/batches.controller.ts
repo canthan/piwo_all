@@ -16,10 +16,7 @@ export class BatchesController {
       logger.info(`Test batches`);
       logger.info(ctx);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: 'hello, batches!',
-      };
+      ctx.body = 'hello, batches!';
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
@@ -33,10 +30,7 @@ export class BatchesController {
 
       logger.info(`Got ${batches.length} batches`);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: batches,
-      };
+      ctx.body = { batches };
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
@@ -50,10 +44,8 @@ export class BatchesController {
 
       logger.info(`Got ${batches.length} batches`);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: batches,
-      };
+      ctx.body = { batches }
+
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
@@ -69,12 +61,11 @@ export class BatchesController {
 
       logger.info(`Batch ${batch.batchId} saved`);
 
-      ctx.body = !!batch
-        ? { status: HTTP_STATUS.CREATED, data: batch }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: 'Something went wrong' };
+      ctx.status = HTTP_STATUS.CREATED;
+      ctx.body = { ...batch };
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'Something went wrong, cannot add new batch');
     }
   };
 
@@ -93,12 +84,10 @@ export class BatchesController {
       if (!!batch) {
         logger.info(`Batch ${batch.batchId} updated`);
       }
-      ctx.body = !!batch
-        ? { status: HTTP_STATUS.OK, data: batch }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: 'That batch does not exist' };
+      ctx.body = batch;
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That batch does not exist');
     }
   };
 
@@ -127,11 +116,10 @@ export class BatchesController {
         deletedRecords.batchIds.push(removedBatch)
       }
 
-      ctx.body = !!removedBatch
-        ? { status: HTTP_STATUS.OK, data: deletedRecords }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: 'That batch does not exist' };
+      ctx.body = { deletedRecords };
+
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That batch does not exist');
     }
   };
 }

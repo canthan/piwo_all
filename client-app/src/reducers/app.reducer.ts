@@ -69,6 +69,7 @@ const appReducerMapping = () => ({
         firstname: payload.user.firstname,
         surname: payload.user.surname,
         email: payload.user.email,
+        stashConfig: payload.user.stashConfig,
       },
     },
   }),

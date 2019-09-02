@@ -24,10 +24,7 @@ export class CombinedController {
       const user = await UsersService.getUserById(id);
       logger.info(`Got ${user.username} user`);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: user,
-      };
+      ctx.body = { data: user };
 
     } catch (error) {
       ctx.throw(ctx.status, error);
@@ -47,11 +44,11 @@ export class CombinedController {
 
       const { email, firstname, registrationDate, surname, userId, username, stashConfig } = user
       const outputData: UserData = {
-        email, 
-        firstname, 
-        registrationDate, 
-        surname, 
-        userId, 
+        email,
+        firstname,
+        registrationDate,
+        surname,
+        userId,
         username,
         batches,
         stashes,
@@ -60,10 +57,8 @@ export class CombinedController {
 
       logger.info(`Got ${outputData.firstname} ${outputData.surname} data`);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: outputData,
-      };
+      ctx.body = outputData;
+
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
@@ -73,11 +68,8 @@ export class CombinedController {
     try {
       logger.info(`Test combined`);
       logger.info(ctx);
-      
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: 'hello, combined!',
-      };
+
+      ctx.body = { data: 'hello, combined!' };
     } catch (error) {
       ctx.throw(ctx.status, error);
     }

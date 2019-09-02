@@ -62,12 +62,9 @@ export class UsersController {
 
         // to be changed to handle tokens correctly
         ctx.body = {
-          status: HTTP_STATUS.OK,
-          data: {
-            ...removePassword(mapUserOutDTO(user)),
-            refreshToken,
-            token,
-          },
+          ...removePassword(mapUserOutDTO(user)),
+          refreshToken,
+          token,
         };
       } else {
         throw new UnauthorizedException(ErrorText.WRONG_PASSWORD);
@@ -98,10 +95,7 @@ export class UsersController {
       });
 
       ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: {
-          ...removePassword(editedUser),
-        },
+        ...removePassword(editedUser),
       }
     } catch (error) {
       ctx.throw(ctx.status, error);
@@ -126,10 +120,7 @@ export class UsersController {
       const editedUser = await UsersService.updateStashConfig(userId, stashConfig.filter(stash => !stash.deleted));
 
       ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: {
-          removedStashesNo, editedStashesNo, removedStashNames, editedStashNames, stashConfig: editedUser.stashConfig,
-        },
+        removedStashesNo, editedStashesNo, removedStashNames, editedStashNames, stashConfig: editedUser.stashConfig,
       }
     } catch (error) {
       ctx.throw(ctx.status, error);
@@ -149,10 +140,7 @@ export class UsersController {
       }
 
       // to add token management
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: {},
-      }
+      ctx.status = HTTP_STATUS.NO_CONTENT;
 
     } catch (error) {
       ctx.throw(ctx.status, error);
@@ -248,5 +236,4 @@ export class UsersController {
 
     return { editedStashesNo, editedStashNames };
   }
-
 }

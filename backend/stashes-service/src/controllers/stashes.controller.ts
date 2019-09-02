@@ -51,12 +51,9 @@ export class StashesController {
 
       logger.info(`Got ${stashes.length} stashes`);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: stashes,
-      };
+      ctx.body = { stashes };
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'something went wrong while getting stashes');
     }
   };
 
@@ -98,10 +95,8 @@ export class StashesController {
       logger.info(`Getting stashes ${stashName}`);
       const stashes = await StashesService.getStashByName(stashName);
 
-      ctx.body = {
-        status: HTTP_STATUS.OK,
-        data: stashes,
-      };
+      ctx.body = { stashes };
+
     } catch (error) {
       ctx.throw(ctx.status, error);
     }
@@ -124,12 +119,11 @@ export class StashesController {
 
       logger.info(`Stash ${stash.stashId} saved`);
 
-      ctx.body = !!stash
-        ? { status: HTTP_STATUS.CREATED, data: stash }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: 'Something went wrong' };
+      ctx.status = HTTP_STATUS.CREATED;
+      ctx.body = stash;
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'Something went wrong while adding stash');
     }
   };
 
@@ -151,12 +145,10 @@ export class StashesController {
         }
 
       });
-      ctx.body = !!updatedStashes
-        ? { status: HTTP_STATUS.OK, data: updatedStashes }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: 'That stash does not exist' };
+      ctx.body = updatedStashes;
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That stash does not exist');
     }
   };
 
@@ -167,13 +159,12 @@ export class StashesController {
       logger.info(`Removing stash ${stashId}`);
 
       const removedStashId: number = await StashesService.deleteStashById(stashId);
+      console.log(removedStashId);
 
-      ctx.body = !!removedStashId
-        ? { status: HTTP_STATUS.OK, data: { stashId: removedStashId } }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: 'That stash does not exist' };
+      ctx.body = { stashId: removedStashId };
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That stash does not exist');
     }
   };
 
@@ -183,11 +174,9 @@ export class StashesController {
 
       logger.info(`Removing all stashes with name ${stashName}`);
 
-      const removedStashes: number = await StashesService.deleteStashesByName(stashName);
+      const removedStashesNo: number = await StashesService.deleteStashesByName(stashName);
 
-      ctx.body = !!removedStashes
-        ? { data: { removedStashes }, status: HTTP_STATUS.OK }
-        : { status: HTTP_STATUS.BAD_REQUEST, message: `There are no stashes with name ${stashName}` };
+      ctx.body = !!removedStashesNo ? { removedStashesNo } : { removedStashesNo: 0 };
 
     } catch (error) {
       ctx.throw(ctx.status, error);
@@ -202,9 +191,7 @@ export class StashesController {
 
       const editedStashesNo: number = await StashesService.editStashName(newName, oldName);
 
-      ctx.body = !!editedStashesNo
-        ? { data: { editedStashesNo }, status: HTTP_STATUS.OK }
-        : { data: { editedStashesNo }, status: HTTP_STATUS.NO_CONTENT };
+      ctx.body = !!editedStashesNo ? { editedStashesNo } : { editedStashesNo: 0 };
 
     } catch (error) {
       ctx.throw(ctx.status, error);

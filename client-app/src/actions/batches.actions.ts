@@ -17,7 +17,7 @@ import {
 } from './../constants/batches.actions.types';
 import { CONFIG } from '../config/config';
 import { Batch, EmptyBatch, DeletedRecords } from '../types/storage.types';
-import { ReduxAction, AsyncAction, Response } from '../types/common.types';
+import { ReduxAction, AsyncAction } from '../types/common.types';
 
 export const getBatchesDataRequest = (): ReduxAction<undefined> => ({
   type: GET_USER_STORAGE_REQUEST,
@@ -98,10 +98,10 @@ export const deleteBatchAsync = (userId: string, batchId: string): AsyncAction =
 ) => {
   dispatch(deleteBatchRequest());
   try {
-    const response: AxiosResponse<{ data: DeletedRecords }> = await Axios.delete(
+    const response: AxiosResponse<{ deletedRecords: DeletedRecords }> = await Axios.delete(
       `${CONFIG.BATCHES_API}/${userId}/${batchId}`
     );
-    const deletedBatch = response.data.data.batchIds.find(
+    const deletedBatch = response.data.deletedRecords.batchIds.find(
       (removedbatchId: string) => removedbatchId === batchId
     );
 
@@ -118,11 +118,11 @@ export const addBatchAsync = (userId: string, newBatch: EmptyBatch): AsyncAction
 ) => {
   dispatch(addBatchRequest());
   try {
-    const response: AxiosResponse<Response<Batch>> = await Axios.post(
+    const response: AxiosResponse<Batch> = await Axios.post(
       `${CONFIG.BATCHES_API}/${userId}`,
       newBatch
     );
-    const newBatchResponse = response.data.data;
+    const newBatchResponse = response.data;
 
     return dispatch(addBatchSuccess(newBatchResponse));
   } catch (error) {
@@ -135,11 +135,11 @@ export const editBatchDataAsync = (userId: string, batchId: string, batchData: E
 ) => {
   dispatch(editBatchDataRequest());
   try {
-    const response: AxiosResponse<Response<Batch>> = await Axios.put(
+    const response: AxiosResponse<Batch> = await Axios.put(
       `${CONFIG.BATCHES_API}/${userId}/${batchId}`,
       { batch: batchData }
     );
-    const updatedBatch: Batch = response.data.data;
+    const updatedBatch: Batch = response.data;
 
     return dispatch(editBatchDataSuccess(updatedBatch));
   } catch (error) {

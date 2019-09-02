@@ -12,13 +12,15 @@ export class StashesService {
   public async getStashesByUserId(userId: string): Promise<Stash[]> {
     try {
       const requestUrl = `${config.get(AppConfig.STASHES_SERVICE_URI)}/user/${userId}`;
-      const response = await axiosInstance.get<{ data: StashModel[] }>(
+      const response: AxiosResponse<{ stashes: StashModel[] }> = await axiosInstance.get(
         requestUrl,
         {
           data: { userId },
         }
-      );
-      const stashes = response.data.data.map(stash => mapStashOutDTO(stash));
+        );
+        console.log(response.data);
+      const stashes = response.data.stashes.map(stash => mapStashOutDTO(stash));
+
 
       return stashes;
     } catch (error) {
@@ -29,14 +31,14 @@ export class StashesService {
   public async removeStashesByName(stashName: string): Promise<number> {
     try {
       const requestUrl = `${config.get(AppConfig.STASHES_SERVICE_URI)}/stashByName/${stashName}`;
-      const response: AxiosResponse<{ data: { removedStashes: number } }> = await axiosInstance.delete(
+      const response: AxiosResponse<{ removedStashesNo: number }> = await axiosInstance.delete(
         requestUrl,
         {
           data: { stashName },
         }
       )
 
-      return response.data.data.removedStashes;
+      return response.data.removedStashesNo;
 
     } catch (error) {
       throw new NotFoundException(error.response.data.message);
@@ -46,12 +48,12 @@ export class StashesService {
   public async updateStashName(newName: string, oldName: string): Promise<number> {
     try {
       const requestUrl = `${config.get(AppConfig.STASHES_SERVICE_URI)}/stashByName`;
-      const response: AxiosResponse<{ data: { editedStashesNo: number } }> = await axiosInstance.patch(
+      const response: AxiosResponse<{ editedStashesNo: number }> = await axiosInstance.patch(
         requestUrl,
         { newName, oldName }
       )
 
-      return response.data.data.editedStashesNo;
+      return response.data.editedStashesNo;
 
     } catch (error) {
       throw new NotFoundException(error.response.data.message);

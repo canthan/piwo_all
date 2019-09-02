@@ -26,7 +26,7 @@ import { getSummaryFromStashes, removeSummaryByName, editSummaryNames } from './
 import { getStashesFromUserData, removeStashesByName, editStashNames } from './stashes.actions';
 import { getBatchesFromUserData } from './batches.actions';
 import { UserData, AppState, User, UserProfileFields, StashConfig, ChangeStashConfigResponse } from './../types/app.types';
-import { ReduxAction, Response, AsyncAction } from '../types/common.types';
+import { ReduxAction, AsyncAction } from '../types/common.types';
 import { Endpoints } from '../constants/endpoint.constants';
 
 export const getUserDataRequest = (): AnyAction => ({
@@ -53,10 +53,11 @@ export const getUserDataAsync = (userId: string): AsyncAction => async (
 ) => {
   dispatch(getUserDataRequest());
   try {
-    const response: AxiosResponse<Response<UserData>> = await http.get(
+    const response: AxiosResponse<UserData> = await http.get(
       `${CONFIG.COMBINED_DATA_API}/${userId}`,
     );
-    const userData = response.data.data;
+    const userData = response.data;
+    
     dispatch(getUserDataSuccess(userData));
     dispatch(getBatchesFromUserData(sortByNumber(userData.batches, "batchNo")));
     dispatch(getStashesFromUserData(userData.stashes));
@@ -91,11 +92,11 @@ export const loginAsync = (email: string, password: string, register = false): A
 ) => {
   dispatch(loginRequest());
   try {
-    const response: AxiosResponse<Response<UserData>> = await Axios.post(
+    const response: AxiosResponse<UserData> = await Axios.post(
       `${CONFIG.USERS_API}/${register ? Endpoints.register : Endpoints.login}`,
       { email, password },
     );
-    const userData = response.data.data;
+    const userData = response.data;
 
     return dispatch(loginSuccess(userData));
   } catch (error) {
@@ -122,21 +123,16 @@ export const changeStashConfigAsync = (userId: string, stashConfig: StashConfig[
 ) => {
   dispatch(changeStashConfigRequest());
   try {
-    const response: AxiosResponse<Response<ChangeStashConfigResponse>> = await Axios.patch(
+    const response: AxiosResponse<ChangeStashConfigResponse> = await Axios.patch(
       `${CONFIG.USERS_API}/${userId}`,
       { stashConfig },
     );
-    const { stashConfig: returnedStashConfig, removedStashesNo, editedStashesNo, removedStashNames, editedStashNames } = response.data.data;
+    const { stashConfig: returnedStashConfig, removedStashesNo, editedStashesNo, removedStashNames, editedStashNames } = response.data;
 
-    if (removedStashesNo) {
-      dispatch(removeStashesByName(removedStashNames));
-      dispatch(removeSummaryByName(removedStashNames));
-    }
-
-    if (editedStashesNo) {
-      dispatch(editStashNames(editedStashNames));
-      dispatch(editSummaryNames(editedStashNames));
-    }
+    if (removedStashesNo) dispatch(removeStashesByName(removedStashNames));
+    if (removedStashNames.length) dispatch(removeSummaryByName(removedStashNames));
+    if (editedStashesNo) dispatch(editStashNames(editedStashNames));
+    if (editedStashNames.length) dispatch(editSummaryNames(editedStashNames));
 
     return dispatch(changeStashConfigSuccess(returnedStashConfig));
   } catch (error) {
@@ -162,7 +158,7 @@ export const logoutAsync = (email: string): AsyncAction => async (
 ) => {
   dispatch(logoutRequest());
   try {
-    const response: AxiosResponse<Response<UserData>> = await Axios.post(
+    await Axios.post(
       `${CONFIG.USERS_API}/${Endpoints.logout}`,
       { email }
     );
@@ -198,11 +194,11 @@ export const editProfileAsync = (user: UserProfileFields): AsyncAction => async 
 ) => {
   dispatch(editProfileRequest());
   try {
-    const response: AxiosResponse<Response<UserData>> = await Axios.put(
+    const response: AxiosResponse<UserData> = await Axios.put(
       `${CONFIG.USERS_API}/${Endpoints.editProfile}`,
       { user }
     );
-    const userData = response.data.data;
+    const userData = response.data;
 
     return dispatch(editProfileSuccess(userData));
   } catch (error) {
