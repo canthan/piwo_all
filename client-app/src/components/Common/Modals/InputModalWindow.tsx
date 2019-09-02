@@ -10,12 +10,16 @@ interface Props {
   body: string;
   onConfirm: AnyFunction;
   onCancel: AnyFunction;
+  forbibben?: string[];
+  caseSensitive?: boolean;
+  maxLength?: number;
 }
 
 export function InputModalWindow(props: Props) {
-
+  const { caseSensitive = false, maxLength = 50 } = props;
   const [show, setShow] = useState<boolean>(true);
   const [value, setValue] = useState<string>('');
+  const [valid, checkValidity] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -36,7 +40,22 @@ export function InputModalWindow(props: Props) {
   }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(event.target.value);
+    const { value } = event.target;
+    setValue(value);
+    if (props.forbibben) {
+      checkValidity(value !== '' && caseSensitive
+        ? !props.forbibben.includes(value)
+        : !props.forbibben.find(name => name.toLocaleUpperCase() === value.toLocaleUpperCase())
+      );
+    } else {
+      checkValidity(value !== '');
+    }
+  }
+
+  const handleKey = (e: React.KeyboardEvent) => {
+    if (valid && e.key === 'Enter') {
+      handleConfirm();
+    }
   }
 
   return (
@@ -54,11 +73,20 @@ export function InputModalWindow(props: Props) {
           value={value}
           ref={inputRef}
           onChange={handleChange}
+          onKeyUp={(e) => handleKey(e)}
+          maxLength={maxLength}
         />
+        <div className="error-text">{
+          !valid
+            ? !value
+              ? <span>Field cannot be empty</span>
+              : <span>Name already exists</span>
+            : null
+        }</div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-        <Button variant="primary" onClick={handleConfirm} disabled={!value}>Confirm</Button>
+        <Button variant="primary" type="submit" onClick={handleConfirm} disabled={!valid}>Confirm</Button>
       </Modal.Footer>
     </Modal>
   );

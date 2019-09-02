@@ -145,6 +145,7 @@ export function StashConfigModalWindow(props: Props) {
           ? <InputModalWindow
             title={"Add new Stash"}
             body={`Please enter new stash name:`}
+            forbibben={props.config.map(stash => stash.oldName ? stash.oldName : stash.name)}
             onConfirm={(value: string) => addStashField(value)}
             onCancel={() => openNewStashModal(false)}
           />
