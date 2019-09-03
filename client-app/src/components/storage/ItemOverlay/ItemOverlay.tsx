@@ -11,7 +11,7 @@ export function ItemOverlay(props: Props) {
       <div className="itemOverlay">
         <div className="item">
           {props.children
-            ? <div>{props.children}</div>
+            ? <>{props.children}</>
             : <>
               <h3>Loading batch...</h3>
               <div className="item__loader">

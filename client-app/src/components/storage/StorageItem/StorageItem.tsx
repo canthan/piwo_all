@@ -200,7 +200,7 @@ export class ItemComponent extends React.Component<Props, State> {
 
     return (
       <>
-        <div className={this.state.modified ? 'modified' : ''}>
+        <div className={this.state.modified ? 'modified ' : '' + '--full-width'}>
           {this.state.edited ? (
             <EmptyHeaderComponent
               name={this.state.editedBatchData.name}
