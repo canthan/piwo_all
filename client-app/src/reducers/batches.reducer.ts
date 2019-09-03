@@ -34,7 +34,7 @@ const batchesReducerMapping = (): ReducerFunctionMap => ({
   [GET_USER_STORAGE_REQUEST]: (state: BatchesState) => ({ ...state }),
   [ADD_BATCH_SUCCESS]: (state: BatchesState, newBatch: Batch) => ({
     ...state,
-    ...{ batches: [...state.batches, newBatch] },
+    ...{ batches: [newBatch, ...state.batches] },
   }),
   [EDIT_BATCH_DATA_SUCCESS]: (state: BatchesState, editedBatch: Batch) => {
     editedBatch.stashes = getStashesFromBatch(

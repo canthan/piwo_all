@@ -50,11 +50,15 @@ export class EmptyItemComponent extends React.Component<Props, EmptyBatch> {
   }
 }
 
+const actions = {
+  addBatchAsync
+};
+
 const mapStateToProps = (state: OverallAppState) => ({
   userId: state.app.user.userId,
 });
 
 export default connect(
   mapStateToProps,
-  { addBatchAsync }
+  actions
 )(EmptyItemComponent);
