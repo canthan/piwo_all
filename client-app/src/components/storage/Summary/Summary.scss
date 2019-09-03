@@ -4,20 +4,34 @@
   background-color: $background-secondary;
   padding-top: 6px;
   padding-bottom: 1px;
+  
+  &__toggle {
+    background-color: $background-secondary;    
+    font-weight: bold;
+    padding-bottom: 3px;
+  }
 
   &__line {
     background-color: $row-distinction;
-  }
+    
+    &__button {
+      cursor: pointer;
 
+      &__icon {
+        padding-left: 5px;
+      }
+    }
+  }
+  
   &__list {
     list-style: none;
     display: flex;
-
+    
     li {
       display: block;
       font-size: 1em;
-      font-weight: bold;
       text-transform: capitalize;
+      font-weight: bold;
     }  
   }
 }
