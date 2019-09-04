@@ -53,9 +53,10 @@ export interface BatchOutDTO {
   batchNo: string;
   name: string;
   bottledOn: Date | string;
-  litres: number;
-  bottles: number;
-  crates: number;
+  quantityLitres: number;
+  quantityBottles: number;
+  quantityBottlesSmall: number;
+  quantityCrates: number;
   stashes: Stash[];
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faBoxes } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBoxes, faTable } from '@fortawesome/free-solid-svg-icons'
 
 import { CustomToggleWrapper } from '../../Common/CustomToggleWrapper/CustomToggleWrapper';
 import { IconAndText, defaultIconAndTextConfig } from '../../Common/IconAndText/IconAndText';
@@ -30,6 +30,7 @@ export const Menu = (props: Props) => {
       </Dropdown.Toggle>
       <Dropdown.Menu>
         <Dropdown.Item onClick={() => props.onClick(Routes.storage)}><FontAwesomeIcon icon={faBoxes} /> Storage</Dropdown.Item>
+        <Dropdown.Item onClick={() => props.onClick(Routes.storageTable)}><FontAwesomeIcon icon={faTable} /> Table view</Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
   )

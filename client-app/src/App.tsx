@@ -15,6 +15,7 @@ import { Callback } from './components/Auth/Callback';
 import { OverallAppState } from './reducers/initialState';
 
 import './App.scss';
+import TableViewComponent from './components/TableView/TableView';
 
 type Props = RouterProps;
 
@@ -28,6 +29,7 @@ export function App(props: Props) {
         <Route path='/callback' render={props => <Callback auth={auth} {...props} />} />
         <Route path='/' exact render={props => <Login auth={auth} {...props} />} />
         <ProtectedRoute path='/storage' exact render={props => <StorageComponent auth={auth} {...props} />} />
+        <ProtectedRoute path='/storageTable' exact render={props => <TableViewComponent auth={auth} {...props} />} />
         <ProtectedRoute path='/profile' exact render={props => <UserProfile auth={auth} {...props} />} />
         <Route component={NotFound} />
       </Switch>

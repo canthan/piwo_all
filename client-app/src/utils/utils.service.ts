@@ -7,4 +7,4 @@ export const sortByNumber = <T, K extends keyof T>(array: T[], value: K): T[] =>
 export const isObjectEmpty = (obj: object): boolean => !Object.entries(obj).length;
 
 export const getCurrentDate = (): Date => dayjs().toDate();
-export const dateInStandardFormat = (date: Date): string => dayjs(date).format(DEFAULT_DATE_FORMAT);
+export const dateInStandardFormat = (date: Date | string): string => dayjs(date).format(DEFAULT_DATE_FORMAT);

@@ -27,12 +27,13 @@ export const initialStashSummary: StashSummary = {
 
 
 export const initialBatch: BatchOutDTO = {
-  bottledOn: new Date(),
+  bottledOn: dayjs().toDate(),
   name: 'aaa',
   batchNo: '1',
-  litres: 0,
-  bottles: 0,
-  crates: 0,
+  quantityLitres: 0,
+  quantityBottles: 0,
+  quantityBottlesSmall: 0,
+  quantityCrates: 0,
   stashes: [],
 }
 

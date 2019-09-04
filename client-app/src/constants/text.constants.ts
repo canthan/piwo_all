@@ -10,6 +10,7 @@ export enum ErrorMessages {
 
 export enum HeaderTitles {
   storage = 'Storage',
+  storageTable = 'Storage Table View',
   login = 'Login',
   userProfile = 'User Profile',
   notExist = 'Page does not exist',
@@ -22,6 +23,8 @@ export const getHeaderTitle = (route: string): HeaderTitles => {
       return HeaderTitles.login;
     case Routes.storage:
       return HeaderTitles.storage;
+    case Routes.storageTable:
+      return HeaderTitles.storageTable;
     case Routes.profile:
       return HeaderTitles.userProfile;
     default:

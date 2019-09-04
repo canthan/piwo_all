@@ -2,9 +2,9 @@ import { Batch, Stash, BatchOutDTO, StashOutDTO } from './../types/storage.types
 
 export class MapperService {
   public MapBatchOutDTO = (batch: Batch): BatchOutDTO => {
-    const { batchNo, name, bottledOn, bottles, litres, crates, stashes } = batch;
+    const { batchNo, name, bottledOn, quantityBottles, quantityLitres, quantityCrates, stashes, quantityBottlesSmall } = batch;
 
-    return { batchNo, name, bottledOn, bottles, litres, crates, stashes }
+    return { batchNo, name, bottledOn, quantityBottles, quantityLitres, quantityCrates, stashes, quantityBottlesSmall }
   }
 
   public MapStashOutDTO = (stash: Stash): StashOutDTO => {
