@@ -10,6 +10,7 @@ export class BatchesRouter {
     router.get(`${path}/all`, batchesController.getAllBatches);
     router.get(`${path}/:userId`, batchesController.getBatchByUserId);
     router.post(`${path}/:userId`, batchesController.addBatch);
+    router.patch(`${path}/:batchId`, batchesController.updateQuantities);
     router.put(`${path}/:userId/:batchId`, batchesController.editBatch);
     router.delete(`${path}/:userId/:batchId`, batchesController.removeBatch);
   }

@@ -91,6 +91,25 @@ export class BatchesController {
     }
   };
 
+  public updateQuantities = async (ctx: Context, next: AnyFunction): Promise<void> => {
+    try {
+      const { batchId } = ctx.params;
+      const stashes: Stash[] = ctx.request.body.stashes;
+
+      logger.info(`Updating quantities for batch ${batchId}`);
+
+      const batch: Batch = await BatchesService.updateQuantities(batchId, stashes);
+
+      if (!!batch) {
+        logger.info(`Batch ${batch.batchId} updated`);
+      }
+      ctx.body = batch;
+
+    } catch (error) {
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That batch does not exist');
+    }
+  }
+
   public removeBatch = async (ctx: Context, next: AnyFunction): Promise<void> => {
     try {
       const { batchId, userId } = ctx.params;

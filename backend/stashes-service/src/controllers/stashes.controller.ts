@@ -7,6 +7,7 @@ import { StashesService } from '../services/stashes.service';
 import { asyncForEach } from '../common/utils/async.foreach';
 import { StashModel } from '../models/stashes.model';
 import { mapStashOutDTO } from '../services/mapper.service';
+import { BatchesService } from '../services/batches.service';
 
 const logger = getLogger();
 
@@ -22,7 +23,8 @@ export class StashesController {
         data: 'hello, stashes!',
       };
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'something went wrong while testing api');
     }
   };
 
@@ -39,7 +41,8 @@ export class StashesController {
         data: stashes,
       };
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'something went wrong while getting stashes');
     }
   };
 
@@ -53,6 +56,7 @@ export class StashesController {
 
       ctx.body = { stashes };
     } catch (error) {
+      logger.error(error);
       ctx.throw(HTTP_STATUS.BAD_REQUEST, 'something went wrong while getting stashes');
     }
   };
@@ -70,7 +74,8 @@ export class StashesController {
         data: stashes,
       };
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, `something went wrong while getting stashes for batch with id ${ctx.params.batchId}`);
     }
   };
 
@@ -85,7 +90,8 @@ export class StashesController {
         data: stash,
       };
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, `something went wrong while getting stash with id ${ctx.params.stashId}`);
     }
   };
 
@@ -98,7 +104,8 @@ export class StashesController {
       ctx.body = { stashes };
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, `something went wrong while getting stash with name ${ctx.params.stashName}`);
     }
   };
 
@@ -123,7 +130,8 @@ export class StashesController {
       ctx.body = stash;
 
     } catch (error) {
-      ctx.throw(HTTP_STATUS.BAD_REQUEST, 'Something went wrong while adding stash');
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, `Something went wrong while adding stash to batch with id ${ctx.params.batchId}`);
     }
   };
 
@@ -143,11 +151,20 @@ export class StashesController {
           updatedStashes.push(mapStashOutDTO(updatedStash));
           logger.info(`Stash ${updatedStash.stashId} updated`);
         }
-
       });
+
+      const updatedBatchIds = Array.from(new Set(updatedStashes.map(stash => stash.batchId)));
+
+      await asyncForEach(updatedBatchIds, async (updatedbatchId: string) => {
+        logger.info(`Updating batch quantities ${updatedbatchId}`);
+
+        await BatchesService.updateBatchesQuantities(updatedbatchId, updatedStashes);
+      });
+
       ctx.body = updatedStashes;
 
     } catch (error) {
+      logger.error(error);
       ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That stash does not exist');
     }
   };
@@ -156,14 +173,23 @@ export class StashesController {
     try {
       const { stashId } = ctx.params;
 
+      const stash = await StashesService.getStashById(stashId);
+      if (!stash) {
+        ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That stash does not exist');
+      }
+
       logger.info(`Removing stash ${stashId}`);
 
       const removedStashId: number = await StashesService.deleteStashById(stashId);
-      console.log(removedStashId);
+
+      const stashes = await StashesService.getStashesByBatchId(stash.batchId);
+      logger.info(`Updating batch quantities ${stash.batchId}`);
+      await BatchesService.updateBatchesQuantities(stash.batchId, stashes);
 
       ctx.body = { stashId: removedStashId };
 
     } catch (error) {
+      logger.error(error);
       ctx.throw(HTTP_STATUS.BAD_REQUEST, 'That stash does not exist');
     }
   };
@@ -173,13 +199,22 @@ export class StashesController {
       const { stashName } = ctx.params;
 
       logger.info(`Removing all stashes with name ${stashName}`);
+      const removedStashes = await StashesService.getStashByName(stashName);
 
       const removedStashesNo: number = await StashesService.deleteStashesByName(stashName);
+      if (removedStashes.length) {
+        await asyncForEach(removedStashes, async (removedStash: Stash) => {
+          logger.info(`Updating batch quantities ${removedStash.batchId}`);
+          const stashes = await StashesService.getStashesByBatchId(removedStash.batchId);
+          await BatchesService.updateBatchesQuantities(removedStash.batchId, stashes);
+        });
+      }
 
       ctx.body = !!removedStashesNo ? { removedStashesNo } : { removedStashesNo: 0 };
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, `Something went wrong while removing stash with name ${ctx.params.stashName}`);
     }
   };
 
@@ -194,7 +229,21 @@ export class StashesController {
       ctx.body = !!editedStashesNo ? { editedStashesNo } : { editedStashesNo: 0 };
 
     } catch (error) {
-      ctx.throw(ctx.status, error);
+      logger.error(error);
+      ctx.throw(HTTP_STATUS.BAD_REQUEST, `Something went wrong while editing stash with name ${ctx.request.body.oldName}`);
     }
   };
+
+  public updateBatchQuantities = async (batchId: string): Promise<void> => {
+    try {
+      const stashes = await StashesService.getStashesByBatchId(batchId);
+
+      const updatedBatch = await BatchesService.updateBatchesQuantities(batchId, stashes);
+
+      return updatedBatch;
+    } catch (error) {
+      logger.error(error);
+      throw new Error(`Something went wrong while updating batch with id ${batchId}`);
+    }
+  }
 }

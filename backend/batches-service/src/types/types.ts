@@ -8,6 +8,7 @@ export interface BatchOutDTO {
 	bottledOn: Date;
 	quantityLitres: number;
 	quantityBottles: number;
+	quantityBottlesSmall: number;
 	quantityCrates: number;
 }
 
@@ -24,7 +25,7 @@ export interface DeletedRecords {
 
 export interface StashOutDTO {
   name: string;
-  items: Bottles;
+  items: Bottles[];
   batchId: string;
   userId: string;
 }
@@ -34,8 +35,6 @@ export interface Stash extends StashOutDTO {
 }
 
 export interface Bottles {
-  b050: number;
-  b040: number;
-  b033: number;
-  [size: string]: number;
+  volume: number,
+  amount: number,
 }

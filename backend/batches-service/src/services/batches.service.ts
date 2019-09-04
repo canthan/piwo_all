@@ -1,9 +1,12 @@
 import { getLogger } from 'log4js';
 
-import { BatchModel } from './../models/batches.model';
 import Exceptions from '../common/exceptions/exceptions';
-import { Batch } from '../types/types';
+
 import { mapBatchOutDTO } from './mapper.service';
+import { BatchModel } from './../models/batches.model';
+
+import { getLitres, getHalfLiterBottleAmount, getSmallBottleAmount, BOTTLES_IN_CRATE } from '../utils/common';
+import { Batch, Stash } from '../types/types';
 
 const logger = getLogger();
 
@@ -54,6 +57,32 @@ export class BatchesService {
         batchNo,
         bottledOn,
       }
+    ).exec();
+
+    if (!updated.ok) {
+      throw new Error('Something went wrong during updating batch');
+    }
+
+    const updatedBatchResponse = await BatchModel.findOne({ batchId }).exec() as BatchModel;
+
+    return mapBatchOutDTO(updatedBatchResponse);
+  }
+
+  public static async updateQuantities(batchId: string, stashes: Stash[]) {
+    const updatedBatchModel = await BatchModel.findOne({ batchId }).exec();
+
+    if (!updatedBatchModel) {
+      throw new Exceptions.NotFoundException(`Can't find batch with id: ${batchId}`);
+    }
+
+    const quantityLitres = getLitres(stashes);
+    const quantityBottles = getHalfLiterBottleAmount(stashes);
+    const quantityBottlesSmall = getSmallBottleAmount(stashes);
+    const quantityCrates = quantityBottles / BOTTLES_IN_CRATE;
+
+    const updated = await BatchModel.updateOne(
+      { batchId },
+      { quantityLitres, quantityBottles, quantityBottlesSmall, quantityCrates }
     ).exec();
 
     if (!updated.ok) {

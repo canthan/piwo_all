@@ -12,6 +12,7 @@ export const BatchSchema = new Schema({
     name: { type: String, required: true },
     quantityLitres: { type: Number, default: 0 },
     quantityBottles: { type: Number, default: 0 },
+    quantityBottlesSmall: { type: Number, default: 0 },
     quantityCrates: { type: Number,  default: 0 },
     bottledOn: { type: Date, required: true },
 });

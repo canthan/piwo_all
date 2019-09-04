@@ -15,7 +15,7 @@ export const mapStashOutDTO = (stashModel: StashModel): Stash => {
 }
 
 export const mapBatchOutDTO = (batchModel: BatchModel): Batch => {
-  const { name, batchId, batchNo, userId, bottledOn, quantityLitres, quantityBottles, quantityCrates } = batchModel;
+  const { name, batchId, batchNo, userId, bottledOn, quantityLitres, quantityBottles, quantityCrates, quantityBottlesSmall } = batchModel;
 
   return {
     name,
@@ -25,6 +25,7 @@ export const mapBatchOutDTO = (batchModel: BatchModel): Batch => {
     bottledOn, 
     quantityLitres, 
     quantityBottles, 
+    quantityBottlesSmall,
     quantityCrates,
   }
 }

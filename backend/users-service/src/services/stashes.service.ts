@@ -17,10 +17,8 @@ export class StashesService {
         {
           data: { userId },
         }
-        );
-        console.log(response.data);
+      );
       const stashes = response.data.stashes.map(stash => mapStashOutDTO(stash));
-
 
       return stashes;
     } catch (error) {

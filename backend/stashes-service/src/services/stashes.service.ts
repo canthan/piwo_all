@@ -1,11 +1,7 @@
-import { getLogger } from 'log4js';
-
 import { StashModel } from './../models/stashes.model';
 import { Stash, StashOutDTO } from '../types/types';
 import Exceptions from '../common/exceptions/exceptions';
 import { mapStashOutDTO } from './mapper.service';
-
-const logger = getLogger();
 
 export class StashesService {
 

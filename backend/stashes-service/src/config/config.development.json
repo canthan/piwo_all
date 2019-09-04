@@ -1,6 +1,7 @@
 {
   "NODE_ENV": "development",
   "MONGODB_STASHES_URI": "mongodb://stashes-mongo:27019/stashes",
+  "BATCHES_SERVICE_URI": "http://batches-service:3018/batches",
   "MONGODB_RECONNECT_ATTEMPTS": 3,
   "MONGODB_RECONNECT_INTERVAL": 10000,
   "LISTENING_PORT": 3019,
